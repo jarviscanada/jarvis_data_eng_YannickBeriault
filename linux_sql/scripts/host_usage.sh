@@ -21,7 +21,7 @@ fi
 hostname=$(hostname -f)
 export PGPASSWORD=$psql_password
 host_id_query="SELECT id FROM host_info WHERE hostname = '$hostname';"
-host_id="$(psql -h $psql_host -p $psql_port -d $db_name -U $psql_user -c "$host_id_query" | grep row \
+host_id="$(psql -h $psql_host -p $psql_port -d $db_name -U $psql_user -c "$host_id_query" | grep ' [0-9]' \
     | sed 's/[^0-9]//g')"
 
 #save CPU(s) usage stats for further calculations
