@@ -24,23 +24,23 @@ host_id_query="SELECT id FROM host_info WHERE hostname = '$hostname';"
 host_id="$(psql -h $psql_host -p $psql_port -d $db_name -U $psql_user -c "$host_id_query" | grep row \
     | sed 's/[^0-9]//g')"
 
+#0 will be the value when there as been no such hostname created yet (extracted from the "0 rows" part of the result)
 if [ $host_id -eq 0 ]; then
 
-  #save number of CPU to a variable
+  #save result of lscpu command
   lscpu_out=`lscpu`
-  cpu_number=$(echo "$lscpu_out"  | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
 
   #save full model name
   fullModelName="$(echo "$lscpu_out" | grep "Model name")"
 
   #hardware
-  hostname="$(hostname -f)"
   cpu_number=$(echo "$lscpu_out"  | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
   cpu_architecture="$(echo "$lscpu_out" | grep Architecture | cut - -f 2 -d ':' | xargs)"
   cpu_model="$(echo "$fullModelName" | cut - -f 2 -d ':' | cut - -f 1 -d '@' | xargs)"
   cpu_mhz="$(echo "$lscpu_out" | grep "CPU MHz" | cut - -f 2 -d ':' | xargs)"
   l2_cache="$(echo "$lscpu_out" | grep "L2 cache" | cut - -f 2 -d ':' | xargs | sed 's/[^0-9]//g')"
   total_mem="$(cat /proc/meminfo | grep MemTotal | cut - -f 2 -d ':' | xargs | sed 's/[^0-9]//g')"
+
   timestamp="$(date +"%Y-%m-%d %H:%M:%S")"
 
   #Inserting server usage data into host_usage table

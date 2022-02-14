@@ -6,6 +6,7 @@ db_password=$3
 
 sudo systemctl status docker || sudo systemctl start docker
 
+#Here, we get to know if the container we are planning on using or creating already exists.
 docker container inspect jrvs-psql
 container_status=$?
 
@@ -18,10 +19,11 @@ case $cmd in
 	  fi
 
     if [ $# -ne 3 ]; then
-      echo 'Create requires username and password'
+      echo 'The Create command requires username and password'
       exit 1
     fi
 
+    #Now we can create a place to store data and the actual instance, in two commands
   	docker volume create pgdata
 	  docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data \
 	      -p 5432:5432 postgres:9.6-alpine
@@ -35,6 +37,7 @@ case $cmd in
       exit 1
     fi
 
+    #Starting or stopping, depending on the "cmd" argument
 	  docker container $cmd jrvs-psql
 	  exit $?
 	;;

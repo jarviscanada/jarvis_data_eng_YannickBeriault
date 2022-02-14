@@ -22,7 +22,7 @@ CREATE TABLE PUBLIC.host_usage
     disk_available      INT
 );
 
-#The following views are meant to be used by queries
+--The following views are meant to be used by queries
 CREATE VIEW groupedDates AS
 SELECT host_id, date_trunc('hour', timestamp) + date_part('minute', timestamp):: \
         int / 5 * interval '5 min' AS groupedDate
