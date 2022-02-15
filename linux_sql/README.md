@@ -6,7 +6,7 @@ It gathers usage info every minute, as long the database instance is properly ru
 session but does so in the background and should not necessitate user's intervention once launched. Queries are provided 
 to obtain:
 * User id and Total memory available, ordered by the number of CPUs;
-* Groups of timestamps covering five minutes, with host name and average memory used over that time;
+* Timestamps in five minutes increments, with host name and average memory used over that time;
 * Timestamps for 5 minutes intervals where less than three entries where made, labeled as server failures (intervals
 with no entries at all are not included, as they may denote a time when the system was shut down or the agent was not
 running).  
@@ -21,7 +21,7 @@ Version control is done using Github.
   * `./sql/ddl.sql` from the root folder
 * Insert hardware data into the database:
   * `./scripts/host_info.sh` from the root folder. This needs to be done only once per system, and won't create any 
-  subsequent entry if ran more than once for any given system;
+  subsequent entry if launched more than once for any given system;
 * You can also create a usage data entry manually:
   * `./scripts/host_usage.sh` from the root folder.
 * Automating the script:
@@ -97,7 +97,13 @@ The program is deployed through Github and requires the setting up of a Docker c
 in the consulting user's own local timezone;
 * A script should be made to test arguments for both host_info.sh and host_usage.sh: some redundancy would be avoided 
 and future refactoring and modifications would be simplified;
+* 
 * This is an instance storing the data on the local system. To be complete, it still needs to be made into a client-
+<<<<<<< HEAD
 server architecture, which would on the short term simplify the client-side program, as a side effect;
 * Installation and set-up should be automated;
 * Queries should be embedded inside easy to enter commands.
+=======
+server type of app, which would on the short term simplify the client-side program;
+* Installation and set-up should be automated.
+>>>>>>> 0ceb33554099ebb01cc180f9a699c825dd5fff20
