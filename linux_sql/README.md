@@ -46,16 +46,34 @@ the views in sql/ddl.sql, aggregations and junctions.
 * scripts/psql_docker.sh
   * This script creates, starts or stops a Docker container with a running PostgreSQL instance. Data persistence in 
   assured by pairing with a local directory. Usage is: `./scripts/psql_docker.sh create|start|stop`
-* 
-- host_info.sh
-- host_usage.sh
-- crontab
-- queries.sql (describe what business problem you are trying to resolve)
+* scripts/host_info.sh
+  * This script gathers the static hardware info of a system. It also detects if there is already a record for a 
+  particular system and immediately exits if this is the case, as there is no point in gathering redundant information.
+  It is launched as is, with no argument: `./scripts/host_info.sh`
+* host_usage.sh
+  * This script gathers the usage data of a system and enters it into the database. It is the one that is meant to run 
+  every minute. It does not have to be launched manually. 
+* crontab
+  * This command opens the file that receives an entry instructing it to run our host_usage.sh script every minute. It 
+  does not need to be modified beyond that. 
+* sql/ddl.sql
+  * This is the script that creates the two tables we need as well as two views needed to simplify the queries provided
+  with the program. It is given as an argument to a psql command to our database: `psql -h localhost -U postgres -d 
+  host_agent -f sql/ddl.sql`
+* queries.sql 
+  * This is where we will find the provided queries. They are meant to give us an indication of the relationship between
+  the number of CPUs and total memory for the monitored systems, the average memory usage of those systems, as well as
+  to report possible failures of the system or of the server.
 
 ## Database Modeling
-Describe the schema of each table using markdown table syntax (do not put any sql code)
-- `host_info`
-- `host_usage`
+Tables structure:
+* `host_info`
+|id|hostname|cpu_number|cpu_architecture|cpu_model|cpu_mhz|L2_cache|total_mem|timestamp|
+--- | --- | --- | --- | --- | --- | --- | --- | --- |  
+8 | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal |  
+        2 | x86_64           | AMD EPYC 7B12 | 2249.998 |      512 |   8005740 |
+ 2022-02-11 21:55:16
+* `host_usage`
 
 # Test
 How did you test your bash scripts and SQL queries? What was the result?
