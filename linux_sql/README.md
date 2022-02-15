@@ -68,22 +68,34 @@ the views in sql/ddl.sql, aggregations and junctions.
 ## Database Modeling
 Tables structure:
 * `host_info`  
-|id|hostname|cpu_number|cpu_architecture|cpu_model|cpu_mhz|L2_cache|total_mem|timestamp|  
---- | --- | --- | --- | --- | --- | --- | --- | --- |  
-8 | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal |  
-        2 | x86_64           | AMD EPYC 7B12 | 2249.998 |      512 |   8005740 |
- 2022-02-11 21:55:16
+
+| id | hostname                                                               | cpu_number |cpu_architecture|cpu_model|cpu_mhz | L2_cache | total_mem | timestamp    |
+|---|------------------------------------------------------------------------|------------|-----|-----|-----|-----|-----|-----|
+| 8 | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal | 2          |  x86_64| AMD EPYC 7B12| 2249.998| 512|  8005740 | 2022-02-11 21:55:16|
+| 5 | paglio-HP-Z400-Workstation  | 4  | x86_64| Intel(R) Xeon(R) CPU |2080.817  |  256 | 16373892    | 2022-02-15 12:12:06    |
+
 * `host_usage`
 
-# Test
-How did you test your bash scripts and SQL queries? What was the result?
+|   timestamp  | host_id | memory_free    |  cpu_idle   |  cpu_kernel   |  disk_io   |disk_available     |
+|-----|---------|-----|-----|-----|-----|-----|
+|  2022-02-11 22:02:35   | 1       |  3710052   |  95   |  0   |   118  |  5382048   |
+|  2022-02-12 03:12:42   | 1       |   4167032  |   96  |   0  |   75  |  5369296   |
 
-# Deployment
-How did you deploy your app? (e.g. Github, crontab, docker)
 
-# Improvements
+## Test
+Scripts and queries were tested by simple execution followed by close examination of the data. The results were normal 
+and in the expected format. This convinced me that the program presented no discernible issue yet and was ready to go
+forward with the next phase of development. Automatized tests will have to be written if the agent is to be developed 
+any further.
 
-A note for later: date is in UTC. Check if that is the time to use.  
-A script should be made to test arguments for both host_info.sh and host_usage.sh: some redundancy would be avoided.
+## Deployment
+The program is deployed through Github and requires the setting up of a Docker container as well as a crontab entry.
 
-Connecting to psql instance: psql -h localhost -U postgres -d host_agent
+## Improvements
+* The date is given in UTC for now. It is a good standard for storing the data, but will have to be formatted to appear
+in the consulting user's own local timezone;
+* A script should be made to test arguments for both host_info.sh and host_usage.sh: some redundancy would be avoided 
+and future refactoring and modifications would be simplified;
+* This is an instance storing the data on the local system. To be complete, it still needs to be made into a client-
+server type of app, which would on the short term simplify the client-side program;
+* Installation and set-up should be automated.
