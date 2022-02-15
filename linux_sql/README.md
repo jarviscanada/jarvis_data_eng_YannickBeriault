@@ -5,7 +5,7 @@ This agent is used to automatically gather hardware as well as memory and CPU us
 It gathers usage info every minute, as long the database instance is properly running. It is meant to run on any user's
 session but does so in the background and should not necessitate user's intervention once launched. Queries are provided to obtain:
 * User id and Total memory available, ordered by the number of CPUs;
-* Groups of timestamps covering five minutes, with host name and average memory used over that time;
+* Timestamps in five minutes increments, with host name and average memory used over that time;
 * Timestamps for 5 minutes intervals where less than three entries where made, labeled as server failures (intervals
 with no entries at all are not included, as they may denote a time when the system was shut down or the agent was not
 running).  
