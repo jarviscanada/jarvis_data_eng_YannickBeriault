@@ -68,7 +68,7 @@ the views in sql/ddl.sql, aggregations and junctions.
 ## Database Modeling
 Tables structure:
 * `host_info`
-|id|hostname|cpu_number|cpu_architecture|cpu_model|cpu_mhz|L2_cache|total_mem|timestamp|
+|id|hostname|cpu_number|cpu_architecture|cpu_model|cpu_mhz|L2_cache|total_mem|timestamp|  
 --- | --- | --- | --- | --- | --- | --- | --- | --- |  
 8 | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal |  
         2 | x86_64           | AMD EPYC 7B12 | 2249.998 |      512 |   8005740 |
