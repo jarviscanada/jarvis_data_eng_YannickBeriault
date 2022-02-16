@@ -47,7 +47,7 @@ jarvis_projects:
     git_url: "/linux_sql"
     # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Implementing a monitoring agent that is used to automatically gather hardware as
+    description: Implemented a monitoring agent that is used to automatically gather hardware as
 	well as memory and CPU usage information on a system. It gathers usage info every minute, as
 	long the database instance is properly running. It was made using bash scripts and sql, on a
 	virtual machine accessed through VNC viewer. It runs a PostgreSQL database inside a Docker
@@ -79,14 +79,17 @@ jarvis_projects:
 # Feel free to add more projects
 highlighted_projects:
     #project name
-  - name: "Web app for resturant"
+  - name: "ProjekRockola"
     #URL is optional
-    git_url: "https://github.com/jarviscanada/jarvis_profile_builder"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
-  - name: "Machine Learning"
-    git_url:
-    description: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
+    description: Developped a command line based audio-player (no GUI) with elaborate smart playlist management. I
+    decided to develop this program since no program gave me quite the smart playlist management experience I was 
+    looking for. It is written in Java, using javafx and JDBC. It makes use of an elaborate MySQL database, hosted
+    locally. I use it every day.
+  - name: "Mainframe"
+    description: Put together a simple GUI interface to manage various aspects of my personnal discipline. It is written
+    solely in Java and uses simple text files for data persistence. It is an old project that will need to be totally 
+    revamped, but it has proven to be quite robust. I also use it every day.
 
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
@@ -95,43 +98,56 @@ professional_experience:
   #Write your Jarvis role as a professional experience rather than training.
   - title: "Software Developer"
     company: "Jarvis"
-    duration: "2020-present"
+    duration: "2022-present"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis."
-  - title: "Tutor"
-    company: "XYZ Company"
-    duration: "2019"
-    description: "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis."
+    description: "I am tasked to implement and develop various applications that give me the opportunity to hone my
+    skills with the technologies and techniques I learned in my training. I use languages such as bash, java and SQL,
+    technologies such as virtual machines, the IntelliJ IDEA, Vim, Docker, Git and PostgreSQL, and techniques such as 
+    Agile/scrum and Gitflow."
+  - title: "Evaluator"
+    company: "Université du Québec à Montréal"
+    duration: "2019-2021"
+    description: "I evaluated students' programs written in Java, C++ and assembly language. I also had to take the time 
+    to answer students' preoccupations and questions about their grades, being firm and understanding at the same time."
+  - title: "Translator"
+    company: "Amazon Europe Core"
+    duration: "2017-2022"
+    description: "I translate products descriptions and internal documentations from English to French. I was happy to
+    go from being employed from time to time to have access to almost all the contracts I could want through rigorous 
+    work and good evaluations from the organisation. Having the capacity to work with minimal information and try to
+    still deliver the most appropriate result is also a skill I developed with this employer."
 
 #List of edcuation
 education: 
-  - school_name: "XYZ university"
-    duration: "2012-2016"
-    degree: "Bachelor of Applied Sciences"
-    department: "Electrical and Computer Engineering"
+  - school_name: "Université du Québec à Montréal"
+    duration: "2020-present"
+    degree: "Advanced Certificate in Software Development"
+    department: "Computer Science"
     # optional
-    awards_achievements: 
-      - "Scholarship"
-      - "Dean's List (2015, 2016): Ut enim ad minim veniam"
-      - "GPA: 3.8/4.0"
-  - school_name: "XYZ university"
-    duration: "2016-2018"
-    degree: "Master of Engineering"
-    department: "Electrical and Computer Engineering"
-    awards_achievements: 
+  - school_name: "Université du Québec à Montréal"
+    duration: "2018-2020"
+    degree: "Certificate in Computer Science and Software Development"
+    department: "Computer Science"
 
 #Optional section
 others:
     #category
-  - title: "Certificates"
-    #list of items
+  - title: "Other experiences"
     bullets:
-      - "Udacity Machine Learning (2019)"
-  - title: "Awards"
-    bullets:
-      - "Winner"
+      - "Writing & Proofreading"
+      - "Problem solving & leadership"
+      - "Planning & decision making"
+      - "Artistic creation"
   - title: "Activities/Hobbies"
     bullets:
-      - "Basketball player"
-      - "Competitive gaming"
-      - "Volunteer, ABC Food bank: Ut enim ad minim veniam"
+      - "Creative writing"
+      - "Playing music"
+      - "Geopolitics and humanities"
+      - "Bicycling and hiking"
+      - "Camping"
+  - title: "Languages spoken"
+    bullets:
+      - "French (native)"
+      - "English (fluent)"
+      - "Spanish (fluent)"
+      - "German (beginner)"
