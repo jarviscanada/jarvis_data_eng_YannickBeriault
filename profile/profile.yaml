@@ -9,7 +9,7 @@ ssummary: The first thing that attracted me into computer science were databases
 organizing and making sense of any type of data, as well as the impressive elegance presented by
 good code, something that I discovered during my training, are still aspects of the field that are
 really stimulating to me. I obtained a Certificate in computer science and am working on obtaining a
-second, advanced certificate (both constituted of 30 credits). I have been working as a translator
+second, advanced Certificate (both constituted of 30 credits). I have been working as a translator
 for many years before transitioning into software development.
 
 # Group your skills by level.
@@ -29,8 +29,8 @@ skills:
     - IntelliJ IDEA
     - JavaScript
     - HTML/CSS
-	- Assembly language
-	- Algorithmics and Mathematics for Computer Science
+    - Assembly language
+    - Algorithmics and Mathematics for Computer Science
   # At least 5 skills
   familiar:
     - C
@@ -49,9 +49,9 @@ jarvis_projects:
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     description: Implemented a monitoring agent that is used to automatically gather hardware as
 	well as memory and CPU usage information on a system. It gathers usage info every minute, as
-	long the database instance is properly running. It was made using bash scripts and sql, on a
+	long as the database instance is properly running. It was made using bash scripts and sql, on a
 	virtual machine accessed through VNC viewer. It runs a PostgreSQL database inside a Docker
-	container. It obtains its data using terminal commands that it processes using a combination of
+	container. It obtains its data using terminal commands, whose results it processes using a combination of
 	simple bash commands like `grep`, `cut` and `sed`.
   #- name: "Core Java Apps"
   #  git_url: "/core_java"
@@ -89,7 +89,7 @@ highlighted_projects:
   - name: "Mainframe"
     description: Put together a simple GUI interface to manage various aspects of my personnal discipline. It is written
     solely in Java and uses simple text files for data persistence. It is an old project that will need to be totally 
-    revamped, but it has proven to be quite robust. I also use it every day.
+    revamped, but it has proven to be quite dependable. I also use it every day.
 
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
@@ -132,7 +132,7 @@ education:
 #Optional section
 others:
     #category
-  - title: "Other experiences"
+  - title: "Other experiences & skills"
     bullets:
       - "Writing & Proofreading"
       - "Problem solving & leadership"
@@ -142,6 +142,7 @@ others:
     bullets:
       - "Creative writing"
       - "Playing music"
+      - "Board games"
       - "Geopolitics and humanities"
       - "Bicycling and hiking"
       - "Camping"
