@@ -5,14 +5,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Grep {
+public class Grep_Demo {
 
     private static final String usageString = "java -jar grep.jar regexPattern srcDir outFile";
 
     private String pattern;
     private File output;
 
-    public Grep (String pattern, File output) {
+    public Grep_Demo(String pattern, File output) {
 
         this.pattern = pattern;
         this.output = output;
@@ -67,7 +67,7 @@ public class Grep {
 
     public static void main(String[] args) {
 
-        Grep currentSearch;
+        Grep_Demo currentSearch;
 
         if (args.length != 3) {
             System.out.println(usageString);
@@ -97,7 +97,7 @@ public class Grep {
             }
         }
 
-        currentSearch = new Grep(regexPattern, outFile);
+        currentSearch = new Grep_Demo(regexPattern, outFile);
 
         currentSearch.processDir(srcDir);
     }
