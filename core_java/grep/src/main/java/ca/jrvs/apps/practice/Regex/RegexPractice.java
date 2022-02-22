@@ -1,7 +1,10 @@
 package ca.jrvs.apps.practice.Regex;
 
 import ca.jrvs.apps.practice.RegexExc;
+
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexPractice implements RegexExc {
 
@@ -11,18 +14,43 @@ public class RegexPractice implements RegexExc {
 
     //Regex methods
     public boolean matchJpeg(String filename) {
-        return true;
+
+        String patternString = ".*\\.jpe?g$";
+
+        boolean result = matchMaker(patternString, filename);
+
+        return result;
     }
 
     public boolean matchIp(String ip) {
-        return true;
+
+        String patternString = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}";
+
+        boolean result = matchMaker(patternString, ip);
+
+        return result;
     }
 
     public boolean isEmptyLine(String line) {
-        return true;
+
+        String patternString = "^$";
+
+        boolean result = matchMaker(patternString, line);
+
+        return result;
     }
 
     //Local methods
+    private boolean matchMaker(String patternString, String toMatch) {
+
+        Pattern patternToMatch = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = patternToMatch.matcher(toMatch);
+        boolean result = matcher.matches();
+
+        return result;
+    }
+
     private String obtainToTest() {
 
         String chaine;
