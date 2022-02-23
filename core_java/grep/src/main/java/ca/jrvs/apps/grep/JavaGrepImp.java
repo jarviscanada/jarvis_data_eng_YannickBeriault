@@ -25,6 +25,11 @@ public class JavaGrepImp implements JavaGrep {
     private String rootPath;
     private String outPath;
 
+    /**
+     * Creates the necessary lists and calls the methods that process files and lines.
+     *
+     * @throws IOException
+     */
     @Override
     public void process() throws IOException {
 
@@ -157,6 +162,7 @@ public class JavaGrepImp implements JavaGrep {
             throw new IllegalArgumentException("USAGE: JavaGrepImp regex rootPath outFile");
         }
 
+        //Default configuration of logger
         BasicConfigurator.configure();
 
         JavaGrepImp javaGrepImp = new JavaGrepImp();
