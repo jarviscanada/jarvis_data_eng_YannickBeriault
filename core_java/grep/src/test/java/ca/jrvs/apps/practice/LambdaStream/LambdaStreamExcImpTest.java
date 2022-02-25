@@ -1,17 +1,23 @@
 package ca.jrvs.apps.practice.LambdaStream;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class LambdaStreamExcImpTest {
+
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     LambdaStreamExcImp lambdaStream = new LambdaStreamExcImp();
     String[] strings = new String[]{"Alpha", "Beta", "Gamma", "Delta"};
@@ -90,9 +96,114 @@ public class LambdaStreamExcImpTest {
     @Test
     public void testSquareRootIntStream() {
 
-        double epsilon = 0.000001d;
-        List<Double> squareRootsSequence = Arrays.asList(1.0, 1.414, 1.732, 2.0);
-        DoubleStream expected = DoubleStream.of(1.0, 1.414, 1.732, 2.0);
+        double epsilon = 0.001d;
+        double[] squareRootsSequence = new double[]{1.0, 1.414, 1.732, 2.0};
 
+        assertArrayEquals(squareRootsSequence,
+                lambdaStream.squareRootIntStream(lambdaStream.createIntStream(sequence))
+                        .toArray(),
+                epsilon
+        );
+    }
+
+    @Test
+    public void testGetOdd() {
+
+        int[] oddSequence = new int[]{1, 3};
+
+        assertArrayEquals(oddSequence,
+                lambdaStream.getOdd(lambdaStream.createIntStream(sequence))
+                .toArray()
+        );
+    }
+
+    //class testPrinting {
+
+        //Setting up the output so we can test it's content
+        @Before
+        public void setUpOutputForTest() {
+            System.setOut(new PrintStream(outputStreamCaptor));
+        }
+
+        @Test
+        public void testGetLambdaPrinter() {
+
+            lambdaStream.getLambdaPrinter("I am ", ".")
+                    .accept("the walrus");
+
+            assertEquals("I am the walrus.", outputStreamCaptor.toString()
+                    .trim()
+            );
+        }
+
+        @Test
+        public void testPrintMessages() {
+
+            String prefix = "The letter ";
+            String suffix = " is in the greek alphabet.";
+
+            lambdaStream.printMessages(strings,
+                    lambdaStream.getLambdaPrinter(prefix,
+                            suffix)
+            );
+
+            assertEquals(prefix + "Alpha" + suffix + "\n"
+                            + prefix + "Beta" + suffix + "\n"
+                            + prefix + "Gamma" + suffix + "\n"
+                            + prefix + "Delta" + suffix,
+                    outputStreamCaptor.toString()
+                            .trim()
+            );
+        }
+
+        @Test
+        public void testPrintOdd() {
+
+            String prefix = "odd number: ";
+            String suffix = "!";
+
+            lambdaStream.printOdd(lambdaStream.createIntStream(sequence),
+                    lambdaStream.getLambdaPrinter(prefix,
+                            suffix)
+            );
+
+            assertEquals(prefix + "1" + suffix + "\n"
+                            + prefix + "3" + suffix,
+                    outputStreamCaptor.toString()
+                            .trim()
+            );
+        }
+
+
+
+        //Setting the output back to default
+        @After
+        public void setUpNormalOutput() {
+            System.setOut(standardOut);
+        }
+
+    @Test
+    public void testFlatNestedInt() {
+
+        int[] sequence2 = new int[]{5, 6, 7};
+        int[] sequence3 = new int[]{8, 9, 10};
+        Integer[] squaredAndFlat = new Integer[]{1, 4, 9, 16, 25, 36, 49, 64, 81, 100};
+
+        List<List<Integer>> nestedInts = Arrays.asList(IntStream.of(sequence)
+                        .boxed()
+                        .collect(Collectors.toList()),
+                IntStream.of(sequence2)
+                        .boxed()
+                        .collect(Collectors.toList()),
+                IntStream.of(sequence3)
+                        .boxed()
+                        .collect(Collectors.toList())
+        );
+
+        assertArrayEquals(squaredAndFlat,
+                lambdaStream.flatNestedInt(nestedInts
+                                .stream())
+                        .toArray()
+        );
     }
 }
