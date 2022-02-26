@@ -27,7 +27,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda {
     @Override
     public void process() {
 
-        Predicate<String> matchPattern = Pattern.compile(this.regex)
+        Predicate<String> matchPattern = Pattern.compile(this.getRegex())
                 .asPredicate();
 
         streamFiles(this.getRootPath())

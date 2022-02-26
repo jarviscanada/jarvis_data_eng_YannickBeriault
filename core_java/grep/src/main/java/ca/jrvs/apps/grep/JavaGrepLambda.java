@@ -1,7 +1,6 @@
 package ca.jrvs.apps.grep;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.stream.Stream;
 
 public interface JavaGrepLambda {
@@ -29,14 +28,9 @@ public interface JavaGrepLambda {
     /**
      * Write lines to a file
      *
-     * Uses: - FileOutputStream, to create an output stream for our data (not ready as such to be written to a file)
-     *       - OutputStreamWriter, to translate the characters from our output into the encoding that we will specify
-     *       - BufferedWriter, to write our stream to a file, line by line
-     *
      * @param lines matched line
-     * @throws IOException if write failed
      */
-    void writeToFile(String lines) throws IOException;
+    void writeToFile(String lines);
 
     String getRootPath();
 
