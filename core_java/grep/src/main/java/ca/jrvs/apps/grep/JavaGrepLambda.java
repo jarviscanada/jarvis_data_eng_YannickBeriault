@@ -8,36 +8,23 @@ public interface JavaGrepLambda {
 
     /**
      * Top level search workflow
-     * @throws IOException
      */
-    void process() throws IOException;
+    void process();
 
     /**
-     * Traverse a given directory and returns all files
+     * Traverse a given directory and returns all files in a stream
      * @param rootDir input directory
-     * @return files under the rootDir
+     * @return a stream containing the files under the rootDir
      */
     Stream<File> streamFiles(String rootDir);
 
     /**
-     * Read a file and return all the lines
-     *
-     * Uses: - FileReader, to read streams of characters from a file
-     *       - BufferedReader, to read lines from a stream of character
-     *       - UTF-8 as character encoding (it being the most used of the Unicode standard
+     * Read a file and return all the lines in a stream
      *
      * @param inputFile file to be read
-     * @return lines
-     * @throws IllegalArgumentException if a given inputFile is not a file
+     * @return stream of lines
      */
     Stream<String> readLines(File inputFile);
-
-    /**
-     * checks if a line contains the regex pattern (passed by user)
-     * @param line input string
-     * @return true if there is a match
-     */
-    boolean containsPattern(String line);
 
     /**
      * Write lines to a file

@@ -19,7 +19,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ca.jrvs.apps.grep.JavaGrepImp</mainClass>
+              <mainClass>ca.jrvs.apps.grep.JavaGrepLambdaImp</mainClass>
             </manifest>
           </archive>
         </configuration>

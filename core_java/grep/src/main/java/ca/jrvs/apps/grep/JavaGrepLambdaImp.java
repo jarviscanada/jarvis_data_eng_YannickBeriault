@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -26,22 +23,15 @@ public class JavaGrepLambdaImp implements JavaGrepLambda {
     private String rootPath;
     private String outPath;
 
-    /**
-     * Creates the necessary lists and calls the methods that process files and lines.
-     *
-     * @throws IOException
-     */
+    //Creates the necessary lists and calls the methods that process files and lines.
     @Override
-    public void process() throws IOException {
+    public void process() {
 
         Predicate<String> matchPattern = Pattern.compile(this.regex)
                 .asPredicate();
-        List<String> lines = new ArrayList<>();
-        Stream<File> files;
 
-        files = streamFiles(this.getRootPath());
-
-        files.flatMap(this::readLines)
+        streamFiles(this.getRootPath())
+                .flatMap(this::readLines)
                 .filter(matchPattern)
                 .forEach(this::writeToFile);
     }
@@ -80,30 +70,25 @@ public class JavaGrepLambdaImp implements JavaGrepLambda {
         } catch (IOException e) {
             this.logger.error("There was a problem processing file " + inputFile.getAbsolutePath());
         }
+
+        return null;
     }
 
     @Override
-    public boolean containsPattern(String line) {
+    public void writeToFile(String line) {
 
-        Pattern patternToMatch = Pattern.compile(this.regex);
-        Matcher matcher = patternToMatch.matcher(line);
+        try {
 
-        return matcher.matches();
-    }
-
-    @Override
-    public void writeToFile(String lines) throws IOException {
-
-        FileWriter fw = new FileWriter(this.outPath, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for (String line : lines) {
+            FileWriter fw = new FileWriter(this.outPath, true);
+            BufferedWriter bw = new BufferedWriter(fw);
 
             bw.write(line);
             bw.newLine();
-        }
 
-        bw.close();
+            bw.close();
+        } catch (IOException e) {
+            this.logger.error("There was a problem writing to file " + this.getOutFile());
+        }
     }
 
     @Override
