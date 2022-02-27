@@ -133,7 +133,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda {
     public static void main(String[] args) {
 
         if (args.length != 3) {
-            throw new IllegalArgumentException("USAGE: JavaGrepImp regex rootPath outFile");
+            throw new IllegalArgumentException("USAGE: JavaGrepLambdaImp regex rootPath outFile");
         }
 
         //Default configuration of logger
