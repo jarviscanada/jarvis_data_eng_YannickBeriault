@@ -1,0 +1,19 @@
+Index: core_java/grep/log/grep.out
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>    Is father, mother, Tybalt, Romeo, Juliet,\nEnter Romeo and Juliet aloft, at the Window.\n    And Romeo dead; and Juliet, dead before,\n    Romeo, there dead, was husband to that Juliet;\nRomeo fait des clins d'oeil à Juliette\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core_java/grep/log/grep.out b/core_java/grep/log/grep.out
+--- a/core_java/grep/log/grep.out	
++++ b/core_java/grep/log/grep.out	
+@@ -3,3 +3,8 @@
+     And Romeo dead; and Juliet, dead before,
+     Romeo, there dead, was husband to that Juliet;
+ Romeo fait des clins d'oeil à Juliette
++    Is father, mother, Tybalt, Romeo, Juliet,
++Enter Romeo and Juliet aloft, at the Window.
++    And Romeo dead; and Juliet, dead before,
++    Romeo, there dead, was husband to that Juliet;
++Romeo fait des clins d'oeil à Juliette
