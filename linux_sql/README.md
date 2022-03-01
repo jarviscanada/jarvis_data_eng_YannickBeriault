@@ -70,17 +70,19 @@ the views in sql/ddl.sql, aggregations and junctions.
 Tables structure:
 * `host_info`  
 
-| id | hostname                                                               | cpu_number |cpu_architecture|cpu_model|cpu_mhz | L2_cache | total_mem | timestamp    |
-|---|------------------------------------------------------------------------|------------|-----|-----|-----|-----|-----|-----|
-| 8 | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal | 2          |  x86_64| AMD EPYC 7B12| 2249.998| 512|  8005740 | 2022-02-11 21:55:16|
-| 5 | paglio-HP-Z400-Workstation  | 4  | x86_64| Intel(R) Xeon(R) CPU |2080.817  |  256 | 16373892    | 2022-02-15 12:12:06    |
+| id               | hostname                                                               | cpu_number | cpu_architecture | cpu_model            | cpu_mhz  | L2_cache | total_mem | timestamp           |
+|------------------|------------------------------------------------------------------------|------------|------------------|----------------------|----------|----------|-----------|---------------------|
+| SERIAL, NOT NULL | VARCHAR, NOT NULL                                                      | INT        | VARCHAR(50)      | VARCHAR(100)         | FLOAT    | INT      | INT       | TIMESTAMP           |
+| 8                | jrvs-remote-desktop-centos7.us-east1-c.c.phrasal-bonus-340017.internal | 2          | x86_64           | AMD EPYC 7B12        | 2249.998 | 512      | 8005740   | 2022-02-11 21:55:16 |
+| 5                | paglio-HP-Z400-Workstation                                             | 4          | x86_64           | Intel(R) Xeon(R) CPU | 2080.817 | 256      | 16373892  | 2022-02-15 12:12:06 |
 
 * `host_usage`
 
-|   timestamp  | host_id | memory_free    |  cpu_idle   |  cpu_kernel   |  disk_io   |disk_available     |
-|-----|---------|-----|-----|-----|-----|-----|
-|  2022-02-11 22:02:35   | 1       |  3710052   |  95   |  0   |   118  |  5382048   |
-|  2022-02-12 03:12:42   | 1       |   4167032  |   96  |   0  |   75  |  5369296   |
+| timestamp           | host_id          | memory_free | cpu_idle | cpu_kernel | disk_io | disk_available |
+|---------------------|------------------|-------------|----------|------------|---------|----------------|
+| TIMESTAMP, NOT NULL | SERIAL, NOT NULL | INT         | SMALLINT | SMALLINT   | INT     | INT            |
+| 2022-02-11 22:02:35 | 1                | 3710052     | 95       | 0          | 118     | 5382048        |
+| 2022-02-12 03:12:42 | 1                | 4167032     | 96       | 0          | 75      | 5369296        |
 
 
 ## Test
@@ -97,13 +99,13 @@ The program is deployed through Github and requires the setting up of a Docker c
 in the consulting user's own local timezone;
 * A script should be made to test arguments for both host_info.sh and host_usage.sh: some redundancy would be avoided 
 and future refactoring and modifications would be simplified;
-* 
 * This is an instance storing the data on the local system. To be complete, it still needs to be made into a client-
-<<<<<<< HEAD
-server architecture, which would on the short term simplify the client-side program, as a side effect;
-* Installation and set-up should be automated;
-* Queries should be embedded inside easy to enter commands.
-=======
 server type of app, which would on the short term simplify the client-side program;
-* Installation and set-up should be automated.
->>>>>>> 0ceb33554099ebb01cc180f9a699c825dd5fff20
+* Installation and set-up should be automated;
+* When our program will be deployed so it answers to many clients (many systems), there is always the possibility that
+two systems with the same hostname will try to enter their host data into the database. The way the host_info script is
+written for the moment, the system data of the second one trying to do so would not be inputted and its usage data would
+be attributed to the first one. We need to add a column to our host_info database that stores the MAC address of the 
+hosts and to verify this information as well in the host_info script.  That would nullify the risk of this problem 
+presenting itself by mistake (the possibility of MAC address spoofing would need to be looked into from a security 
+perspective).
