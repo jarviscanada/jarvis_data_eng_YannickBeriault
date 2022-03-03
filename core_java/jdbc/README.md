@@ -6,7 +6,7 @@ using Maven and version control was done through git, with Github as central rep
 
 # Implementation
 ## ER Diagram
-![ER diagram](assets/JDBCErDiagram.jpg)
+![ER diagram](assets/JdbcErDiagram.jpg)
 
 ## Design Patterns
 Our calls to the database were all embedded in a DAO called CustomerDAO. This enables us to isolate the queries from the
