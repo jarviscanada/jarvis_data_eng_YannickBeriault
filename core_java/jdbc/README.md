@@ -14,8 +14,8 @@ rest of the code, thus adding robustness and refactorability: someone working on
 the future would not have to know how the queries are implemented and could not do much to break them. Remains the
 matter of making a decision between working with repositories or keeping any complex future queries in DAO classes. For
 now, while the database is situated on a single system, it makes more sense to leverage the database to do joins and
-other complex queries. If we were to scale out this database and distribute on various systems, we would have to look
-into the question of maybe using repositories to join data inside our Java code.
+other complex queries. If we were to scale out this database and distribute it on various systems, we would have to look
+into the question of maybe using repositories to join data inside our Java code instead of using SQL to do so.
 
 # Test
 All testing was manual. A large sample of customers and some orders were fed to the database to populate it. It was then
