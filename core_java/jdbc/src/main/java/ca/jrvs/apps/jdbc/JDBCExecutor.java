@@ -16,12 +16,17 @@ public class JDBCExecutor {
         try {
 
             Connection connection = dcm.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM CUSTOMER");
+            CustomerDAO customerDAO = new CustomerDAO(connection);
 
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt(1));
-            }
+            Customer customer = customerDAO.findById(10000);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName()
+                    + " " + customer.getEmail());
+
+            customer.setEmail("iWantToGo@gmail.com");
+            customerDAO.update(customer);
+            customer = customerDAO.findById(10000);
+            System.out.println(customer.getFirstName() + " " + customer.getLastName()
+                    + " " + customer.getEmail());
         } catch (SQLException e) {
             e.printStackTrace();
         }
