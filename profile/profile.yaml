@@ -43,12 +43,12 @@ jarvis_projects:
     # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     description: Implemented a monitoring agent that is used to automatically gather hardware as well as memory and CPU usage information on a system. It gathers usage info every minute, as long as the database instance is properly running. It was made using bash scripts and sql, on a virtual machine accessed through VNC viewer. It runs a PostgreSQL database inside a Docker container. It obtains its data using terminal commands, whose results it processes using a combination of simple bash commands like `grep`, `cut` and `sed`.
-  #- name: "Core Java Apps"
-  #  git_url: "/core_java"
-  #  description:
-  #    - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-  #    - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-  #    - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  - name: "Core Java Apps"
+    git_url: "/core_java"
+    description:
+  #   - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+      - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+      - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
   #- name: "Springboot App"
   #  git_url: "/springboot"
   #  description: ""
