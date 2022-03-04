@@ -47,8 +47,8 @@ jarvis_projects:
     git_url: "/core_java"
     description:
   #   - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-      - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-      - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+      - "JDBC App: Realized a very basic implementation of a program for entering customers into a database and retrieving info about them. The database is implemented using PostgreSQL running inside a Docker container and the program makes use of JDBC and the SQL Java libraries. Dependencies where managed using Maven and version control was done through git, with Github as central repository."
+      - "Grep App: Implemented a very simple version of the terminal command grep, taking as arguments a regex pattern, a root directory in which to search the files for lines containing the pattern, as well as the path to a file (pre-existing or not) in which to save the lines containing the pattern. The app uses the io and nio libraries, as well as the util.function.Predicate and util.regex libraries for matching lines, and the util.stream library to gain performance, readability and to be able to potentially process large amounts of data. It was developed using git and the IntelliJ IDE and can be launched from a jar file or from inside a docker container."
   #- name: "Springboot App"
   #  git_url: "/springboot"
   #  description: ""
