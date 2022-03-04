@@ -17,9 +17,9 @@ skills:
     - RDBMS/SQL
     - Agile/Scrum
     - Git
+    - JDBC
   # At least 5 skills
   competent:
-    - JDBC
     - Vim
     - IntelliJ IDEA
     - JavaScript

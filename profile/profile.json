@@ -95,7 +95,6 @@
   ],
   "skills": {
     "competent": [
-      "JDBC",
       "Vim",
       "IntelliJ IDEA",
       "JavaScript",
@@ -117,7 +116,8 @@
       "Linux/Bash",
       "RDBMS/SQL",
       "Agile/Scrum",
-      "Git"
+      "Git",
+      "JDBC"
     ]
   },
   "summary": "The first thing that attracted me into computer science were databases. Their potential for organizing and making sense of any type of data, as well as the impressive elegance presented by good code, something that I discovered during my training, are still aspects of the field that are really stimulating to me. I obtained a Certificate in computer science and am working on obtaining a second, advanced Certificate (both constituted of 30 credits). I have been working as a translator for many years before transitioning into software development."
