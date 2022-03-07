@@ -6,6 +6,20 @@ package ca.jrvs.practice.codingChallenge;
 
 public class NumberOddOrEven {
 
+    public static String checkWithBitOperator(int numberToCheck) {
+
+        String answer;
+        int maskedValue = numberToCheck&1;
+
+        if (maskedValue == 0) {
+            answer = "even";
+        } else {
+            answer = "odd";
+        }
+
+        return answer;
+    }
+
     public static String checkWithModulo(int numberToCheck) {
 
         String answer;
@@ -31,5 +45,6 @@ public class NumberOddOrEven {
         }
 
         System.out.println(checkWithModulo(numberToCheck));
+        System.out.println(checkWithBitOperator(numberToCheck));
     }
 }

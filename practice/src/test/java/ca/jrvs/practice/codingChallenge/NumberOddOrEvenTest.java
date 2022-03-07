@@ -26,4 +26,24 @@ public class NumberOddOrEvenTest {
 
         assertEquals(answer, expected);
     }
+
+    @Test
+    public void TestCheckWithBitOperatorEven() {
+        String answer;
+        String expected = "even";
+
+        answer = NumberOddOrEven.checkWithBitOperator(8);
+
+        assertEquals(answer, expected);
+    }
+
+    @Test
+    public void TestCheckWithBitOperatorOdd() {
+        String answer;
+        String expected = "odd";
+
+        answer = NumberOddOrEven.checkWithBitOperator(15);
+
+        assertEquals(answer, expected);
+    }
 }
