@@ -2,10 +2,14 @@ package ca.jrvs.practice.codingChallenge;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
+/**
+ *https://www.notion.so/jarvisdev/How-to-compare-two-maps-8433b25bd53e4d97b7a6c3291d84ff00
+ */
 public class CompareTwoMaps {
 
+    //A first implementation was made comparing the results returned by two iterators, but I then realized it would
+    //not be satisfying with big maps, because their order is not guaranteed.
     public <K,V> boolean compareMaps(Map<K,V> m1, Map<K,V> m2) {
 
         if (m1 == m2) {
@@ -15,15 +19,18 @@ public class CompareTwoMaps {
             return false;
         }
 
-        Iterator<Map.Entry<K, V>> m1Iterator = m1.entrySet().iterator();
-        Iterator<Map.Entry<K, V>> m2Iterator = m2.entrySet().iterator();
+        for (Map.Entry<K, V> m1Entry : m1.entrySet()) {
 
-        while (m1Iterator.hasNext()) {
+            K key1 = m1Entry.getKey();
+            V value1 = m1Entry.getValue();
 
-            Map.Entry<K, V> m1Entry = m1Iterator.next();
-            Map.Entry<K, V> m2Entry = m2Iterator.next();
-            if (!m1Entry.getKey().equals(m2Entry.getKey())
-                    || !m1Entry.getValue().equals(m2Entry.getValue())) {
+            if (!m2.containsKey(key1)) {
+                return false;
+            }
+
+            V value2 = m2.get(key1);
+
+            if (value1 != value2) {
                 return false;
             }
         }

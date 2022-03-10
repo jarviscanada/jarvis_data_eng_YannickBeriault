@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" time="0" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.14+9-Ubuntu-0ubuntu2.18.04"/>
@@ -63,6 +63,6 @@
   </properties>
   <testcase classname="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" name="TestCheckWithModuloOdd" time="0"/>
   <testcase classname="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" name="TestCheckWithBitOperatorEven" time="0"/>
-  <testcase classname="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" name="TestCheckWithModuloEven" time="0"/>
+  <testcase classname="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" name="TestCheckWithModuloEven" time="0.002"/>
   <testcase classname="ca.jrvs.practice.codingChallenge.NumberOddOrEvenTest" name="TestCheckWithBitOperatorOdd" time="0"/>
 </testsuite>

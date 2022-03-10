@@ -1,8 +1,11 @@
 package ca.jrvs.practice.dataStructure.map;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class HashJMap<K, V> implements JMap<K, V> {
 
@@ -15,12 +18,14 @@ public class HashJMap<K, V> implements JMap<K, V> {
      * The load factor used when none specified in constructor.
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
     /**
      * The load factor for the hash table.
      *
      * @serial
      */
     final float loadFactor;
+
     /**
      * The table, initialized on first use, and resized as
      * necessary. When allocated, length is always a power of two.
@@ -28,15 +33,18 @@ public class HashJMap<K, V> implements JMap<K, V> {
      * bootstrapping mechanics that are currently not needed.)
      */
     Node<K, V>[] table;
+
     /**
      * Holds cached entrySet(). Note that AbstractMap fields are used
      * for keySet() and values().
      */
     Set<Map.Entry<K, V>> entrySet;
+
     /**
      * The number of key-value mappings contained in this map.
      */
     int size;
+
     /**
      * The next size value at which to resize (capacity * load factor).
      * Use #capacity() to compute capacity
@@ -63,8 +71,11 @@ public class HashJMap<K, V> implements JMap<K, V> {
      *         or the load factor is nonpositive
      */
     public HashJMap(int initialCapacity, float loadFactor) {
-        //validate inputs
-        //your code goes here
+
+        if (initialCapacity < 0)
+            throw new IllegalArgumentException("Initial capacity must be a positive integer.");
+        if (loadFactor <= 0.0)
+            throw new IllegalArgumentException("Load factor must be positive and non-zero.")
 
         this.loadFactor = loadFactor;
         //threshold = capacity *
@@ -93,21 +104,42 @@ public class HashJMap<K, V> implements JMap<K, V> {
      */
     @Override
     public V put(K key, V value) {
-        //validate key == null
 
-        //init this.table
+        if (key == null)
+            throw new NullPointerException("Key cannot be null.");
 
-        //using key.hashcode to compute the bucket location (this.table)
-        //e.g. key.hashcode % (table.length -1)
+        if (this.table == null) {
 
-        //store KV in the table[index] (as Node<K,V>)
-        //if key already exist (use #containsKey) update the value instead
-        //if table[index] is taken, link the KV pair next to the exiting KV pair
+            this.table = (Node<K, V>[]) new Node[this.capacity()];
+            this.size = 0;
+        }
 
-        //add KV pair to this.entrySet
+        int index = key.hashCode() % (table.length - 1);
+        Node<K, V> newNode = new HashJMap.Node(key.hashCode(), key, value, null);
+        Node<K, V> inspectedNode = table[index];
+        Node<K, V> previousNode;
 
-        //if this.size is greater than threshold, double table and re-hash
-        //(iterate through this.entrySet for re-hashing )
+        if (inspectedNode == null) {
+
+            table[index] = newNode;
+            this.size++;
+        } else {
+
+            do {
+
+                if (inspectedNode.getKey() == key)
+                    return inspectedNode.setValue(value);
+
+                previousNode = inspectedNode;
+                inspectedNode = inspectedNode.next;
+            } while (inspectedNode != null);
+
+            previousNode.next = newNode;
+            this.size++;
+        }
+
+        if (this.size > threshold)
+            this.resize();
 
         return null;
     }
@@ -185,6 +217,75 @@ public class HashJMap<K, V> implements JMap<K, V> {
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
         return null;
+    }
+
+    final class EntrySet extends AbstractSet<Map.Entry<K,V>> {
+
+        @Override
+        public Iterator<Map.Entry<K, V>> iterator() {
+            return new EntryIterator();
+        }
+
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public Spliterator<Map.Entry<K, V>> spliterator() {
+            return super.spliterator();
+        }
+
+        @Override
+        public <T> T[] toArray(IntFunction<T[]> generator) {
+            return super.toArray(generator);
+        }
+
+        @Override
+        public boolean removeIf(Predicate<? super Map.Entry<K, V>> filter) {
+            return super.removeIf(filter);
+        }
+
+        @Override
+        public Stream<Map.Entry<K, V>> stream() {
+            return super.stream();
+        }
+
+        @Override
+        public Stream<Map.Entry<K, V>> parallelStream() {
+            return super.parallelStream();
+        }
+
+        @Override
+        public void forEach(Consumer<? super Map.Entry<K, V>> action) {
+            super.forEach(action);
+        }
+    }
+
+    final class EntryIterator implements Iterator<Map.Entry<K,V>> {
+
+        Node<K, V> current = (table != null) ? table[0] : null;
+        Node<K, V> next;
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Map.Entry<K, V> next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super Map.Entry<K, V>> action) {
+            Iterator.super.forEachRemaining(action);
+        }
     }
 
     /**
