@@ -1,6 +1,5 @@
 package ca.jrvs.practice.dataStructure.map;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
@@ -75,7 +74,7 @@ public class HashJMap<K, V> implements JMap<K, V> {
         if (initialCapacity < 0)
             throw new IllegalArgumentException("Initial capacity must be a positive integer.");
         if (loadFactor <= 0.0)
-            throw new IllegalArgumentException("Load factor must be positive and non-zero.")
+            throw new IllegalArgumentException("Load factor must be positive and non-zero.");
 
         this.loadFactor = loadFactor;
         //threshold = capacity *
@@ -114,15 +113,13 @@ public class HashJMap<K, V> implements JMap<K, V> {
             this.size = 0;
         }
 
-        int index = key.hashCode() % (table.length - 1);
+        int index = getHashedIndex(key);
         Node<K, V> newNode = new HashJMap.Node(key.hashCode(), key, value, null);
         Node<K, V> inspectedNode = table[index];
         Node<K, V> previousNode;
 
         if (inspectedNode == null) {
-
             table[index] = newNode;
-            this.size++;
         } else {
 
             do {
@@ -135,8 +132,8 @@ public class HashJMap<K, V> implements JMap<K, V> {
             } while (inspectedNode != null);
 
             previousNode.next = newNode;
-            this.size++;
         }
+        this.size++;
 
         if (this.size > threshold)
             this.resize();
@@ -166,15 +163,13 @@ public class HashJMap<K, V> implements JMap<K, V> {
      */
     @Override
     public boolean containsKey(Object key) {
-        //validate key == null
 
-        //using key.hashcode to compute the bucket location (this.table)
-        //e.g. key.hashcode % (table.length -1)
+        if (key == null)
+            throw new NullPointerException("Key cannot be null.");
 
-        //if there is more than one Node<K,V> in the bucket,
-        //traverse through the linkedList and use `equals` to find the key
+        int index = getHashedIndex((K) key);
 
-        return false;
+        return (iterateOverBucket((K) key, index) != null);
     }
 
 
@@ -191,7 +186,22 @@ public class HashJMap<K, V> implements JMap<K, V> {
      */
     @Override
     public V get(Object key) {
-        //similar to #containsKey
+
+        int index = getHashedIndex((K) key);
+        return iterateOverBucket((K) key, index);
+    }
+
+    private V iterateOverBucket(K key, int index) {
+
+        Node<K, V> currentNode = table[index];
+        while (currentNode != null) {
+
+            if (!currentNode.getKey().equals(key))
+                currentNode = currentNode.next;
+            else
+                return currentNode.getValue();
+        }
+
         return null;
     }
 
@@ -204,7 +214,7 @@ public class HashJMap<K, V> implements JMap<K, V> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     /**
@@ -216,7 +226,22 @@ public class HashJMap<K, V> implements JMap<K, V> {
      */
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
-        return null;
+        return new EntrySet();
+    }
+
+    private int getHashedIndex(K key) {
+        return key.hashCode() % (table.length - 1);
+    }
+
+    private void resize() {
+
+        HashJMap<K, V> tempHashMap = new HashJMap<>(table.length << 1, 1.0f);
+
+        for (Map.Entry<K, V> node : this.entrySet())
+            tempHashMap.put(node.getKey(), node.getValue());
+
+        table = tempHashMap.table;
+        threshold = (int) ((float)table.length * loadFactor);
     }
 
     final class EntrySet extends AbstractSet<Map.Entry<K,V>> {
@@ -228,7 +253,7 @@ public class HashJMap<K, V> implements JMap<K, V> {
 
         @Override
         public int size() {
-            return 0;
+            return size;
         }
 
         @Override
@@ -264,17 +289,55 @@ public class HashJMap<K, V> implements JMap<K, V> {
 
     final class EntryIterator implements Iterator<Map.Entry<K,V>> {
 
-        Node<K, V> current = (table != null) ? table[0] : null;
-        Node<K, V> next;
+        Node<K, V> currentNode;
+        Node<K, V> nextNode;
+        int index;
 
-        @Override
-        public boolean hasNext() {
-            return false;
+        public EntryIterator() {
+
+            currentNode = nextNode = null;
+            index = 0;
+
+            nextNode = getNextHeadNode();
+        }
+
+        private Node<K, V> getNextHeadNode() {
+
+            Node<K, V> returnNode = null;
+
+            if (table != null) {
+
+                while (table[index] == null) {
+
+                    if (index < table.length - 1)
+                        index++;
+                    else
+                        break;
+                }
+
+                returnNode = table[index];
+            }
+
+            return returnNode;
         }
 
         @Override
-        public Map.Entry<K, V> next() {
-            return null;
+        public boolean hasNext() {
+            return nextNode != null;
+        }
+
+        @Override
+        public Node<K, V> next() {
+
+            currentNode = nextNode;
+            if (nextNode.next != null)
+                nextNode = nextNode.next;
+            else {
+                index++;
+                nextNode = getNextHeadNode();
+            }
+
+            return currentNode;
         }
 
         @Override
