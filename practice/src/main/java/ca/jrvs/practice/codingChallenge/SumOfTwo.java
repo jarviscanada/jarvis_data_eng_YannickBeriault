@@ -1,5 +1,7 @@
 package ca.jrvs.practice.codingChallenge;
 
+import java.util.HashMap;
+
 /**
  * https://www.notion.so/jarvisdev/Two-Sum-a0e56cef0c1548848f5f66b400ad2155
  * This class contains two solutions to the Two sum problem: a naive solution and a more efficient one.
@@ -9,7 +11,30 @@ package ca.jrvs.practice.codingChallenge;
 
 public class SumOfTwo {
 
-    public static int[] findTwoSumNaive(int [] values, int target) {
+    public static int[] findTwoSumHashMap(int[] values, int target) {
+
+        int[] solution = new int[2];
+        HashMap<Integer, Integer> searchMap = new HashMap<>();
+
+        for (int i = 0; i < values.length; i++) {
+
+            int value = values[i];
+            int toFind = target - value;
+
+            if (searchMap.containsKey(toFind)) {
+
+                solution[1] = i;
+                solution[0] = searchMap.get(toFind);
+                return solution;
+            }
+
+            searchMap.put(value, i);
+        }
+
+        return null;
+    }
+
+    public static int[] findTwoSumNaive(int[] values, int target) {
 
         int[] solution = new int[2];
 
