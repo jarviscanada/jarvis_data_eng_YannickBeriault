@@ -22,7 +22,8 @@ public class StringToInteger {
 
                     preParsedBuilder.append(currentChar);
                     continue;
-                }
+                } else if (!Character.isDigit(currentChar))
+                    return 0;
             }
 
             if (Character.isDigit(currentChar)) {
@@ -62,5 +63,51 @@ public class StringToInteger {
                 return (int) finalParse;
         } else
             return 0;
+    }
+
+    public static int atoiWithoutJavaParse(String stringInt) {
+
+        long solution = 0;
+        boolean isNegative = false;
+        boolean firstValidCharIn = false;
+
+        for (int i = 0; i < stringInt.length(); i++) {
+
+            char currentChar = stringInt.charAt(i);
+
+            if (!firstValidCharIn) {
+
+                if (currentChar == ' ')
+                    continue;
+                else if (currentChar == '-' || currentChar == '+') {
+
+                    isNegative = (currentChar == '-');
+                    firstValidCharIn = true;
+                    continue;
+                } else if (Character.isDigit(currentChar))
+                    firstValidCharIn = true;
+            }
+
+            if (Character.isDigit(currentChar)) {
+
+                int currentDigit = currentChar % 48;
+                solution = (solution << 3) + solution * 2;
+                solution += currentDigit;
+
+                if (solution > Integer.MAX_VALUE) {
+
+                    if (isNegative && solution > Integer.MAX_VALUE + 1)
+                        return Integer.MIN_VALUE;
+                    else
+                        return Integer.MAX_VALUE;
+                }
+            } else
+                break;
+        }
+
+        if (isNegative) {
+            return (int) -solution;
+        } else
+            return (int) solution;
     }
 }
