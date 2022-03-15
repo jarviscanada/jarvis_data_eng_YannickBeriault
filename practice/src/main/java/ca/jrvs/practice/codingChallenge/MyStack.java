@@ -1,39 +1,41 @@
 package ca.jrvs.practice.codingChallenge;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
+
+/**
+ * https://www.notion.so/jarvisdev/Implement-Stack-using-Queue-6096df31031d4102a825b9f1d05c6150
+ */
 
 public class MyStack {
 
-    private ArrayDeque<Integer> frontQueue;
-    private ArrayDeque<Integer> backgroundQueue;
+    private ArrayDeque<Integer> clunkyStack;
 
     public MyStack() {
-
-        this.frontQueue = new ArrayDeque<>();
-        this.backgroundQueue = new ArrayDeque<>();
+        this.clunkyStack = new ArrayDeque<>();
     }
 
     public void push(int x) {
 
-        while(!frontQueue.isEmpty())
-            backgroundQueue.add(frontQueue.pop());
+        int size = clunkyStack.size();
 
-        frontQueue.add(x);
+        clunkyStack.add(x);
 
-        while(!backgroundQueue.isEmpty())
-            frontQueue.add(backgroundQueue.pop());
+        while (size > 0) {
+
+            clunkyStack.add(clunkyStack.pop());
+            size--;
+        }
     }
 
     public int pop() {
-        return frontQueue.pop();
+        return clunkyStack.pop();
     }
 
     public int top() {
-        return frontQueue.peek();
+        return clunkyStack.peek();
     }
 
     public boolean empty() {
-        return frontQueue.isEmpty();
+        return clunkyStack.isEmpty();
     }
 }
