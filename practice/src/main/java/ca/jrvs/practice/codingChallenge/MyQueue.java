@@ -4,35 +4,42 @@ import java.util.ArrayDeque;
 
 public class MyQueue {
 
-    private ArrayDeque<Integer> frontStack;
-    private ArrayDeque<Integer> backStack;
+    private ArrayDeque<Integer> stackA;
+    private ArrayDeque<Integer> stackB;
 
     public MyQueue() {
 
-        frontStack = new ArrayDeque<>();
-        backStack = new ArrayDeque<>();
+        stackA = new ArrayDeque<>();
+        stackB = new ArrayDeque<>();
     }
 
     public void push(int x) {
-
-        while (!frontStack.isEmpty())
-            backStack.push(frontStack.pop());
-
-        backStack.push(x);
-
-        while (!backStack.isEmpty())
-            frontStack.push(backStack.pop());
+           stackB.push(x);
     }
 
     public int pop() {
-        return frontStack.pop();
+
+        if (stackA.isEmpty())
+            this.unStack();
+
+        return stackA.pop();
+    }
+
+    private void unStack() {
+
+        while (!stackB.isEmpty())
+            stackA.push(stackB.pop());
     }
 
     public int peek() {
-        return frontStack.peek();
+
+        if (stackA.isEmpty())
+            this.unStack();
+
+        return stackA.peek();
     }
 
     public boolean empty() {
-        return frontStack.isEmpty();
+        return (stackA.isEmpty() && stackB.isEmpty());
     }
 }
