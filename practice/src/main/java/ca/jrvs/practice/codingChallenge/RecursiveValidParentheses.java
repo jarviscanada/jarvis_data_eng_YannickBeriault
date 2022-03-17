@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * https://www.notion.so/jarvisdev/YannickB-Coding-Challenges-4-questions-per-week-fb89f886ffc44c7cbd856042e895e874
+ */
+
 public class RecursiveValidParentheses {
 
     private static HashMap<Character, Character> bracketMapper = createMapper();
