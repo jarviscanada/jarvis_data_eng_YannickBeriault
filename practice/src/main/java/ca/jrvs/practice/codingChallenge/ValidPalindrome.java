@@ -14,7 +14,7 @@ public class ValidPalindrome {
         else {
 
             workingS = s;
-            return fastIsPalindromeRecursive(0, s.length());
+            return fastIsPalindromeRecursive(0, s.length() - 1);
         }
     }
 
