@@ -23,11 +23,6 @@ public class ValidPalindrome {
         if (head >= tail)
             return true;
 
-        if (!Character.isLetterOrDigit(workingS.charAt(head)))
-            return fastIsPalindromeRecursive(head + 1, tail);
-        if (!Character.isLetterOrDigit(workingS.charAt(tail)))
-            return fastIsPalindromeRecursive(head, tail - 1);
-
         if (Character.toLowerCase(workingS.charAt(head))
                 == Character.toLowerCase(workingS.charAt(tail))) {
 
@@ -35,7 +30,11 @@ public class ValidPalindrome {
                 return true;
             else
                 return fastIsPalindromeRecursive( head + 1, tail - 1);
-        } else
+        } else if (!Character.isLetterOrDigit(workingS.charAt(head)))
+            return fastIsPalindromeRecursive(head + 1, tail);
+        else if (!Character.isLetterOrDigit(workingS.charAt(tail)))
+            return fastIsPalindromeRecursive(head, tail - 1);
+        else
             return false;
     }
 
