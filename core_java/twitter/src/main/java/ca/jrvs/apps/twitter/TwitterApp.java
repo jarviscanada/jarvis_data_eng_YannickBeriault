@@ -4,11 +4,11 @@ import java.util.zip.DataFormatException;
 
 public class TwitterApp {
 
-    private final static String ARGUMENTS_NUMBER_ERROR_MESSAGE = "Please provide the right number of arguments.";
-    private final static String GEO_TAG_ERROR_MESSAGE = "Geo tag is in wrong format.";
-    private final static String OPTION_ARGUMENT_ERROR_MESSAGE = "Incorrect option argument.";
-    private final static String TEXT_LENGTH_ERROR_MESSAGE = "Tweet must be between 1 and 140 characters.";
-    private final static String USAGE_ERROR_MESSAGE = "Usage\n" +
+    final static String ARGUMENTS_NUMBER_ERROR_MESSAGE = "Please provide the right number of arguments.";
+    final static String GEO_TAG_ERROR_MESSAGE = "Geo tag is in wrong format.";
+    final static String OPTION_ARGUMENT_ERROR_MESSAGE = "Incorrect option argument.";
+    final static String TEXT_LENGTH_ERROR_MESSAGE = "Tweet must be between 1 and 140 characters.";
+    final static String USAGE_ERROR_MESSAGE = "Usage\n" +
             "TwitterApp post|show|delete \"tweet_text\" \"latitude:longitude\"\n" +
             "\nArguments:\n" +
             "tweet_text         - tweet_text cannot exceed 140 UTF-8 encoded characters. \n" +
@@ -20,7 +20,7 @@ public class TwitterApp {
     }
 
     static boolean checkArgsLength(String[] arguments) {
-        return (arguments[0].equalsIgnoreCase("show") && arguments.length == 2)
+        return (arguments.length == 2 && arguments[0].equalsIgnoreCase("show"))
                 || arguments.length == 3;
     }
 
@@ -35,9 +35,9 @@ public class TwitterApp {
 
         if (arguments[0].equalsIgnoreCase("post"))
             post(arguments[1], arguments[2]);
-        else if (arguments[0].equalsIgnoreCase("show"))
+        //else if (arguments[0].equalsIgnoreCase("show"))
 
-        else if (arguments[0].equalsIgnoreCase("delete"))
+        //else if (arguments[0].equalsIgnoreCase("delete"))
 
     }
 
