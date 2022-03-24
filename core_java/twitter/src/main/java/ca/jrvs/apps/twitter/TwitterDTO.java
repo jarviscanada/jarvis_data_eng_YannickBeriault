@@ -14,4 +14,106 @@ public class TwitterDTO {
     private int favoriteCount;
     private boolean favorited;
     private boolean retweeted;
+
+    public TwitterDTO(String text, float[] coordinates) {
+
+        this.createdAt = new Date();
+        this.id = 1276568976764686343L;
+        this.text = text;
+        this.hashtags = new String[0];
+        this.mentions = new String[0];
+        this.coordinates = coordinates;
+        this.retweetCount = 0;
+        this.favoriteCount = 0;
+        this.favorited = false;
+        this.retweeted = false;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String[] getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(String[] hashtags) {
+        this.hashtags = hashtags;
+    }
+
+    public String[] getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(String[] mentions) {
+        this.mentions = mentions;
+    }
+
+    public float getLatitude() {
+        return getCoordinates()[0];
+    }
+
+    public float getLongitude() {
+        return getCoordinates()[1];
+    }
+
+    private float[] getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(float[] coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public int getRetweetCount() {
+        return retweetCount;
+    }
+
+    public void setRetweetCount(int retweetCount) {
+        this.retweetCount = retweetCount;
+    }
+
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
+    public boolean isRetweeted() {
+        return retweeted;
+    }
+
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
+    }
 }

@@ -20,8 +20,8 @@ public class TwitterApp {
     }
 
     static boolean checkArgsLength(String[] arguments) {
-        return (arguments.length == 2 && arguments[0].equalsIgnoreCase("show"))
-                || arguments.length == 3;
+        return arguments.length == 3
+                || (arguments.length == 2 && arguments[0].equalsIgnoreCase("show"));
     }
 
     static boolean checkOptionArgument(String option) {
@@ -47,6 +47,9 @@ public class TwitterApp {
             throw new DataFormatException(TEXT_LENGTH_ERROR_MESSAGE);
 
         float[] latitudeLongitude = geoTagParser(geoTag);
+
+        Tweeter poster = new Tweeter();
+        poster.post(tweetText, latitudeLongitude);
     }
 
     static float[] geoTagParser(String geoTag) throws DataFormatException {
@@ -72,7 +75,8 @@ public class TwitterApp {
 
     public static void main(String[] args) {
 
-        if (checkArgsLength(args)) {
+        if (!checkArgsLength(args)) {
+
             argumentErrorManager(ARGUMENTS_NUMBER_ERROR_MESSAGE);
             return;
         }
