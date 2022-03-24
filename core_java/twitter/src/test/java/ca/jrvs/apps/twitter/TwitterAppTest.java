@@ -68,4 +68,23 @@ public class TwitterAppTest {
         assertArrayEquals(testArray2, TwitterApp.geoTagParser("-32.58:105.25"), epsilon);
         assertArrayEquals(testArray3, TwitterApp.geoTagParser("89.78:-178.25"), epsilon);
     }
+
+    @Test
+    public void testShowIdFormat() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        long id = twitterApp.tweeter.tweetBank.getAnyId();
+
+        String[] arguments = {"show", Long.toString(id)};
+        twitterApp.methodSwitch(arguments);
+    }
+
+    @Test(expected = DataFormatException.class)
+    public void testShowIdFormatFalse() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+
+        String[] arguments = {"show", "5419688ff"};
+        twitterApp.methodSwitch(arguments);
+    }
 }

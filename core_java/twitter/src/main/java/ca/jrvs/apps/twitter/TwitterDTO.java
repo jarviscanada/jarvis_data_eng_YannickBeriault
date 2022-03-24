@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter;
 
 import java.util.Date;
+import java.util.Random;
 
 public class TwitterDTO {
 
@@ -17,8 +18,10 @@ public class TwitterDTO {
 
     public TwitterDTO(String text, float[] coordinates) {
 
+        Random randomizer = new Random();
+
         this.createdAt = new Date();
-        this.id = 1276568976764686343L;
+        this.id = randomizer.nextLong();
         this.text = text;
         this.hashtags = new String[0];
         this.mentions = new String[0];
