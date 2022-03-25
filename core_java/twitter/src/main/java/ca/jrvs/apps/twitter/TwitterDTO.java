@@ -16,6 +16,20 @@ public class TwitterDTO {
     private boolean favorited;
     private boolean retweeted;
 
+    public TwitterDTO() {
+
+        this.createdAt = new Date();
+        this.id = 496489496856468L;
+        this.text = "Ce tweet est un dummy.";
+        this.hashtags = new String[0];
+        this.mentions = new String[0];
+        this.coordinates = new float[]{43.443f, 79.2224f};
+        this.retweetCount = 0;
+        this.favoriteCount = 0;
+        this.favorited = false;
+        this.retweeted = false;
+    }
+
     public TwitterDTO(String text, float[] coordinates) {
 
         Random randomizer = new Random();

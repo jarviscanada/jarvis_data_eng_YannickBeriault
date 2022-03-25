@@ -28,10 +28,23 @@ public class Tweeter {
 
     public StringWriter show(long id, String[] options) throws DataFormatException {
 
-        if (tweetBank.getTweet(id) == null)
+        TwitterDTO tweet = tweetBank.getTweet(id);
+
+        if (tweet == null)
             throw new DataFormatException(UNEXISTING_TWEET_ERROR_MESSAGE);
-        else
-            return createStringWriter(buildJsonObject(tweetBank.getTweet(id)));
+        else {
+
+            JsonObject jsonObject = buildJsonObject(tweet);
+
+            if (options.length == 0)
+                return createStringWriter(jsonObject);
+            else {
+
+                try {
+                    jsonObject = s
+                }
+            }
+        }
     }
 
     private JsonObject buildJsonObject(TwitterDTO tweet) {
@@ -64,6 +77,11 @@ public class Tweeter {
                 .add("favorited", tweet.isFavorited())
                 .add("retweeted", tweet.isRetweeted())
                 .build();
+    }
+
+    private JsonObject shortenJsonObject(JsonObject jsonObject) {
+
+        HashMap
     }
 
     private StringWriter createStringWriter(JsonObject jsonObject) {
