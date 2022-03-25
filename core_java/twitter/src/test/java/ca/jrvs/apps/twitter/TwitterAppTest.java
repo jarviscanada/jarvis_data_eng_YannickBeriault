@@ -2,6 +2,7 @@ package ca.jrvs.apps.twitter;
 
 import org.junit.Test;
 
+import java.io.StringWriter;
 import java.util.zip.DataFormatException;
 
 import static org.junit.Assert.*;
@@ -86,5 +87,39 @@ public class TwitterAppTest {
 
         String[] arguments = {"show", "5419688ff"};
         twitterApp.methodSwitch(arguments);
+    }
+
+    @Test
+    public void testShowMethodStringWriter() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        String[] emptyArray = new String[0];
+        StringWriter writer = twitterApp.tweeter.show(496489496856468L, emptyArray);
+
+        assertTrue(writer != null);
+    }
+
+    @Test
+    public void testShowMethodOptionsTrue1() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        String[] optionsArray = {"created_at", "text", "retweet_count"};
+        twitterApp.tweeter.show(496489496856468L, optionsArray);
+    }
+
+    @Test
+    public void testShowMethodOptionsTrue2() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        String[] optionsArray = {"created_at", "text", "hashtags", "retweet_count"};
+        twitterApp.tweeter.show(496489496856468L, optionsArray);
+    }
+
+    @Test(expected = DataFormatException.class)
+    public void testShowMethodOptionsFalse() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        String[] optionsArray = {"created_at", "pendejada"};
+        twitterApp.tweeter.show(496489496856468L, optionsArray);
     }
 }
