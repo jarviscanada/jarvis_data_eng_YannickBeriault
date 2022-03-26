@@ -1,5 +1,6 @@
 package ca.jrvs.apps.twitter;
 
+import java.io.StringWriter;
 import java.util.zip.DataFormatException;
 
 public class TwitterApp {
@@ -15,7 +16,11 @@ public class TwitterApp {
             "tweet_text         - tweet_text cannot exceed 140 UTF-8 encoded characters. \n" +
             "latitude:longitude - Geo location.";
 
-    public Tweeter tweeter = new Tweeter();
+    public Tweeter tweeter;
+
+    public TwitterApp() {
+        this.tweeter = new Tweeter();
+    }
 
     //Methods to manage argument errors
     private static void argumentErrorManager(String specificMessage) {
@@ -24,7 +29,9 @@ public class TwitterApp {
 
     static boolean checkArgsLength(String[] arguments) {
         return arguments.length == 3
-                || (arguments.length == 2 && arguments[0].equalsIgnoreCase("show"));
+                || (arguments.length == 2
+                      && (arguments[0].equalsIgnoreCase("show")
+                      || arguments[0].equalsIgnoreCase("delete")));
     }
 
     static boolean checkOptionArgument(String option) {
@@ -40,8 +47,8 @@ public class TwitterApp {
             post(arguments[1], arguments[2]);
         else if (arguments[0].equalsIgnoreCase("show"))
             show(arguments[1], arguments.length == 3 ? arguments[2] : null);
-        //else if (arguments[0].equalsIgnoreCase("delete"))
-
+        else if (arguments[0].equalsIgnoreCase("delete"))
+            delete(arguments[1]);
     }
 
     private void post(String tweetText, String geoTag) throws DataFormatException {
@@ -74,6 +81,25 @@ public class TwitterApp {
         System.out.println(this.tweeter.show(id, options));
     }
 
+    private void delete(String toDelete) throws DataFormatException {
+
+        String[] victimsIdStrings = toDelete.split(",");
+        long[] victimsId = new long[victimsIdStrings.length];
+
+        for (int i = 0; i < victimsIdStrings.length; i++) {
+
+            try {
+                victimsId[i] = Long.parseLong(victimsIdStrings[i]);
+            } catch (NumberFormatException e) {
+                throw new DataFormatException(ID_FORMAT_ERROR_MESSAGE);
+            }
+        }
+
+        StringWriter[] epitaphWriters = tweeter.delete(victimsId);
+        for (StringWriter epitaph : epitaphWriters)
+            System.out.println(epitaph);
+    }
+
     static float[] geoTagParser(String geoTag) throws DataFormatException {
 
         float[] latitudeLongitude = new float[2];
@@ -93,7 +119,6 @@ public class TwitterApp {
 
         return latitudeLongitude;
     }
-
 
     public static void main(String[] args) {
 

@@ -16,10 +16,12 @@ public class TwitterDTO {
     private boolean favorited;
     private boolean retweeted;
 
+    private static long incrementableIdMaker = 496489496856468L;
+
     public TwitterDTO() {
 
         this.createdAt = new Date();
-        this.id = 496489496856468L;
+        this.id = incrementableIdMaker++;
         this.text = "Ce tweet est un dummy.";
         this.hashtags = new String[0];
         this.mentions = new String[0];
@@ -44,6 +46,10 @@ public class TwitterDTO {
         this.favoriteCount = 0;
         this.favorited = false;
         this.retweeted = false;
+    }
+
+    public static void setIncrementableIdMaker(long idMaker) {
+        incrementableIdMaker = idMaker;
     }
 
     public Date getCreatedAt() {

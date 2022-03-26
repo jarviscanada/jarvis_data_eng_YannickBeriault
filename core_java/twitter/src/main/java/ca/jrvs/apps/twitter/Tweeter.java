@@ -43,6 +43,19 @@ public class Tweeter {
         return createStringWriter(jsonObject);
     }
 
+    public StringWriter[] delete(long[] victimsId) throws DataFormatException {
+
+        StringWriter[] epitaphWriters = new StringWriter[victimsId.length];
+
+        for(int i = 0; i < victimsId.length; i++) {
+
+            epitaphWriters[i] = show(victimsId[i], new String[0]);
+            tweetBank.deleteTweet(victimsId[i]);
+        }
+
+        return epitaphWriters;
+    }
+
     private JsonObject buildJsonObject(TwitterDTO tweet) {
 
         JsonArrayBuilder hashtagsArrayBuilder = Json.createArrayBuilder();

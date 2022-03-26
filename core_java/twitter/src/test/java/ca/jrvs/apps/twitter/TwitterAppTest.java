@@ -103,23 +103,36 @@ public class TwitterAppTest {
     public void testShowMethodOptionsTrue1() throws DataFormatException {
 
         TwitterApp twitterApp = new TwitterApp();
-        String[] optionsArray = {"created_at", "text", "retweet_count"};
-        twitterApp.tweeter.show(496489496856468L, optionsArray);
+        twitterApp.methodSwitch(new String[] {"show", "496489496856468", "created_at,text,retweet_count"});
     }
 
     @Test
     public void testShowMethodOptionsTrue2() throws DataFormatException {
 
         TwitterApp twitterApp = new TwitterApp();
-        String[] optionsArray = {"created_at", "text", "hashtags", "retweet_count"};
-        twitterApp.tweeter.show(496489496856468L, optionsArray);
+        twitterApp.methodSwitch(new String[] {"show", "496489496856468", "created_at,text,hashtags,retweet_count"});
     }
 
     @Test(expected = DataFormatException.class)
     public void testShowMethodOptionsFalse() throws DataFormatException {
 
         TwitterApp twitterApp = new TwitterApp();
-        String[] optionsArray = {"created_at", "pendejada"};
-        twitterApp.tweeter.show(496489496856468L, optionsArray);
+        twitterApp.methodSwitch(new String[] {"show", "496489496856468", "created_at,pendejada"});
+    }
+
+    @Test
+    public void testDeleteMethod() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        twitterApp.methodSwitch(new String[] {"delete", "496489496856468,496489496856469"});
+
+        assertTrue(twitterApp.tweeter.tweetBank.tweetBank.size() == 3);
+    }
+
+    @Test(expected = DataFormatException.class)
+    public void testDeleteMethodFalse() throws DataFormatException {
+
+        TwitterApp twitterApp = new TwitterApp();
+        twitterApp.methodSwitch(new String[] {"delete", "496489496856467,496489496856469"});
     }
 }
