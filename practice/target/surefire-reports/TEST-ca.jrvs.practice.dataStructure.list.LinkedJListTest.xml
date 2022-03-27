@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="ca.jrvs.practice.dataStructure.map.HashJMapTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="9" failures="0" name="ca.jrvs.practice.dataStructure.list.LinkedJListTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.14+9-Ubuntu-0ubuntu2.18.04"/>
@@ -61,7 +61,13 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="ca.jrvs.practice.dataStructure.map.HashJMapTest" name="testGetValueWithKey" time="0.005"/>
-  <testcase classname="ca.jrvs.practice.dataStructure.map.HashJMapTest" name="testPutAndResize" time="0"/>
-  <testcase classname="ca.jrvs.practice.dataStructure.map.HashJMapTest" name="testContainsKey" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testToArray" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testRemoveAndIsEmpty" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testClear" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testContains" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testAddAndGet" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testSizeAndAdd" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testGetIndexOut" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testIndexOf" time="0"/>
+  <testcase classname="ca.jrvs.practice.dataStructure.list.LinkedJListTest" name="testRemoveIndexOut" time="0"/>
 </testsuite>
