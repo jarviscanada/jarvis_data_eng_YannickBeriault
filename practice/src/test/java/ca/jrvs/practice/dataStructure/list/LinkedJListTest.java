@@ -104,4 +104,24 @@ public class LinkedJListTest {
         linkedJList.clear();
         assertTrue(linkedJList.isEmpty());
     }
+
+    @Test
+    public void testRemoveDuplicates() {
+
+        LinkedJList linkedJList = new LinkedJList();
+        assertFalse(linkedJList.removeDuplicates());
+
+        linkedJList.add(8);
+        linkedJList.add(8);
+        linkedJList.add(7);
+        linkedJList.add(8);
+        linkedJList.add(3);
+        linkedJList.add(7);
+        linkedJList.add(5);
+        linkedJList.add(8);
+
+        assertTrue(linkedJList.removeDuplicates());
+        assertEquals(linkedJList.size(), 4);
+        assertEquals(linkedJList.indexOf(5), 3);
+    }
 }

@@ -1,5 +1,7 @@
 package ca.jrvs.practice.dataStructure.list;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
@@ -148,6 +150,37 @@ public class LinkedJList implements JList {
         setSize(size() - 1);
 
         return currentNode.getContent();
+    }
+
+    /**
+     * Removes nodes containing objects that are already present in any node nearer from the beginning of the
+     * list. Keeps the first occurence.
+     * @return true if at least one node was removed, false otherwise.
+     */
+    public boolean removeDuplicates() {
+
+        boolean didRemove = false;
+        HashSet<Object> hashSet = new HashSet<>();
+
+        ListNode previousNode = firstNode;
+        ListNode currentNode = firstNode;
+
+        while (currentNode != null) {
+
+            if (!hashSet.add(currentNode.getContent())) {
+
+                previousNode.setNextNode(currentNode.getNextNode());
+                currentNode = previousNode.getNextNode();
+                setSize(size() - 1);
+                didRemove = true;
+            } else {
+
+                previousNode = currentNode;
+                currentNode = currentNode.getNextNode();
+            }
+        }
+
+        return didRemove;
     }
 
     @Override
