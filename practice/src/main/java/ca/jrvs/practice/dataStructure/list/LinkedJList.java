@@ -170,14 +170,14 @@ public class LinkedJList implements JList {
             if (!hashSet.add(currentNode.getContent())) {
 
                 previousNode.setNextNode(currentNode.getNextNode());
-                currentNode = previousNode.getNextNode();
                 setSize(size() - 1);
                 didRemove = true;
             } else {
 
                 previousNode = currentNode;
-                currentNode = currentNode.getNextNode();
             }
+
+            currentNode = currentNode.getNextNode();
         }
 
         return didRemove;

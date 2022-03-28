@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="ca.jrvs.practice.codingChallenges.RecursiveFiboTest" time="0" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="ca.jrvs.practice.codingChallenges.RecursiveFiboTest" time="0.006" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.14+9-Ubuntu-0ubuntu2.18.04"/>
@@ -62,5 +62,5 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="ca.jrvs.practice.codingChallenges.RecursiveFiboTest" name="testGetFiboValueForPosition" time="0"/>
-  <testcase classname="ca.jrvs.practice.codingChallenges.RecursiveFiboTest" name="testGetStairClimbingCombinations" time="0"/>
+  <testcase classname="ca.jrvs.practice.codingChallenges.RecursiveFiboTest" name="testGetStairClimbingCombinations" time="0.006"/>
 </testsuite>
