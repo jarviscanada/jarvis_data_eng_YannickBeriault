@@ -12,7 +12,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ca.jrvs.apps.twitter.TwitterApp</mainClass>
+              <mainClass>ca.jrvs.apps.twitter.TwitterApiTest</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -41,6 +41,78 @@
         <exclusion>
           <artifactId>hamcrest-core</artifactId>
           <groupId>org.hamcrest</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>4.3.1</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>byte-buddy</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>byte-buddy-agent</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>objenesis</artifactId>
+          <groupId>org.objenesis</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>2.6.5</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>spring-boot-test</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-boot-test-autoconfigure</artifactId>
+          <groupId>org.springframework.boot</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>json-path</artifactId>
+          <groupId>com.jayway.jsonpath</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jakarta.xml.bind-api</artifactId>
+          <groupId>jakarta.xml.bind</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>assertj-core</artifactId>
+          <groupId>org.assertj</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hamcrest</artifactId>
+          <groupId>org.hamcrest</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>junit-jupiter</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>mockito-junit-jupiter</artifactId>
+          <groupId>org.mockito</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jsonassert</artifactId>
+          <groupId>org.skyscreamer</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>spring-test</artifactId>
+          <groupId>org.springframework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>xmlunit-core</artifactId>
+          <groupId>org.xmlunit</groupId>
         </exclusion>
       </exclusions>
     </dependency>
