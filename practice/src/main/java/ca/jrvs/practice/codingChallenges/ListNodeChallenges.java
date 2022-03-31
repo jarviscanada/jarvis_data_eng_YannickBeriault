@@ -1,9 +1,29 @@
 package ca.jrvs.practice.codingChallenges;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class RemoveNthNode {
+public class ListNodeChallenges {
+
+    public ListNode middleNode(ListNode head) {
+
+        if (head == null)
+            return null;
+
+        ListNode tailNode = head;
+        ListNode middleNode = head;
+        int counter = 0;
+
+        while (tailNode.next != null) {
+
+            tailNode = tailNode.next;
+            if (counter % 2 == 0)
+                middleNode = middleNode.next;
+
+            counter++;
+        }
+
+        return middleNode;
+    }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
