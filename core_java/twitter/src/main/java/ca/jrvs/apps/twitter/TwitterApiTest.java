@@ -1,6 +1,6 @@
 package ca.jrvs.apps.twitter;
 
-import com.google.gdata.util.common.base.PercentEscaper;
+import com.google.api.client.util.escape.PercentEscaper;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
