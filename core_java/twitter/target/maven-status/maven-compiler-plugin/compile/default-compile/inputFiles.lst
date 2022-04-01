@@ -1,0 +1,10 @@
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TwitterDTO.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/service/Service.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/CrdDao.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TweetBankMock.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/TwitterHttpHelper.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TwitterApiTest.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TwitterApp.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/Tweeter.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/HttpHelper.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/controller/Controller.java

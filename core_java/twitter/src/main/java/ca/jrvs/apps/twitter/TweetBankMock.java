@@ -10,7 +10,6 @@ public class TweetBankMock {
     public TweetBankMock() {
 
         this.tweetBank = new HashMap<>();
-        TwitterDTO.setIncrementableIdMaker(496489496856468L);
 
         TwitterDTO tweet1 = new TwitterDTO("This is not a tweet.", new float[]{41.00f, 28.5718f});
         TwitterDTO tweet2 = new TwitterDTO("The world is a vampire.", new float[]{55.4521f, 37.372f});

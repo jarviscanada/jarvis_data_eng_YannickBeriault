@@ -1,5 +1,6 @@
 package ca.jrvs.apps.twitter;
 
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.StringWriter;
@@ -87,6 +88,11 @@ public class TwitterAppTest {
 
         String[] arguments = {"show", "5419688ff"};
         twitterApp.methodSwitch(arguments);
+    }
+
+    @After
+    public void resetIds() {
+        TwitterDTO.setIncrementableIdMaker(496489496856468L);
     }
 
     @Test
