@@ -37,6 +37,16 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/TwitterHttpHelperTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -52,7 +62,7 @@
             <version>2.1.1</version>
         </dependency>
         <!--Jackson JSON-->
-        <!--dependecy version is interited from the parent-->
+        <!--dependency version is inherited from the parent-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -65,7 +75,6 @@
             <scope>test</scope>
             <version>4.3.1</version>
         </dependency>
-
         <!--spring-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
