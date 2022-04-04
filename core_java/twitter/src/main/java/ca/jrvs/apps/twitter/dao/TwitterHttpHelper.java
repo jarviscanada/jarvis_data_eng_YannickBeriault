@@ -15,8 +15,8 @@ import java.net.URI;
 
 public class TwitterHttpHelper implements HttpHelper {
 
-    private OAuthConsumer consumer;
-    private HttpClient httpClient;
+    private final OAuthConsumer consumer;
+    private final HttpClient httpClient;
 
     public TwitterHttpHelper(String consumerKey, String consumerSecret,
                              String accessToken, String tokenSecret) {

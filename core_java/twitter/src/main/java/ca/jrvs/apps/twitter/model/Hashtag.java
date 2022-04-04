@@ -1,4 +1,7 @@
 package ca.jrvs.apps.twitter.model;
 
 public class Hashtag {
+
+    private int[] indices;
+    private String text;
 }
