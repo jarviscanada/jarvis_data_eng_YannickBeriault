@@ -1,12 +1,12 @@
 package ca.jrvs.apps.twitter.model;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.util.Date;
 
 public class Tweet {
 
     private String createdAt;
-    private final ID id;
+    private ID id;
     private String text;
     private Entities entities;
     private Coordinates coordinates;
@@ -30,6 +30,36 @@ public class Tweet {
         this.favoriteCount = jsonObject.getInt("favorite_count");
         this.favorited = jsonObject.getBoolean("favorited");
         this.retweeted = jsonObject.getBoolean("retweeted");
+
+        if (!jsonObject.isNull("coordinates")) {
+
+            JsonArray coordinatesArray = jsonObject.getJsonArray("coordinates");
+            this.coordinates = new Coordinates((float) coordinatesArray.getJsonNumber(1).doubleValue(),
+                    (float) coordinatesArray.getJsonNumber(0).doubleValue());
+        }
+
+        this.entities = new Entities();
+        JsonArray hashtagsJsonArray = jsonObject.getJsonObject("entities").getJsonArray("hashtags");
+        if (hashtagsJsonArray.size() > 0)
+            this.entities.setHashtags(hashtagsParser(hashtagsJsonArray));
+
+
+    }
+
+    private Hashtag[] hashtagsParser(JsonArray jsonArray) {
+
+        int size = jsonArray.size();
+        Hashtag[] hashtags = new Hashtag[size];
+
+        for(int i = 0; i < size; i++) {
+
+            JsonArray indicesArray = jsonArray.getJsonObject(i).getJsonArray("indices");
+            hashtags[i] = new Hashtag(new int[] {indicesArray.getInt(0),
+                    indicesArray.getInt(1)},
+                    jsonArray.getJsonObject(i).getString("text"));
+        }
+
+        return hashtags;
     }
 
     public String getCreatedAt() {
@@ -46,6 +76,10 @@ public class Tweet {
 
     public String getIdString() {
         return id.getIdString();
+    }
+
+    public void setId(String idString) {
+        this.id = new ID(idString);
     }
 
     public String getText() {

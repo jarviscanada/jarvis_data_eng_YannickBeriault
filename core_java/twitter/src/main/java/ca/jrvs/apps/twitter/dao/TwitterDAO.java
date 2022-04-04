@@ -1,105 +1,127 @@
 package ca.jrvs.apps.twitter.dao;
 
-import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.*;
 import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.json.*;
-import javax.json.stream.JsonParser;
+import javax.json.Json;
+import javax.json.JsonObject;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 
-public class TwitterDAO implements CrdDao {
+public class TwitterDAO implements CrdDao<Tweet, String> {
 
-    @Override
-    public Object create(Object entity) {
+    //URI constants
+    private static final String API_BASE_URI = "https://api.twitter.com";
+    private static final String POST_PATH = "/1.1/statuses/update.json";
+    private static final String LOOKUP_PATH = "/1.1/statuses/lookup.json";
+    private static final String DELETE_PATH = "/1.1/statuses/destroy";
+    //URI symbols
+    private static final String QUERY_SYM = "?";
+    private static final String AMPERSAND = "&";
+    private static final String EQUAL = "=";
 
-        if (entity instanceof HttpResponse)
-            return createWithHttpResponse((HttpResponse) entity);
-        else
-            return null;
+    //Response code
+    private static final int HTTP_OK = 200;
+
+    private HttpHelper httpHelper;
+
+    @Autowired
+    public TwitterDAO(HttpHelper httpHelper) {
+        this.httpHelper = httpHelper;
     }
 
-    private Tweet createWithHttpResponse(HttpResponse response) {
+    @Override
+    public Tweet create(Tweet entity) {
 
-        InputStream inStream;
+        httpHelper = new TwitterHttpHelper();
+        URI uri = producePostUri(entity);
+
+        HttpResponse response = httpHelper.httpPost(uri);
+
+        JsonObject jsonObject = parseResponse(response, HTTP_OK);
+        String newId;
         try {
-            inStream = response.getEntity().getContent();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            return null;
+            newId = jsonObject.getString("id");
+        } catch (NullPointerException e) {
+            throw new RuntimeException("Unable to retrieve id from the server\'s response.");
         }
 
-        return new Tweet(parseIntoJsonObject(inStream));
+        entity.setId(newId);
+        return entity;
     }
 
-    private JsonObject parseIntoJsonObject(Object toParse) {
+    private URI producePostUri(Tweet tweet) {
 
-        JsonParser jsonParser;
-        if (toParse instanceof InputStream) {
-
-            jsonParser = Json.createParser((InputStream) toParse);
-            jsonParser.next();
+        try {
+            return new URI(API_BASE_URI + POST_PATH
+                    + QUERY_SYM + "status" + EQUAL + tweet.getText());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Failed to form URI.");
         }
-        else
-            jsonParser = (JsonParser) toParse;
+    }
 
-        JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder();
-        JsonParser.Event event = JsonParser.Event.START_OBJECT;
+    private JsonObject parseResponse(HttpResponse response, int expectedStatusCode) {
 
-        while (jsonParser.hasNext() && event != JsonParser.Event.END_OBJECT) {
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode != expectedStatusCode) {
 
-            event = jsonParser.next();
-
-            if (event == JsonParser.Event.KEY_NAME) {
-
-                String key = jsonParser.getString();
-                jsonObjectBuilder.add(key, (JsonValue) parserEventValueExtractor(jsonParser));
+            try {
+                System.out.println(EntityUtils.toString(response.getEntity()));
+            } catch (IOException e) {
+                System.out.println("Response has no body.");
             }
+            throw new RuntimeException("Unexpected status code: " + statusCode);
         }
 
-        return jsonObjectBuilder.build();
-    }
+        if (response.getEntity() == null)
+            throw new RuntimeException("Response has no body.");
 
-    private JsonArray parseIntoJsonArray(JsonParser parser) {
-
-        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
-        JsonParser.Event event = parser.next();
-
-        while (event != JsonParser.Event.END_ARRAY) {
-
-            jsonArrayBuilder.add((JsonValue) parserEventValueExtractor(parser));
-            event = parser.next();
+        String responseString;
+        try {
+            responseString = EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to convert entity to string.");
         }
 
-        return jsonArrayBuilder.build();
+        JsonObject responseJson = jsonStringToJsonObject(responseString);
+        if (responseJson == null)
+            throw new RuntimeException("Failed to convert response string to JSONObject.");
+
+        return responseJson;
     }
 
-    private Object parserEventValueExtractor(JsonParser parser) {
-
-        JsonParser.Event format = parser.next();
-
-        if (format == JsonParser.Event.VALUE_STRING || format == JsonParser.Event.VALUE_NUMBER)
-            return parser.getString();
-        else if (format == JsonParser.Event.VALUE_NULL)
-            return  "";
-        else if (format == JsonParser.Event.VALUE_TRUE)
-            return true;
-        else if (format == JsonParser.Event.VALUE_FALSE)
-            return false;
-        else if (format == JsonParser.Event.START_OBJECT)
-            return parseIntoJsonObject(parser);
-        else if (format == JsonParser.Event.START_ARRAY)
-            return parseIntoJsonArray(parser);
+    private JsonObject jsonStringToJsonObject(String jsonString) {
+        return Json.createReader(new StringReader(jsonString)).readObject();
     }
 
     @Override
-    public Object findById(Object o) {
-        return null;
+    public Tweet findById(String id) {
+
+        httpHelper = new TwitterHttpHelper();
+        URI uri = produceLookupUri(id);
+
+        HttpResponse response = httpHelper.httpGet(uri);
+        JsonObject jsonObject = parseResponse(response, HTTP_OK);
+
+        return new Tweet(jsonObject);
+    }
+
+    private URI produceLookupUri(String id) {
+
+        try {
+            return new URI(API_BASE_URI + LOOKUP_PATH
+                    + QUERY_SYM + "id" + EQUAL + id);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Failed to form URI.");
+        }
     }
 
     @Override
-    public Object deleteById(Object o) {
+    public Tweet deleteById(String s) {
         return null;
     }
 }
