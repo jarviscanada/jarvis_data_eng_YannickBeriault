@@ -3,6 +3,10 @@ package ca.jrvs.practice.codingChallenges;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * https://www.notion.so/jarvisdev/Check-if-a-String-contains-only-digits-33a462a37b5f464490169eec3cb0f156
+ */
+
 public class OnlyDigitsStringChecker {
 
     public static boolean asciiChecker(String toCheck) {
