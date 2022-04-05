@@ -23,8 +23,7 @@ public class TwitterHttpHelperTest {
     @Test
     public void testHttpGet() throws URISyntaxException {
 
-        TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(System.getenv("TWITTER_API_KEY"),
-                System.getenv("TWITTER_API_SECRET"), );
+        TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper();
 
         HttpResponse response = twitterHttpHelper.httpGet(new URI(
                 "https://api.twitter.com/1.1/statuses/lookup.json?id=966227360902189056"));

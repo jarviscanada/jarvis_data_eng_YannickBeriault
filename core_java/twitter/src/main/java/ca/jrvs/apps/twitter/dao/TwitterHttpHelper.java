@@ -28,6 +28,18 @@ public class TwitterHttpHelper implements HttpHelper {
         httpClient = HttpClientBuilder.create().build();
     }
 
+    public HttpResponse httpDelete(URI uri) {
+
+        try {
+            return communicateWithServer("DELETE", uri);
+        } catch (OAuthMessageSignerException | OAuthExpectationFailedException
+                | IOException | OAuthCommunicationException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     @Override
     public HttpResponse httpPost(URI uri) {
 
@@ -57,7 +69,7 @@ public class TwitterHttpHelper implements HttpHelper {
     private HttpResponse communicateWithServer(String method, URI uri) throws OAuthMessageSignerException,
             OAuthExpectationFailedException, OAuthCommunicationException, IOException {
 
-        if (method.equals("GET") || method.equals("POST")) {
+        if (method.equals("GET") || method.equals("POST") || method.equals("DELETE")) {
 
             HttpPost request = new HttpPost(uri);
             consumer.sign(request);

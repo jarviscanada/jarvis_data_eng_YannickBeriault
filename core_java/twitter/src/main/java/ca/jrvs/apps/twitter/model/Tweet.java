@@ -15,6 +15,10 @@ public class Tweet {
     private boolean favorited;
     private boolean retweeted;
 
+    public Tweet(String text) {
+        this.text = text;
+    }
+
     public Tweet(String id, String text) {
 
         this.id = new ID(id);
@@ -24,7 +28,7 @@ public class Tweet {
     public Tweet(JsonObject jsonObject) {
 
         this.createdAt = jsonObject.getString("created_at");
-        this.id = new ID(jsonObject.getString("id"));
+        this.id = new ID(jsonObject.getString("id_str"));
         this.text = jsonObject.getString("text");
         this.retweetCount = jsonObject.getInt("retweet_count");
         this.favoriteCount = jsonObject.getInt("favorite_count");
@@ -43,7 +47,9 @@ public class Tweet {
         if (hashtagsJsonArray.size() > 0)
             this.entities.setHashtags(hashtagsParser(hashtagsJsonArray));
 
-
+        JsonArray userMentionsJsonArray = jsonObject.getJsonObject("entities").getJsonArray("user_mentions");
+        if (userMentionsJsonArray.size() > 0)
+            this.entities.setUserMentions(userMentionsParser(userMentionsJsonArray));
     }
 
     private Hashtag[] hashtagsParser(JsonArray jsonArray) {
@@ -60,6 +66,25 @@ public class Tweet {
         }
 
         return hashtags;
+    }
+
+    private UserMention[] userMentionsParser(JsonArray jsonArray) {
+
+        int size = jsonArray.size();
+        UserMention[] userMentions = new UserMention[size];
+
+        for (int i = 0; i < size; i++) {
+
+            JsonObject currentObject = jsonArray.getJsonObject(i);
+            UserMention currentUserMention = new UserMention(currentObject.getString("id_str"),
+                    currentObject.getString("name"), currentObject.getString("screen_name"));
+            JsonArray indicesArray = jsonArray.getJsonObject(i).getJsonArray("indices");
+            currentUserMention.setIndices(new int[] {indicesArray.getInt(0),
+                    indicesArray.getInt(1)});
+            userMentions[i] = currentUserMention;
+        }
+
+        return userMentions;
     }
 
     public String getCreatedAt() {

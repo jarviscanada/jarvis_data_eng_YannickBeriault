@@ -1,12 +1,12 @@
 package ca.jrvs.apps.twitter.dao;
 
 import ca.jrvs.apps.twitter.model.*;
+import com.google.api.client.util.escape.PercentEscaper;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.json.Json;
-import javax.json.JsonObject;
+import javax.json.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
@@ -45,7 +45,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         JsonObject jsonObject = parseResponse(response, HTTP_OK);
         String newId;
         try {
-            newId = jsonObject.getString("id");
+            newId = jsonObject.getString("id_str");
         } catch (NullPointerException e) {
             throw new RuntimeException("Unable to retrieve id from the server\'s response.");
         }
@@ -56,9 +56,12 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
 
     private URI producePostUri(Tweet tweet) {
 
+        PercentEscaper percentEscaper = new PercentEscaper("", false);
+        String escapedTweetText = percentEscaper.escape(tweet.getText());
+
         try {
             return new URI(API_BASE_URI + POST_PATH
-                    + QUERY_SYM + "status" + EQUAL + tweet.getText());
+                    + QUERY_SYM + "status" + EQUAL + escapedTweetText);
         } catch (URISyntaxException e) {
             throw new RuntimeException("Failed to form URI.");
         }
@@ -95,13 +98,32 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     }
 
     private JsonObject jsonStringToJsonObject(String jsonString) {
-        return Json.createReader(new StringReader(jsonString)).readObject();
+
+        char firstBracket = jsonString.charAt(0);
+        JsonReader jsonReader = Json.createReader(new StringReader(jsonString));
+
+        if (firstBracket == '[') {
+
+            JsonArray jsonArray;
+
+            try (jsonReader) {
+                jsonArray = jsonReader.readArray();
+            }
+
+            return jsonArray.getJsonObject(0);
+        } else if (firstBracket == '{') {
+
+            try (jsonReader) {
+                return jsonReader.readObject();
+            }
+        } else
+            return null;
     }
 
     @Override
     public Tweet findById(String id) {
 
-        httpHelper = new TwitterHttpHelper();
+        httpHelper = getHttpHelper();
         URI uri = produceLookupUri(id);
 
         HttpResponse response = httpHelper.httpGet(uri);
@@ -121,7 +143,30 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     }
 
     @Override
-    public Tweet deleteById(String s) {
-        return null;
+    public Tweet deleteById(String id) {
+
+        Tweet tweetToReturn = findById(id);
+
+        httpHelper = getHttpHelper();
+        URI uri = produceDeleteUri(id);
+
+        HttpResponse response = httpHelper.httpDelete(uri);
+        parseResponse(response, HTTP_OK);
+
+        return tweetToReturn;
+    }
+
+    private HttpHelper getHttpHelper() {
+        return new TwitterHttpHelper();
+    }
+
+    private URI produceDeleteUri(String id) {
+
+        try {
+            return new URI(API_BASE_URI + DELETE_PATH
+                    + "/" + id + ".json");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Failed to form URI.");
+        }
     }
 }

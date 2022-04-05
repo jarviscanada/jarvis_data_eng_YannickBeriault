@@ -18,4 +18,6 @@ public interface HttpHelper {
    * @return
    */
   HttpResponse httpGet(URI uri);
+
+  HttpResponse httpDelete(URI uri);
 }
