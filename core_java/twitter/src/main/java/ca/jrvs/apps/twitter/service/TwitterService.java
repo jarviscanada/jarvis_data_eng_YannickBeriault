@@ -4,9 +4,17 @@ import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TwitterService implements Service {
+
+    private static final String INVALID_ID_ERROR_MESSAGE = "Id is not a valid positive long form integer.";
+    public static final ArrayList<String> VALID_FIELDS = new ArrayList<>(Arrays.asList("created_at", "id",
+            "id_str", "text", "entities", "hashtags", "user_mentions", "coordinates", "retweet_count",
+            "favorite_count", "favorited", "retweeted"));
 
     private CrdDao dao;
 
@@ -41,15 +49,51 @@ public class TwitterService implements Service {
 
         validateShowTweet(id, fields);
 
-        return null;
+        return (Tweet) dao.findById(id);
     }
 
     private void validateShowTweet(String id, String[] fields) {
 
+        validateId(id);
+        validateFields(fields);
+    }
+
+    private void validateId(String id) {
+
+        long idLong;
+
+        try {
+            idLong = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_ID_ERROR_MESSAGE);
+        }
+
+        if (idLong < 0)
+            throw new IllegalArgumentException(INVALID_ID_ERROR_MESSAGE);
+    }
+
+    private void validateFields(String[] fields) {
+
+        for (String field : fields) {
+
+            if (!VALID_FIELDS.contains(field))
+                throw new IllegalArgumentException("An invalid field was queried.");
+        }
     }
 
     @Override
     public List<Tweet> deleteTweets(String[] ids) {
-        return null;
+
+        for (String id : ids)
+            validateId(id);
+
+        LinkedList<Tweet> deletedTweets = new LinkedList<>();
+
+        //Here, we iterate two times to ensure the atomicity of the transaction: if any single id is invalid, no
+        // tweet will be deleted.
+        for (String id : ids)
+            deletedTweets.add((Tweet) dao.deleteById(id));
+
+        return deletedTweets;
     }
 }

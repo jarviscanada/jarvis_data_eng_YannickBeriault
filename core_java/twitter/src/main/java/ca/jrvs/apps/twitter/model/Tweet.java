@@ -25,6 +25,12 @@ public class Tweet {
         this.text = text;
     }
 
+    public Tweet(String text, float longitude, float latitude) {
+
+        this.text = text;
+        this.coordinates = new Coordinates(longitude, latitude);
+    }
+
     public Tweet(JsonObject jsonObject) {
 
         this.createdAt = jsonObject.getString("created_at");
