@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter.controller;
 
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.Service;
 
 import java.util.LinkedList;
@@ -27,9 +28,9 @@ public class TwitterController implements Controller {
         if (args.length == 3) {
 
             float[] longitudeLatitude = parseAndValidateCoordinates(args[2]);
-            return (Tweet) service.postTweet(new Tweet(args[1], longitudeLatitude[0], longitudeLatitude[1]));
+            return (Tweet) service.postTweet(TweetUtil.createTweet(args[1], longitudeLatitude[0], longitudeLatitude[1]));
         } else
-            return (Tweet) service.postTweet(new Tweet(args[1]));
+            return (Tweet) service.postTweet(TweetUtil.createTweet(args[1]));
     }
 
     private float[] parseAndValidateCoordinates(String coordinatesCandidates) {

@@ -2,6 +2,7 @@ package ca.jrvs.apps.twitter;
 
 import ca.jrvs.apps.twitter.controller.TwitterController;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.Service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ public class TwitterControllerTest {
     @Test
     public void testPostTweetValid() {
 
-        when(service.postTweet(any())).thenReturn(new Tweet("mocked"));
+        when(service.postTweet(any())).thenReturn(TweetUtil.createTweet("mocked"));
         assertNotNull(twitterController.postTweet(new String[] {"post", "mock text"}));
         assertNotNull(twitterController.postTweet(new String[] {"post", "mock text", "13.2418:52.3112"}));
     }
@@ -38,35 +39,35 @@ public class TwitterControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void testPostTweetExceptionNumberOfArgs() {
 
-        when(service.postTweet(any())).thenReturn(new Tweet("mocked"));
+        when(service.postTweet(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterController.postTweet(new String[] {"post", "mock text", "13.2418:52.3112", "too many"});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPostTweetExceptionNoFloatCoordinates() {
 
-        when(service.postTweet(any())).thenReturn(new Tweet("mocked"));
+        when(service.postTweet(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterController.postTweet(new String[] {"post", "mock text", "13.2418:523112ff"});
     }
 
     @Test
     public void testShowTweetValid() {
 
-        when(service.showTweet(any(), any())).thenReturn(new Tweet("mocked"));
+        when(service.showTweet(any(), any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterController.showTweet(new String[] {"show", "169819819", "id,text"});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testShowTweetExceptionNumberOfArgs() {
 
-        when(service.showTweet(any(), any())).thenReturn(new Tweet("mocked"));
+        when(service.showTweet(any(), any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterController.showTweet(new String[] {"show", "1981981", "id,text", "too many"});
     }
 
     @Test
     public void testDeleteTweetsValid() {
 
-        Tweet mockedTweet = new Tweet("mocked");
+        Tweet mockedTweet = TweetUtil.createTweet("mocked");
         LinkedList<Tweet> mockedList = new LinkedList<>(Arrays.asList(mockedTweet, mockedTweet, mockedTweet));
 
         when(service.deleteTweets(any())).thenReturn(mockedList);
@@ -79,7 +80,7 @@ public class TwitterControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteTweetsExceptionNumberOfArgs() {
 
-        Tweet mockedTweet = new Tweet("mocked");
+        Tweet mockedTweet = TweetUtil.createTweet("mocked");
         LinkedList<Tweet> mockedList = new LinkedList<>(Arrays.asList(mockedTweet, mockedTweet, mockedTweet));
 
         when(service.deleteTweets(any())).thenReturn(mockedList);

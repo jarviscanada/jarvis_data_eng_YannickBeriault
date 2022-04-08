@@ -3,6 +3,7 @@ package ca.jrvs.apps.twitter;
 import ca.jrvs.apps.twitter.dao.TwitterDAO;
 import ca.jrvs.apps.twitter.dao.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -15,7 +16,7 @@ public class TwitterDAOTest {
         TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper();
         TwitterDAO twitterDAO = new TwitterDAO(twitterHttpHelper);
 
-        Tweet tweetToCreate = new Tweet("Hello World through API");
+        Tweet tweetToCreate = TweetUtil.createTweet("Hello World through API");
         Tweet returnedTweet = twitterDAO.create(tweetToCreate);
         assertNotNull(returnedTweet.getIdString());
 

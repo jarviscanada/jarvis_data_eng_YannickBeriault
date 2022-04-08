@@ -17,4 +17,28 @@ public class UserMention {
     public void setIndices(int[] indices) {
         this.indices = indices;
     }
+
+    public int getIndex(int i) {
+        return indices[i];
+    }
+
+    public long getLongId() {
+        return id.getLongId();
+    }
+
+    public String getStringId() {
+        return id.getIdString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int[] getIndices() {
+        return indices;
+    }
+
+    public String getScreenName() {
+        return screenName;
+    }
 }

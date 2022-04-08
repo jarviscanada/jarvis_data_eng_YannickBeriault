@@ -7,8 +7,12 @@ import ca.jrvs.apps.twitter.dao.HttpHelper;
 import ca.jrvs.apps.twitter.dao.TwitterDAO;
 import ca.jrvs.apps.twitter.dao.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterService;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class TwitterCLIApp {
 
@@ -35,12 +39,35 @@ public class TwitterCLIApp {
         Controller twitterController = new TwitterController(twitterService);
         TwitterCLIApp twitterCLIApp = new TwitterCLIApp(twitterController);
 
-        twitterCLIApp.run(args);
+        try {
+            twitterCLIApp.run(args);
+        } catch (IllegalArgumentException e) {
+            System.out.println(USAGE_ERROR_MESSAGE + "\n" + e.getMessage());
+        }
     }
 
     public void run(String[] args) {
 
-       if (args[0].equalsIgnoreCase("post"))
-           controller.postTweet(args);
+        LinkedList<Tweet> returnedTweets = new LinkedList<>();
+
+        if (args[0].equalsIgnoreCase("post"))
+            returnedTweets.add(controller.postTweet(args));
+        else if (args[0].equalsIgnoreCase("show"))
+            returnedTweets.add(controller.showTweet(args));
+        else if (args[0].equalsIgnoreCase("delete"))
+            returnedTweets.addAll(controller.deleteTweet(args));
+        else
+            throw new IllegalArgumentException("This option/method is not available.");
+
+        printTweets(returnedTweets);
+    }
+
+    private void printTweets(List<Tweet> tweetsToPrint) {
+
+        for (Tweet tweet : tweetsToPrint) {
+
+            TweetUtil.printTweet(tweet);
+            System.out.println();
+        }
     }
 }

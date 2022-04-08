@@ -1,8 +1,5 @@
 package ca.jrvs.apps.twitter.model;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-
 public class Tweet {
 
     private String createdAt;
@@ -15,82 +12,10 @@ public class Tweet {
     private boolean favorited;
     private boolean retweeted;
 
-    public Tweet(String text) {
-        this.text = text;
-    }
+    private String[] wantedFields;
 
-    public Tweet(String id, String text) {
-
-        this.id = new ID(id);
-        this.text = text;
-    }
-
-    public Tweet(String text, float longitude, float latitude) {
-
-        this.text = text;
-        this.coordinates = new Coordinates(longitude, latitude);
-    }
-
-    public Tweet(JsonObject jsonObject) {
-
-        this.createdAt = jsonObject.getString("created_at");
-        this.id = new ID(jsonObject.getString("id_str"));
-        this.text = jsonObject.getString("text");
-        this.retweetCount = jsonObject.getInt("retweet_count");
-        this.favoriteCount = jsonObject.getInt("favorite_count");
-        this.favorited = jsonObject.getBoolean("favorited");
-        this.retweeted = jsonObject.getBoolean("retweeted");
-
-        if (!jsonObject.isNull("coordinates")) {
-
-            JsonArray coordinatesArray = jsonObject.getJsonArray("coordinates");
-            this.coordinates = new Coordinates((float) coordinatesArray.getJsonNumber(1).doubleValue(),
-                    (float) coordinatesArray.getJsonNumber(0).doubleValue());
-        }
-
+    public Tweet() {
         this.entities = new Entities();
-        JsonArray hashtagsJsonArray = jsonObject.getJsonObject("entities").getJsonArray("hashtags");
-        if (hashtagsJsonArray.size() > 0)
-            this.entities.setHashtags(hashtagsParser(hashtagsJsonArray));
-
-        JsonArray userMentionsJsonArray = jsonObject.getJsonObject("entities").getJsonArray("user_mentions");
-        if (userMentionsJsonArray.size() > 0)
-            this.entities.setUserMentions(userMentionsParser(userMentionsJsonArray));
-    }
-
-    private Hashtag[] hashtagsParser(JsonArray jsonArray) {
-
-        int size = jsonArray.size();
-        Hashtag[] hashtags = new Hashtag[size];
-
-        for(int i = 0; i < size; i++) {
-
-            JsonArray indicesArray = jsonArray.getJsonObject(i).getJsonArray("indices");
-            hashtags[i] = new Hashtag(new int[] {indicesArray.getInt(0),
-                    indicesArray.getInt(1)},
-                    jsonArray.getJsonObject(i).getString("text"));
-        }
-
-        return hashtags;
-    }
-
-    private UserMention[] userMentionsParser(JsonArray jsonArray) {
-
-        int size = jsonArray.size();
-        UserMention[] userMentions = new UserMention[size];
-
-        for (int i = 0; i < size; i++) {
-
-            JsonObject currentObject = jsonArray.getJsonObject(i);
-            UserMention currentUserMention = new UserMention(currentObject.getString("id_str"),
-                    currentObject.getString("name"), currentObject.getString("screen_name"));
-            JsonArray indicesArray = jsonArray.getJsonObject(i).getJsonArray("indices");
-            currentUserMention.setIndices(new int[] {indicesArray.getInt(0),
-                    indicesArray.getInt(1)});
-            userMentions[i] = currentUserMention;
-        }
-
-        return userMentions;
     }
 
     public String getCreatedAt() {
@@ -99,6 +24,10 @@ public class Tweet {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Entities getEntities() {
+        return this.entities;
     }
 
     public long getId() {
@@ -121,12 +50,8 @@ public class Tweet {
         this.text = text;
     }
 
-    public Entities getEntities() {
-        return entities;
-    }
-
-    public void setEntities(Entities entities) {
-        this.entities = entities;
+    public void setHashtags(Hashtag[] hashtagsArray) {
+        this.entities.setHashtags(hashtagsArray);
     }
 
     public Coordinates getCoordinates() {
@@ -135,6 +60,10 @@ public class Tweet {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public void setCoordinates(float longitude, float latitude) {
+        this.coordinates = new Coordinates(longitude, latitude);
     }
 
     public int getRetweetCount() {
@@ -167,5 +96,17 @@ public class Tweet {
 
     public void setRetweeted(boolean retweeted) {
         this.retweeted = retweeted;
+    }
+
+    public void setUserMentions(UserMention[] userMentionsArray) {
+        this.entities.setUserMentions(userMentionsArray);
+    }
+
+    public String[] getWantedFields() {
+        return wantedFields;
+    }
+
+    public void setWantedFields(String[] wantedFields) {
+        this.wantedFields = wantedFields;
     }
 }

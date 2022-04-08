@@ -2,6 +2,7 @@ package ca.jrvs.apps.twitter;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.TwitterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,58 +37,58 @@ public class TwitterServiceTest {
     @Test
     public void testPostTweetValid() {
 
-        when(dao.create(any())).thenReturn(new Tweet("mocked"));
+        when(dao.create(any())).thenReturn(TweetUtil.createTweet("mocked"));
 
-        assertNotNull(twitterService.postTweet(new Tweet("mocked")));
-        assertNotNull(twitterService.postTweet(new Tweet("mocked", 73.3315f, 45.3032f)));
+        assertNotNull(twitterService.postTweet(TweetUtil.createTweet("mocked")));
+        assertNotNull(twitterService.postTweet(TweetUtil.createTweet("mocked", 73.3315f, 45.3032f)));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPostTweetExceptionLongText() {
 
-        when(dao.create(any())).thenReturn(new Tweet("mocked"));
-        twitterService.postTweet(new Tweet(TOO_LONG_FOR_A_TWEET));
+        when(dao.create(any())).thenReturn(TweetUtil.createTweet("mocked"));
+        twitterService.postTweet(TweetUtil.createTweet(TOO_LONG_FOR_A_TWEET));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPostTweetExceptionBadGeoTag1() {
 
-        when(dao.create(any())).thenReturn(new Tweet("mocked"));
-        twitterService.postTweet(new Tweet("mocked", 200.58f, 45.3032f));
+        when(dao.create(any())).thenReturn(TweetUtil.createTweet("mocked"));
+        twitterService.postTweet(TweetUtil.createTweet("mocked", 200.58f, 45.3032f));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testPostTweetExceptionBadGeoTag2() {
 
-        when(dao.create(any())).thenReturn(new Tweet("mocked"));
-        twitterService.postTweet(new Tweet("mocked", 73.3315f, 95.25f));
+        when(dao.create(any())).thenReturn(TweetUtil.createTweet("mocked"));
+        twitterService.postTweet(TweetUtil.createTweet("mocked", 73.3315f, 95.25f));
     }
 
     @Test
     public void testShowTweetValid() {
 
-        when(dao.findById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.findById(any())).thenReturn(TweetUtil.createTweet("mocked"));
         assertNotNull(twitterService.showTweet("685468541684", VALID_TESTING_FIELDS_ARRAY));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testShowTweetExceptionBadId1() {
 
-        when(dao.findById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.findById(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterService.showTweet("-9468464889", VALID_TESTING_FIELDS_ARRAY);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testShowTweetExceptionBadId2() {
 
-        when(dao.findById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.findById(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterService.showTweet("9468464889651619861681968161681681", VALID_TESTING_FIELDS_ARRAY);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testShowTweetExceptionBadId3() {
 
-        when(dao.findById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.findById(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterService.showTweet("9468464889f", VALID_TESTING_FIELDS_ARRAY);
     }
 
@@ -97,14 +98,14 @@ public class TwitterServiceTest {
         String[] invalidFields = VALID_TESTING_FIELDS_ARRAY;
         invalidFields[3] = "Social media amplifies hysteria.";
 
-        when(dao.findById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.findById(any())).thenReturn(TweetUtil.createTweet("mocked"));
         twitterService.showTweet("9468464889", invalidFields);
     }
 
     @Test
     public void testDeleteTweets() {
 
-        when(dao.deleteById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.deleteById(any())).thenReturn(TweetUtil.createTweet("mocked"));
 
         String[] mockIdsArray = new String[] {MOCK_ID, MOCK_ID, MOCK_ID, MOCK_ID};
         List<Tweet> returnedList = twitterService.deleteTweets(mockIdsArray);
@@ -116,7 +117,7 @@ public class TwitterServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteTweetsInvalidId() {
 
-        when(dao.deleteById(any())).thenReturn(new Tweet("mocked"));
+        when(dao.deleteById(any())).thenReturn(TweetUtil.createTweet("mocked"));
 
         String[] badIdsArray = new String[] {MOCK_ID, MOCK_ID, MOCK_ID, "-168198198"};
         twitterService.deleteTweets(badIdsArray);

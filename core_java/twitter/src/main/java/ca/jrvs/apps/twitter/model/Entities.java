@@ -1,5 +1,11 @@
 package ca.jrvs.apps.twitter.model;
 
+import org.apache.catalina.User;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Entities {
 
     private Hashtag[] hashtags;

@@ -129,7 +129,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         HttpResponse response = httpHelper.httpGet(uri);
         JsonObject jsonObject = parseResponse(response, HTTP_OK);
 
-        return new Tweet(jsonObject);
+        return TweetUtil.createTweet(jsonObject);
     }
 
     private URI produceLookupUri(String id) {

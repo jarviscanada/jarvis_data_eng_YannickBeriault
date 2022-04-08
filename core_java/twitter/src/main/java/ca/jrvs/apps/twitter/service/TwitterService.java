@@ -3,18 +3,14 @@ package ca.jrvs.apps.twitter.service;
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TwitterService implements Service {
 
+    private static final TreeSet<String> VALID_FIELDS_TREE = new TreeSet<>(TweetUtil.VALID_FIELDS);
     private static final String INVALID_ID_ERROR_MESSAGE = "Id is not a valid positive long form integer.";
-    public static final ArrayList<String> VALID_FIELDS = new ArrayList<>(Arrays.asList("created_at", "id",
-            "id_str", "text", "entities", "hashtags", "user_mentions", "coordinates", "retweet_count",
-            "favorite_count", "favorited", "retweeted"));
 
     private CrdDao dao;
 
@@ -49,7 +45,10 @@ public class TwitterService implements Service {
 
         validateShowTweet(id, fields);
 
-        return (Tweet) dao.findById(id);
+        Tweet returnedTweet = (Tweet) dao.findById(id);
+        returnedTweet.setWantedFields(fields);
+
+        return returnedTweet;
     }
 
     private void validateShowTweet(String id, String[] fields) {
@@ -76,7 +75,7 @@ public class TwitterService implements Service {
 
         for (String field : fields) {
 
-            if (!VALID_FIELDS.contains(field))
+            if (!VALID_FIELDS_TREE.contains(field))
                 throw new IllegalArgumentException("An invalid field was queried.");
         }
     }
