@@ -1,8 +1,11 @@
 package ca.jrvs.apps.twitter.model;
 
 import javax.json.*;
+import javax.json.stream.JsonGenerator;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 public class TweetUtil {
@@ -51,7 +54,8 @@ public class TweetUtil {
 
         if (!jsonObject.isNull("coordinates")) {
 
-            JsonArray coordinatesArray = jsonObject.getJsonArray("coordinates");
+            JsonArray coordinatesArray = jsonObject.getJsonObject("coordinates")
+                    .getJsonArray("coordinates");
             nuTweet.setCoordinates((float) coordinatesArray.getJsonNumber(1).doubleValue(),
                     (float) coordinatesArray.getJsonNumber(0).doubleValue());
         }
@@ -107,7 +111,7 @@ public class TweetUtil {
     public static void printTweet(Tweet tweet) {
 
         TreeSet<String> selectedFields;
-        boolean selectFields = tweet.getWantedFields() != null;
+        boolean selectFields = tweet.getWantedFields().length > 0;
         boolean entitiesIsPresent = false;
 
         if (selectFields) {
@@ -149,11 +153,13 @@ public class TweetUtil {
         }
         if (!selectFields || selectedFields.contains("coordinates")) {
 
-            jsonObjectBuilder.add("coordinates",
-                    Json.createArrayBuilder()
-                    .add(tweet.getCoordinates().getLongitude())
-                    .add(tweet.getCoordinates().getLatitude())
-                    .build());
+            jsonObjectBuilder.add("coordinates", tweet.getCoordinates().isSet()
+                            ? Json.createArrayBuilder()
+                                  .add(tweet.getCoordinates().getLongitude())
+                                  .add(tweet.getCoordinates().getLatitude())
+                                  .build()
+                            : JsonValue.NULL
+                    );
         }
         if (!selectFields || selectedFields.contains("retweet_count"))
             jsonObjectBuilder.add("retweet_count", tweet.getRetweetCount());
@@ -164,7 +170,8 @@ public class TweetUtil {
         if (!selectFields || selectedFields.contains("retweeted"))
             jsonObjectBuilder.add("retweeted", tweet.isRetweeted());
 
-        System.out.println(jsonObjectBuilder.build());
+
+        prettyPrintJson(jsonObjectBuilder.build());
     }
 
     private static JsonArray produceHashtagsJsonArray(Hashtag[] hashtags) {
@@ -204,5 +211,18 @@ public class TweetUtil {
         }
 
         return jsonArrayBuilder.build();
+    }
+
+    private static void prettyPrintJson(JsonObject jsonObject) {
+
+        StringWriter writer = new StringWriter();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put(JsonGenerator.PRETTY_PRINTING, true);
+        JsonWriterFactory writerFactory = Json.createWriterFactory(map);
+        JsonWriter jsonWriter = writerFactory.createWriter(writer);
+        jsonWriter.writeObject(jsonObject);
+        jsonWriter.close();
+
+        System.out.println(writer);
     }
 }

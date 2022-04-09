@@ -15,7 +15,10 @@ public class Tweet {
     private String[] wantedFields;
 
     public Tweet() {
+
         this.entities = new Entities();
+        this.coordinates = new Coordinates();
+        this.wantedFields = new String[0];
     }
 
     public String getCreatedAt() {

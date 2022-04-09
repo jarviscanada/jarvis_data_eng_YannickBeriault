@@ -11,6 +11,12 @@ public class Entities {
     private Hashtag[] hashtags;
     private UserMention[] userMentions;
 
+    public Entities() {
+
+        hashtags = new Hashtag[0];
+        userMentions = new UserMention[0];
+    }
+
     public Hashtag[] getHashtags() {
         return hashtags;
     }

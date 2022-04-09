@@ -4,13 +4,15 @@ public class Coordinates {
 
     private float longitude;
     private float latitude;
-    private String type;
+    private boolean isSet = false;
+
+    public Coordinates() {}
 
     public Coordinates(float longitude, float latitude) {
 
         this.longitude = longitude;
         this.latitude = latitude;
-        this.type = "Point";
+        isSet = true;
     }
 
     public float getLatitude() {
@@ -27,18 +29,18 @@ public class Coordinates {
     }
 
     public void setLongitude(float longitude) {
+
         this.longitude = longitude;
+        isSet = true;
     }
 
     public void setLatitude(float latitude) {
+
         this.latitude = latitude;
+        isSet = true;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public boolean isSet() {
+        return isSet;
     }
 }

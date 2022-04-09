@@ -50,8 +50,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
             throw new RuntimeException("Unable to retrieve id from the server\'s response.");
         }
 
-        entity.setId(newId);
-        return entity;
+        return findById(newId);
     }
 
     private URI producePostUri(Tweet tweet) {
@@ -60,8 +59,14 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         String escapedTweetText = percentEscaper.escape(tweet.getText());
 
         try {
+
             return new URI(API_BASE_URI + POST_PATH
-                    + QUERY_SYM + "status" + EQUAL + escapedTweetText);
+                    + QUERY_SYM + "status" + EQUAL + escapedTweetText
+                    + (tweet.getCoordinates().isSet()
+                    ? AMPERSAND + "long" + EQUAL + tweet.getCoordinates().getLongitude()
+                    + AMPERSAND + "lat" + EQUAL + tweet.getCoordinates().getLatitude()
+                    : "")
+            );
         } catch (URISyntaxException e) {
             throw new RuntimeException("Failed to form URI.");
         }
