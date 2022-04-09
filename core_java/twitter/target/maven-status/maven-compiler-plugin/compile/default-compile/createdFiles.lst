@@ -15,6 +15,7 @@ ca/jrvs/apps/twitter/controller/Controller.class
 ca/jrvs/apps/twitter/model/Hashtag.class
 ca/jrvs/apps/twitter/model/Coordinates.class
 ca/jrvs/apps/twitter/model/UserMention.class
+ca/jrvs/apps/twitter/dao/TweetNotFoundException.class
 ca/jrvs/apps/twitter/TwitterCLIApp.class
 ca/jrvs/apps/twitter/model/Tweet.class
 ca/jrvs/apps/twitter/dao/TwitterHttpHelper.class

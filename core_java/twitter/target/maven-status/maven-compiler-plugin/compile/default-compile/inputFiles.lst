@@ -19,3 +19,4 @@
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/Tweeter.java
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/HttpHelper.java
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/model/Coordinates.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/TweetNotFoundException.java
