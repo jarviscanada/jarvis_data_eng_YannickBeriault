@@ -27,6 +27,10 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     //Response code
     private static final int HTTP_OK = 200;
 
+    public static final String TWEET_NOT_FOUND_EXCEPTION_MESSAGE = "The API could not find " +
+            "a tweet with that id.";
+    public static final String UNEXPECTED_STATUS_CODE_MESSAGE = "Unexpected status code: ";
+
     private HttpHelper httpHelper;
 
     @Autowired
@@ -82,7 +86,8 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
             } catch (IOException e) {
                 System.out.println("Response has no body.");
             }
-            throw new RuntimeException("Unexpected status code: " + statusCode);
+
+            throw new RuntimeException(UNEXPECTED_STATUS_CODE_MESSAGE + statusCode);
         }
 
         if (response.getEntity() == null)
@@ -94,6 +99,9 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         } catch (IOException e) {
             throw new RuntimeException("Failed to convert entity to string.");
         }
+
+        if (responseString.equals("[]"))
+            throw new TweetNotFoundException(TWEET_NOT_FOUND_EXCEPTION_MESSAGE);
 
         JsonObject responseJson = jsonStringToJsonObject(responseString);
         if (responseJson == null)

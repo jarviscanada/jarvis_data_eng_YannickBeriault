@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class TwitterServiceTest {
 
-    private static final String TOO_LONG_FOR_A_TWEET = "This text is too long! You should know that a tweet needs to be " +
+    public static final String TOO_LONG_FOR_A_TWEET = "This text is too long! You should know that a tweet needs to be " +
             "short... what were you thinking? Is this really important anyways? Go read a book, or code some" +
             " more...";
     private static final String[] VALID_TESTING_FIELDS_ARRAY = new String[] {"created_at", "coordinates",
