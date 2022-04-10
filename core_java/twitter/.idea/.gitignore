@@ -1,8 +1,9 @@
 # Default ignored files
-/shelf/
-/workspace.xml
-/target/*
-/log/*
-/out/*
-/.idea/*
+.gitignore
+**/shelf/
+**/workspace.xml
+**/target/*
+**/log/*
+**/out/*
+**/.idea/*
 *.jar
