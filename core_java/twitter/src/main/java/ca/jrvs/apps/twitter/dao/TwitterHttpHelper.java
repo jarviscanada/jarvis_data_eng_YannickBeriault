@@ -28,6 +28,15 @@ public class TwitterHttpHelper implements HttpHelper {
         httpClient = HttpClientBuilder.create().build();
     }
 
+    public TwitterHttpHelper(String consumerKey, String consumerSecret,
+                             String accessToken, String accessSecret) {
+
+        consumer = new CommonsHttpOAuthConsumer(consumerKey, consumerSecret);
+        consumer.setTokenWithSecret(accessToken, accessSecret);
+
+        httpClient = HttpClientBuilder.create().build();
+    }
+
     public HttpResponse httpDelete(URI uri) {
 
         try {

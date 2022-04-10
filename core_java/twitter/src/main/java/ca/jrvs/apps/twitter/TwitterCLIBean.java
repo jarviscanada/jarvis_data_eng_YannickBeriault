@@ -49,6 +49,9 @@ public class TwitterCLIBean {
 
     @Bean
     HttpHelper httpHelper() {
-        return new TwitterHttpHelper();
+
+        return new TwitterHttpHelper(System.getenv("TWITTER_API_KEY"),
+                System.getenv("TWITTER_API_SECRET"), System.getenv("TWITTER_ACCESS_TOKEN"),
+                System.getenv("TWITTER_ACCESS_SECRET"));
     }
 }
