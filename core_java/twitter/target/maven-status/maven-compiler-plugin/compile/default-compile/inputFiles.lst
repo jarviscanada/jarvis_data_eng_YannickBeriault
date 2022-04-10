@@ -1,4 +1,5 @@
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/service/Service.java
+/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TwitterCLIBean.java
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/TweetBankMock.java
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/model/UserMention.java
 /home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/twitter/src/main/java/ca/jrvs/apps/twitter/dao/TwitterHttpHelper.java

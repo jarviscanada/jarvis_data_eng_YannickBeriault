@@ -20,3 +20,4 @@ ca/jrvs/apps/twitter/TwitterCLIApp.class
 ca/jrvs/apps/twitter/model/Tweet.class
 ca/jrvs/apps/twitter/dao/TwitterHttpHelper.class
 ca/jrvs/apps/twitter/TweetBankMock.class
+ca/jrvs/apps/twitter/TwitterCLIBean.class
