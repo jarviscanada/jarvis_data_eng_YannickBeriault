@@ -1,4 +1,4 @@
-package ca.jrvs.practice.codingChallenge;
+package ca.jrvs.practice.codingChallenges;
 
 /**
  * https://www.notion.so/jarvisdev/Swap-two-numbers-347e2af862134a56af55d0f6cc218812

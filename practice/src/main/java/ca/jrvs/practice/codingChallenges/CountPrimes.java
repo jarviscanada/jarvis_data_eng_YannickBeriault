@@ -1,4 +1,4 @@
-package ca.jrvs.practice.codingChallenge;
+package ca.jrvs.practice.codingChallenges;
 
 /**
  * https://www.notion.so/jarvisdev/Count-Primes-3f9513492fed4251966a1fc6342cec2b

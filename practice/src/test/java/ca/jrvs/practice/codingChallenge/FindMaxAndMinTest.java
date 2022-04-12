@@ -1,5 +1,6 @@
 package ca.jrvs.practice.codingChallenge;
 
+import ca.jrvs.practice.codingChallenges.FindMaxAndMin;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package ca.jrvs.practice.codingChallenge;
 
+import ca.jrvs.practice.codingChallenges.CountPrimes;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,4 @@
-package ca.jrvs.practice.codingChallenge;
+package ca.jrvs.practice.codingChallenges;
 
 import java.util.ArrayList;
 import java.util.Collection;
