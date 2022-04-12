@@ -261,10 +261,10 @@ public class HashJMap<K, V> implements JMap<K, V> {
             return super.spliterator();
         }
 
-        @Override
+       /* @Override
         public <T> T[] toArray(IntFunction<T[]> generator) {
             return super.toArray(generator);
-        }
+        }*/
 
         @Override
         public boolean removeIf(Predicate<? super Map.Entry<K, V>> filter) {
