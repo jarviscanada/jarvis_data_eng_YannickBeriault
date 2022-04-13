@@ -1,12 +1,16 @@
 package ca.jrvs.apps.twitter.dao;
 
-import ca.jrvs.apps.twitter.model.*;
+import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.model.TweetUtil;
 import com.google.api.client.util.escape.PercentEscaper;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URI;
