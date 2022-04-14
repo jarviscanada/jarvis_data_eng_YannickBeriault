@@ -1,6 +1,6 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ca.jrvs.apps.twitter</groupId>
+    <groupId>ca.jrvs.apps.twitter2</groupId>
     <artifactId>TwitterApp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -19,7 +19,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ca.jrvs.apps.twitter.TwitterApiTest</mainClass>
+                            <mainClass>ca.jrvs.apps.twitter.Twitter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -43,7 +43,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/TwitterHttpHelperTest.java</exclude>
+                        <exclude>**/ca.jrvs.apps.twitter.TwitterHttpHelperTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
