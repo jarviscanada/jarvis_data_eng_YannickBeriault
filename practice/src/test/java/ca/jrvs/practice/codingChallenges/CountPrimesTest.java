@@ -1,4 +1,4 @@
-package ca.jrvs.practice.codingChallenge;
+package ca.jrvs.practice.codingChallenges;
 
 import ca.jrvs.practice.codingChallenges.CountPrimes;
 import org.junit.Test;

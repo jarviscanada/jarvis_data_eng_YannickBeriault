@@ -10,17 +10,24 @@ public class DuplicateNumber {
 
     public int findDuplicate(int[] nums) {
 
+        if (nums.length == 1)
+            return nums[0];
+
         int lowLimit = 0;
         int highLimit = nums.length - 1;
-        int candidate = highLimit / 2;
+        int candidate = (highLimit / 2);
 
         while (lowLimit != highLimit) {
 
-            if (asMoreNumsLowerOrEqualThanValue(nums, candidate)) {
+            if (asMoreNumsLowerOrEqualThanValue(nums, candidate))
+                highLimit = candidate;
+            else
+                lowLimit = candidate + 1;
 
-
-            }
+            candidate = lowLimit + ((highLimit - lowLimit) / 2);
         }
+
+        return candidate;
     }
 
     private static boolean asMoreNumsLowerOrEqualThanValue(int[] nums, int candidate) {
