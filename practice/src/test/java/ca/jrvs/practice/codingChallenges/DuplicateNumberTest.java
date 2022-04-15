@@ -11,6 +11,6 @@ public class DuplicateNumberTest {
 
         DuplicateNumber duplicateNumber = new DuplicateNumber();
 
-        assertEquals(3, duplicateNumber.findDuplicate(new int[] {3,1,3,4,2}));
+        assertEquals(9, duplicateNumber.findDuplicate(new int[] {11, 2, 12, 5, 9, 6, 9, 3, 8, 4, 7, 1, 10}));
     }
 }
