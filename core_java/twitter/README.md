@@ -1,0 +1,1 @@
+docker run --env-file .env --rm ${docker_user}/twitterapp command arg1 arg2(optional)
