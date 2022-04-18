@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ea2375cc-68f5-4698-9f19-10c41ad6b841" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="feature/controllerAndAppImplementation" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="25IBRjwPVxlpKNmPGwS0OyQ9dTm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jdbc" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ca.jrvs.apps.grep" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ca.jrvs.apps.practice" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JAR Application.GrepImpJar">
+    <configuration name="GrepBadOutPath" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.Grep_Demo" />
+      <module name="grep" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;.*Romeo.*Juliet.*&quot; &quot;./data&quot; &quot;./out/blabla/grep_testDate.txt&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrepNotDir" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.Grep_Demo" />
+      <module name="grep" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;.*Romeo.*Juliet.*&quot; &quot;./data/txt/extra.txt&quot; &quot;./out/grep_testDate.txt&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrepUnexistingDir" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.Grep_Demo" />
+      <module name="grep" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;.*Romeo.*Juliet.*&quot; &quot;./dataBlaBla&quot; &quot;./out/grep_testDate.txt&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Grep_Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.Grep_Demo" />
+      <module name="grep" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.jrvs.apps.grep.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.practice.HelloWorld" />
+      <module name="grep" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.jrvs.apps.grep.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaGrepImp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.JavaGrepImplementation.JavaGrepImp" />
+      <module name="grep" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.jrvs.apps.grep.JavaGrepImplementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaGrepImpBadOutPath" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.grep.JavaGrepImplementation.JavaGrepImp" />
+      <module name="grep" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;.*Romeo.*Juliet.*&quot; &quot;./data&quot; &quot;./out/blabla/grep_testDate.txt&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrepImpJar" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/grep-1.0-SNAPSHOT.jar" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;.*Romeo.*Juliet.*&quot; &quot;./data/txt&quot; &quot;./out/grep_testDate.txt&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="JavaGrepImp" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="compile," />
+                <option value="package," />
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.GrepBadOutPath" />
+      <item itemvalue="Application.GrepNotDir" />
+      <item itemvalue="Application.GrepUnexistingDir" />
+      <item itemvalue="Application.JavaGrepImpBadOutPath" />
+      <item itemvalue="Application.Grep_Demo" />
+      <item itemvalue="Application.HelloWorld" />
+      <item itemvalue="Application.JavaGrepImp" />
+      <item itemvalue="JAR Application.GrepImpJar" />
+      <item itemvalue="Maven.JavaGrepImp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.JavaGrepImp" />
+        <item itemvalue="Application.Grep_Demo" />
+        <item itemvalue="Application.HelloWorld" />
+        <item itemvalue="Application.JavaGrepImp" />
+        <item itemvalue="Application.Grep_Demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ea2375cc-68f5-4698-9f19-10c41ad6b841" name="Changes" comment="" />
+      <created>1645204715928</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645204715928</updated>
+    </task>
+    <servers />
+  </component>
+</project>
