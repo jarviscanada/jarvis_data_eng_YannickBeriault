@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e72ce09e-45bb-4d1d-8bd5-fcb14783b85c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Twitter2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/dao/CrdDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/dao/HttpHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/dao/TweetNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/dao/TwitterDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/dao/TwitterHttpHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/Coordinates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/Entities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/Hashtag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/ID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/Tweet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/TweetUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model/UserMention.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ca/jrvs/apps/twitter/TwitterDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ca/jrvs/apps/twitter/TwitterHttpHelperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../twitter/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../twitter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../twitter/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="27lUuJtSjHIbenO4wHLBg2WYtss" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/mcy/Dropbox/Documents/Dossiers_pratiques/Jarvis/projects/jarvis_data_eng_YannickBeriault/core_java/Twitter2/src/main/java/ca/jrvs/apps/twitter/model"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter/model" />
+      <recent name="$PROJECT_DIR$/src/test/java" />
+      <recent name="$PROJECT_DIR$/src/main/java/ca/jrvs/apps/twitter" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ca.jrvs.apps.twitter" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TwitterDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Twitter2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.jrvs.apps.twitter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ca.jrvs.apps.twitter" />
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.twitter.TwitterDAOTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="TWITTER_API_KEY" value="LMdGi5u2eVqMtKtalnzVLBpBL" />
+        <env name="TWITTER_API_SECRET" value="smf3gLrbmMDGEY8uSA7PnmhN8OdNRcjTehgBQV7yxQezqjvUv6" />
+        <env name="TWITTER_ACCESS_TOKEN" value="256184107-whmXUdkYe436RPCaacGBiu6tUUpQYysnaGd1BCG4" />
+        <env name="TWITTER_ACCESS_SECRET" value="QVo5lCjbYjREXqccV7o7lf46gEkc9Bu6RAAyqVciWUk3d" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TwitterDAOTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e72ce09e-45bb-4d1d-8bd5-fcb14783b85c" name="Changes" comment="" />
+      <created>1649894388652</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649894388652</updated>
+    </task>
+    <servers />
+  </component>
+</project>
