@@ -1,5 +1,5 @@
 # Introduction
-This app is meant to manage the most common Twitter operations, being to create and post a tweet, to retrieve and show the most important informations about a tweet and to delete a tweet. It uses a java HTTP client to communicate with the Twitter Rest API, authenticating with the OAuth protocol 1.0. It manages the information extracted from tweet using the javax json library. It manages depencies using Maven and the Spring framework, while being wrapper in a Docker container for convenience of use.
+This app is meant to manage the most common Twitter operations: to create and post a tweet, to retrieve and show the most important informations about a tweet and to delete a tweet. It uses a java HTTP client to communicate with the Twitter Rest API, authenticating with the OAuth protocol 1.0. It manages the information extracted from tweet using the javax json library. It manages depencies using Maven and the Spring framework, while being wrapper in a Docker container for convenience of use.
 
 # Quick Start
 - The app should be packaged using `mvn clean package`. The tests will be run autimatically.
