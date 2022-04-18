@@ -5,12 +5,12 @@ github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_YannickBer
 
 # Introduce yourself, your academic and professional background.
 # What excites you about the software industry and your passion. At least 80 words
-ssummary: The first thing that attracted me into computer science were databases. Their potential for
+summary: "The first thing that attracted me into computer science were databases. Their potential for
 organizing and making sense of any type of data, as well as the impressive elegance presented by
 good code, something that I discovered during my training, are still aspects of the field that are
 really stimulating to me. I obtained a Certificate in computer science and am working on obtaining a
 second, advanced Certificate (both constituted of 30 credits). I have been working as a translator
-for many years before transitioning into software development.
+for many years before transitioning into software development."
 
 # Group your skills by level.
 # Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
@@ -38,8 +38,8 @@ skills:
     - React
     - PHP
     - Laravel
-	- Haskell
-	- Various binary encodings 
+    - Haskell
+    - Various binary encodings
 
 # List of Jarvis projects
 jarvis_projects:
@@ -47,18 +47,18 @@ jarvis_projects:
     git_url: "/linux_sql"
     # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Implemented a monitoring agent that is used to automatically gather hardware as
-	well as memory and CPU usage information on a system. It gathers usage info every minute, as
+    description: "Implemented a monitoring agent that is used to automatically gather hardware as
+    well as memory and CPU usage information on a system. It gathers usage info every minute, as
 	long as the database instance is properly running. It was made using bash scripts and sql, on a
 	virtual machine accessed through VNC viewer. It runs a PostgreSQL database inside a Docker
 	container. It obtains its data using terminal commands, whose results it processes using a combination of
-	simple bash commands like `grep`, `cut` and `sed`.
-  #- name: "Core Java Apps"
-  #  git_url: "/core_java"
-  #  description:
-  #    - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-  #    - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-  #    - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+	simple bash commands like `grep`, `cut` and `sed`."
+  - name: "Core Java Apps"
+    git_url: "/core_java"
+    description:
+      "- Twitter App: Developed an app made to interact with Twitter's REST API in order to create, show and delete tweets.
+      - JDBC App: Wrote a java program to enter customer info into a database and retrieve it.
+      - Grep App: Implemented a simple version of the grep command."
   #- name: "Springboot App"
   #  git_url: "/springboot"
   #  description: ""
@@ -82,14 +82,14 @@ highlighted_projects:
   - name: "ProjekRockola"
     #URL is optional
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Developped a command line based audio-player (no GUI) with elaborate smart playlist management. I
+    description: "Developed a command line based audio-player (no GUI) with elaborate smart playlist management. I
     decided to develop this program since no program gave me quite the smart playlist management experience I was 
     looking for. It is written in Java, using javafx and JDBC. It makes use of an elaborate MySQL database, hosted
-    locally. I use it every day.
+    locally. I use it every day."
   - name: "Mainframe"
-    description: Put together a simple GUI interface to manage various aspects of my personnal discipline. It is written
+    description: "Put together a simple GUI interface to manage various aspects of my personnal discipline. It is written
     solely in Java and uses simple text files for data persistence. It is an old project that will need to be totally 
-    revamped, but it has proven to be quite dependable. I also use it every day.
+    revamped, but it has proven to be quite dependable. I also use it every day."
 
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
@@ -123,11 +123,15 @@ education:
     duration: "2020-present"
     degree: "Advanced Certificate in Software Development"
     department: "Computer Science"
-    # optional
+    awards_achievements:
+      - "Cumulative average: 3.90/4.3"
   - school_name: "Université du Québec à Montréal"
     duration: "2018-2020"
     degree: "Certificate in Computer Science and Software Development"
     department: "Computer Science"
+    awards_achievements:
+      - "Diploma obtained"
+      - "Cumulative average: 4.0/4.3"
 
 #Optional section
 others:
