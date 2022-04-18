@@ -3,10 +3,11 @@ package ca.jrvs.apps.twitter.controller;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.LinkedList;
 import java.util.List;
 
+@org.springframework.stereotype.Controller
 public class TwitterController implements Controller {
 
     private static final String INCORRECT_NUMBER_OF_ARGS_ERROR = "Number or arguments is incorrect.";
@@ -16,6 +17,7 @@ public class TwitterController implements Controller {
 
     private Service service;
 
+    @Autowired
     public TwitterController(Service service) {
         this.service = service;
     }

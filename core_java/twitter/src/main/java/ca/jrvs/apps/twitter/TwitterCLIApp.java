@@ -10,43 +10,32 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.TweetUtil;
 import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
 public class TwitterCLIApp {
 
-    private static final String USAGE_ERROR_MESSAGE = "Usage\n" +
+    public static final String USAGE_ERROR_MESSAGE = "Usage\n" +
             "TwitterApp post|show|delete \"tweet_text\" \"latitude:longitude\"\n" +
             "\nArguments:\n" +
             "tweet_text         - tweet_text cannot exceed 140 UTF-8 encoded characters. \n" +
             "latitude:longitude - Geo location.";
 
-    private Controller controller;
+    private static Controller controller;
 
+    @Autowired
     public TwitterCLIApp(Controller controller) {
         this.controller = controller;
     }
 
-    public static void main(String[] args) {
+    public void run(String[] args) {
 
         if (args.length < 2)
             throw new IllegalArgumentException("More arguments are needed.\n" + USAGE_ERROR_MESSAGE);
-
-        HttpHelper twitterHttpHelper = new TwitterHttpHelper();
-        CrdDao<Tweet, String> twitterDAO = new TwitterDAO(twitterHttpHelper);
-        Service twitterService = new TwitterService(twitterDAO);
-        Controller twitterController = new TwitterController(twitterService);
-        TwitterCLIApp twitterCLIApp = new TwitterCLIApp(twitterController);
-
-        try {
-            twitterCLIApp.run(args);
-        } catch (IllegalArgumentException e) {
-            System.out.println(USAGE_ERROR_MESSAGE + "\n" + e.getMessage());
-        }
-    }
-
-    public void run(String[] args) {
 
         LinkedList<Tweet> returnedTweets = new LinkedList<>();
 

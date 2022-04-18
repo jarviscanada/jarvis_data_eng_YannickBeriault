@@ -4,9 +4,11 @@ import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.model.TweetUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
+@org.springframework.stereotype.Service
 public class TwitterService implements Service {
 
     private static final TreeSet<String> VALID_FIELDS_TREE = new TreeSet<>(TweetUtil.VALID_FIELDS);
@@ -14,6 +16,7 @@ public class TwitterService implements Service {
 
     private CrdDao dao;
 
+    @Autowired
     public TwitterService(CrdDao dao) {
         this.dao = dao;
     }
