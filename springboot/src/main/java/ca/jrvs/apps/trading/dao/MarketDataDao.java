@@ -2,8 +2,10 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
+import ca.jrvs.apps.trading.model.domain.IexQuoteUtil;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -16,19 +18,28 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.json.*;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.io.StringReader;
+import java.util.*;
 
 @Repository
 public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
-    private static final String IEX_BATCH_PATCH = "/stock/market/batch?symbols=%s&types=quotes&token=";
+    private static final String IEX_BATCH_PATCH = "/stock/market/batch?symbols=%s&types=quote&token=";
     private static String IEX_BATCH_URL;
     private static final int OK_STATUS_CODE = 200;
     private static final int NOT_FOUND_CODE = 404;
+
+    private static final String WRONG_NUMBER_OF_QUOTES_ERROR_MESSAGE = "Unexpected number of quotes.";
+    private static final String INCOMPLETE_HTTP_REQUEST_ERROR_MESSAGE = "HTTP request could not be completed.";
+    private static final String RESPONSE_NOT_PARSED_ERROR_MESSAGE =
+            "Response entity could not be parsed to string.";
+    private static final String UNEXPECTED_STATUS_CODE_ERROR_MESSAGE = "Unexpected status code was returned.";
+    private static final String JSON_STRING_CONVERSION_ERROR_MESSAGE =
+            "Failed to convert response string to JSONObject.";
+    private static final String NOT_FOUND_ERROR_MESSAGE =
+            "One or more tickers did not correspond to any valid stock.";
 
     private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
     private HttpClientConnectionManager httpClientConnectionManager;
@@ -59,7 +70,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         else if (quotes.size() == 1)
             iexQuote = Optional.of(quotes.get(0));
         else
-            throw new DataRetrievalFailureException("Unexpected number of quotes.");
+            throw new DataRetrievalFailureException(WRONG_NUMBER_OF_QUOTES_ERROR_MESSAGE);
 
         return iexQuote;
     }
@@ -77,28 +88,46 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<String> iterator = tickers.iterator();
+        int tickersCounter = 0;
 
-        if (iterator.hasNext())
-            stringBuilder.append(iterator.next());
+        if (iterator.hasNext()) {
+
+            stringBuilder.append(iterator.next().toLowerCase());
+            tickersCounter++;
+        }
         while (iterator.hasNext()) {
 
             stringBuilder.append(',');
-            stringBuilder.append(iterator.next());
+            stringBuilder.append(iterator.next().toLowerCase());
+            tickersCounter++;
         }
 
         String url = String.format(IEX_BATCH_URL, stringBuilder);
         Optional<String> responseString = executeHttpGet(url);
+
+        if (!responseString.isPresent())
+            throw new DataRetrievalFailureException(NOT_FOUND_ERROR_MESSAGE);
+
+        JsonObject responseJson = convertResponseStringToJsonObject(responseString.get());
+        if (responseJson == null)
+            throw new DataRetrievalFailureException(JSON_STRING_CONVERSION_ERROR_MESSAGE);
+
+        LinkedList<IexQuote> quotesList = produceQuotesList(responseJson);
+        if (quotesList.size() != tickersCounter)
+            throw new IllegalArgumentException(NOT_FOUND_ERROR_MESSAGE);
+
+        return quotesList;
     }
 
     private Optional<String> executeHttpGet(String url) {
 
         HttpClient httpClient = getHttpClient();
-        HttpPost request = new HttpPost(url);
+        HttpGet request = new HttpGet(url);
         HttpResponse response;
         try {
             response = httpClient.execute(request);
         } catch (IOException e) {
-            throw new DataRetrievalFailureException("HTTP request could not be completed.");
+            throw new DataRetrievalFailureException(INCOMPLETE_HTTP_REQUEST_ERROR_MESSAGE);
         }
 
         Optional<String> optional;
@@ -108,12 +137,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
             try {
                 optional = Optional.of(EntityUtils.toString(response.getEntity()));
             } catch (IOException e) {
-                throw new DataRetrievalFailureException("Response entity could not be parsed to string.");
+                throw new DataRetrievalFailureException(RESPONSE_NOT_PARSED_ERROR_MESSAGE);
             }
         } else if (statusCode == NOT_FOUND_CODE)
             optional = Optional.empty();
         else
-            throw new DataRetrievalFailureException("Unexpected status code was returned.");
+            throw new DataRetrievalFailureException(UNEXPECTED_STATUS_CODE_ERROR_MESSAGE);
 
         return optional;
     }
@@ -124,6 +153,41 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
                 .setConnectionManager(httpClientConnectionManager)
                 .setConnectionManagerShared(true)
                 .build();
+    }
+
+    private JsonObject convertResponseStringToJsonObject(String responseString) {
+
+        char firstBracket = responseString.charAt(0);
+        JsonReader jsonReader = Json.createReader(new StringReader(responseString));
+
+        if (firstBracket == '[') {
+
+            JsonArray jsonArray;
+
+            try (jsonReader) {
+                jsonArray = jsonReader.readArray();
+            }
+
+            return jsonArray.getJsonObject(0);
+        } else if (firstBracket == '{') {
+
+            try (jsonReader) {
+                return jsonReader.readObject();
+            }
+        } else
+            return null;
+    }
+
+    private LinkedList<IexQuote> produceQuotesList(JsonObject responseJson) {
+
+        LinkedList<IexQuote> list = new LinkedList<>();
+
+        for (Map.Entry<String, JsonValue> entry : responseJson.entrySet()) {
+            list.add(IexQuoteUtil.createIexQuote(entry.getValue().asJsonObject()
+                    .getJsonObject("quote")));
+        }
+
+        return list;
     }
 
     @Override
