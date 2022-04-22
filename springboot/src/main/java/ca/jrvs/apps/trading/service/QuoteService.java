@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Transactional
-@Service
+//@Service
 public class QuoteService {
 
     private static final Logger logger = LoggerFactory.getLogger(QuoteService.class);
