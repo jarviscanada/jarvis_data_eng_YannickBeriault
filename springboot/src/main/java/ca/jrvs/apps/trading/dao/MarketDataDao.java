@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.*;
 
-//@Repository
+@Repository
 public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     private static final String IEX_BATCH_PATCH = "/stock/market/batch?symbols=%s&types=quote&token=";

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+//@PropertySource("jetbrains://idea/navigate/reference?project=springboot&path=src/main/resources.application.properties")
 //@EnableTransactionManagement
 public class AppConfig {
 
@@ -28,7 +29,7 @@ public class AppConfig {
         return marketDataConfig;
     }
 
-    @Bean
+    /*@Bean
     public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
                          MarketDataConfig marketDataConfig) {
         return new MarketDataDao(httpClientConnectionManager, marketDataConfig);
@@ -47,7 +48,7 @@ public class AppConfig {
     @Bean
     public QuoteDao quoteDao() {
         return new QuoteDao();
-    }
+    }*/
 
     @Bean
     public HttpClientConnectionManager httpClientConnectionManager() {

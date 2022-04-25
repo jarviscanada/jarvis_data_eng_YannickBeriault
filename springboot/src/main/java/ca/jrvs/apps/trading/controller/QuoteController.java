@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 //@Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//@Controller
+@Controller
 @RequestMapping("/quote")
 public class QuoteController {
 
