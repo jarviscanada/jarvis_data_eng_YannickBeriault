@@ -4,60 +4,62 @@ package ca.jrvs.apps.trading.model.domain;
  * https://iexcloud.io/docs/api/#quote
  */
 
-public class IexQuote {
+public class Quote implements Entity<String> {
 
     private String ticker;
-    private double lastPrice;
-    private double bidPrice;
-    private int bidSize;
-    private double askPrice;
-    private int askSize;
+    private double last_price;
+    private double bid_price;
+    private int bid_size;
+    private double ask_price;
+    private int ask_size;
 
-    public String getTicker() {
+    @Override
+    public String getId() {
         return ticker;
     }
 
-    public void setTicker(String ticker) {
+    @Override
+    public void setId(String ticker) {
         this.ticker = ticker;
     }
 
     public double getLastPrice() {
-        return lastPrice;
+        return last_price;
     }
 
     public void setLastPrice(double lastPrice) {
-        this.lastPrice = lastPrice;
+        this.last_price = lastPrice;
     }
 
     public double getBidPrice() {
-        return bidPrice;
+        return bid_price;
     }
 
     public void setBidPrice(double bidPrice) {
-        this.bidPrice = bidPrice;
+        this.bid_price = bidPrice;
     }
 
     public int getBidSize() {
-        return bidSize;
+        return bid_size;
     }
 
     public void setBidSize(int bidSize) {
-        this.bidSize = bidSize;
+        this.bid_size = bidSize;
     }
 
     public double getAskPrice() {
-        return askPrice;
+        return ask_price;
     }
 
     public void setAskPrice(double askPrice) {
-        this.askPrice = askPrice;
+        this.ask_price = askPrice;
     }
 
     public int getAskSize() {
-        return askSize;
+        return ask_size;
     }
 
     public void setAskSize(int askSize) {
-        this.askSize = askSize;
+        this.ask_size = askSize;
     }
 }

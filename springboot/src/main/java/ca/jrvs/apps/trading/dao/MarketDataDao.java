@@ -1,12 +1,11 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
-import ca.jrvs.apps.trading.model.domain.IexQuote;
-import ca.jrvs.apps.trading.model.domain.IexQuoteUtil;
+import ca.jrvs.apps.trading.model.domain.Quote;
+import ca.jrvs.apps.trading.model.domain.QuoteUtil;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -24,7 +23,7 @@ import java.io.StringReader;
 import java.util.*;
 
 @Repository
-public class MarketDataDao implements CrudRepository<IexQuote, String> {
+public class MarketDataDao implements CrudRepository<Quote, String> {
 
     private static final String IEX_BATCH_PATCH = "/stock/market/batch?symbols=%s&types=quote&token=";
     private static String IEX_BATCH_URL;
@@ -60,10 +59,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
      * @throws DataRetrievalFailureException if HTTP request failed
      */
     @Override
-    public Optional<IexQuote> findById(String ticker) {
+    public Optional<Quote> findById(String ticker) {
 
-        Optional<IexQuote> iexQuote;
-        List<IexQuote> quotes = (List<IexQuote>) findAllById(Collections.singletonList(ticker));
+        Optional<Quote> iexQuote;
+        List<Quote> quotes = (List<Quote>) findAllById(Collections.singletonList(ticker));
 
         if (quotes.size() == 0)
             return Optional.empty();
@@ -84,7 +83,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
      * @throws DataRetrievalFailureException if HTTP request failed
      */
     @Override
-    public Iterable<IexQuote> findAllById(Iterable<String> tickers) {
+    public Iterable<Quote> findAllById(Iterable<String> tickers) {
 
         StringBuilder stringBuilder = new StringBuilder();
         Iterator<String> iterator = tickers.iterator();
@@ -112,7 +111,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         if (responseJson == null)
             throw new DataRetrievalFailureException(JSON_STRING_CONVERSION_ERROR_MESSAGE);
 
-        LinkedList<IexQuote> quotesList = produceQuotesList(responseJson);
+        LinkedList<Quote> quotesList = produceQuotesList(responseJson);
         if (quotesList.size() != tickersCounter)
             throw new IllegalArgumentException(NOT_FOUND_ERROR_MESSAGE);
 
@@ -178,12 +177,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
             return null;
     }
 
-    private LinkedList<IexQuote> produceQuotesList(JsonObject responseJson) {
+    private LinkedList<Quote> produceQuotesList(JsonObject responseJson) {
 
-        LinkedList<IexQuote> list = new LinkedList<>();
+        LinkedList<Quote> list = new LinkedList<>();
 
         for (Map.Entry<String, JsonValue> entry : responseJson.entrySet()) {
-            list.add(IexQuoteUtil.createIexQuote(entry.getValue().asJsonObject()
+            list.add(QuoteUtil.createQuote(entry.getValue().asJsonObject()
                     .getJsonObject("quote")));
         }
 
@@ -196,7 +195,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     }
 
     @Override
-    public Iterable<IexQuote> findAll() {
+    public Iterable<Quote> findAll() {
         throw new UnsupportedOperationException("Not implemented");
     }
 
@@ -212,12 +211,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     }
 
     @Override
-    public void delete(IexQuote entity) {
+    public void delete(Quote entity) {
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
-    public void deleteAll(Iterable<? extends IexQuote> entities) {
+    public void deleteAll(Iterable<? extends Quote> entities) {
         throw new UnsupportedOperationException("Not implemented");
     }
 
@@ -227,12 +226,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     }
 
     @Override
-    public <S extends IexQuote> S save(S entity) {
+    public <S extends Quote> S save(S entity) {
         throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
-    public <S extends IexQuote> Iterable<S> saveAll(Iterable<S> entities) {
+    public <S extends Quote> Iterable<S> saveAll(Iterable<S> entities) {
         throw new UnsupportedOperationException("Not implemented");
     }
 }

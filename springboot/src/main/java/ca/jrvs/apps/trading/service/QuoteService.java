@@ -2,7 +2,7 @@ package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.dao.MarketDataDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
-import ca.jrvs.apps.trading.model.domain.IexQuote;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class QuoteService {
      * @return IexQuote object
      * @throws IllegalArgumentException if ticker is invalid
      */
-    public IexQuote findIexQuoteByTicker(String ticker) {
+    public Quote findIexQuoteByTicker(String ticker) {
 
         return marketDataDao.findById(ticker)
                 .orElseThrow(() -> new IllegalArgumentException(ticker + " is invalid."));

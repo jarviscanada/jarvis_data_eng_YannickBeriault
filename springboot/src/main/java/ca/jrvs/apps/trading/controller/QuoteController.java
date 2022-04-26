@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.controller;
 
-import ca.jrvs.apps.trading.dao.QuoteDao;
-import ca.jrvs.apps.trading.model.domain.IexQuote;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class QuoteController {
     @GetMapping(path = "/iex/ticker/{ticker}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public IexQuote getQuote(@PathVariable String ticker) {
+    public Quote getQuote(@PathVariable String ticker) {
 
         try {
             return quoteService.findIexQuoteByTicker(ticker);
