@@ -29,27 +29,6 @@ public class AppConfig {
         return marketDataConfig;
     }
 
-    /*@Bean
-    public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
-                         MarketDataConfig marketDataConfig) {
-        return new MarketDataDao(httpClientConnectionManager, marketDataConfig);
-    }
-
-    @Bean
-    public QuoteService quoteService(QuoteDao quoteDao, MarketDataDao marketDataDao) {
-        return new QuoteService(quoteDao, marketDataDao);
-    }
-
-    @Bean
-    public QuoteController quoteController(QuoteService quoteService) {
-        return new QuoteController(quoteService);
-    }
-
-    @Bean
-    public QuoteDao quoteDao() {
-        return new QuoteDao();
-    }*/
-
     @Bean
     public HttpClientConnectionManager httpClientConnectionManager() {
 
