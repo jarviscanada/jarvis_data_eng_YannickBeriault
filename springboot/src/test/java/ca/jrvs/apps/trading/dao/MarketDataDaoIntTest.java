@@ -9,12 +9,14 @@ import org.junit.Test;
 import org.springframework.dao.DataRetrievalFailureException;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class MarketDataDaoIntTest {
+
+    private final String[] goodQuoteTickers = new String[] {"amzn", "caj", "ibm", "sony", "tsla"};
 
     private MarketDataDao dao;
 
@@ -67,5 +69,24 @@ public class MarketDataDaoIntTest {
         } catch (DataRetrievalFailureException e) {
             assertEquals(MarketDataDao.NOT_FOUND_ERROR_MESSAGE, e.getMessage());
         }
+    }
+
+    @Test
+    public void testFindAllById() {
+
+        int counter = 0;
+        Iterable<IexQuote> foundQuotes = dao.findAllById(Arrays.asList(goodQuoteTickers));
+
+        for (String ticker : goodQuoteTickers) {
+
+            Iterator<IexQuote> iterator = foundQuotes.iterator();
+            while (iterator.hasNext()) {
+
+                if (ticker.equalsIgnoreCase(iterator.next().getTicker()))
+                    counter++;
+            }
+        }
+
+        assertEquals(goodQuoteTickers.length, counter);
     }
 }
