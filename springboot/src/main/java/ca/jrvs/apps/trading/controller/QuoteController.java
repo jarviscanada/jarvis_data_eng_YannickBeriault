@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 //@Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
-@RequestMapping("/quote")
+@RequestMapping("/quotes")
 public class QuoteController {
 
     private QuoteService quoteService;
@@ -28,6 +28,17 @@ public class QuoteController {
 
         try {
             return quoteService.findIexQuoteByTicker(ticker);
+        } catch (Exception e) {
+            throw ResponseExceptionUtil.getResponseStatusException(e);
+        }
+    }
+
+    @PutMapping(path = "/iexMarketData")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateMarketData() {
+
+        try {
+            quoteService.updateMarketData();
         } catch (Exception e) {
             throw ResponseExceptionUtil.getResponseStatusException(e);
         }

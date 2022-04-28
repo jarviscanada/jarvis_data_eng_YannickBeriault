@@ -97,7 +97,8 @@ public class QuoteService {
      * Helper method.
      */
     public Quote saveQuote(String ticker) {
-        return findIexQuoteByTicker(ticker);
+
+        return saveQuote(findIexQuoteByTicker(ticker));
     }
 
     /**
@@ -108,9 +109,13 @@ public class QuoteService {
      */
     public Quote findIexQuoteByTicker(String ticker) {
 
-        return buildQuoteFromIexQuote(marketDataDao.findById(ticker)
-                .orElseThrow(() -> new IllegalArgumentException(ticker + " is invalid."))
-        );
+        try {
+            return buildQuoteFromIexQuote(marketDataDao.findById(ticker)
+                    .orElseThrow(() -> new IllegalArgumentException(ticker + " is invalid."))
+            );
+        } catch (DataRetrievalFailureException e) {
+            throw new IllegalArgumentException(ticker + " is invalid (" + e.getMessage() + ").");
+        }
     }
 
     /**

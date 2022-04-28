@@ -100,7 +100,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
         for (Quote quote : quotes) {
 
-            addOne(quote);
+            save(quote);
             savedQuotes.add(quote);
         }
 
