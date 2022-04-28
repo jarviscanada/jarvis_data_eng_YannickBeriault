@@ -4,7 +4,7 @@ package ca.jrvs.apps.trading.model.domain;
  * https://iexcloud.io/docs/api/#quote
  */
 
-public class Quote implements Entity<String> {
+public class IexQuote implements Entity<String> {
 
     private String ticker;
     private double latest_price;
@@ -27,8 +27,8 @@ public class Quote implements Entity<String> {
         return getId();
     }
 
-    public double getLatestPrice() {
-        return latest_price;
+    public Double getLatestPrice() {
+        return (bid_size == 0 && ask_size == 0) ? null : latest_price;
     }
 
     public void setLatestPrice(double latestPrice) {

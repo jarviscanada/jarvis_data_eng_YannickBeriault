@@ -75,7 +75,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
      */
     private int updateOne(Quote quote) {
 
-        String updateSql = "UPDATE quote set last_price=?, bid_price=?, bid_size=?," +
+        String updateSql = "UPDATE quote set latest_price=?, bid_price=?, bid_size=?," +
                 "ask_price=?, ask_size=? WHERE " + ID_COLUMN_NAME + "=?";
 
         return jdbcTemplate.update(updateSql, makeUpdateValues(quote));
@@ -89,7 +89,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
      */
     private Object[] makeUpdateValues(Quote quote) {
 
-        return new Object[]{quote.getLastPrice(), quote.getBidPrice(), quote.getBidSize(),
+        return new Object[]{quote.getLatestPrice(), quote.getBidPrice(), quote.getBidSize(),
                 quote.getAskPrice(), quote.getAskSize(), quote.getId()};
     }
 

@@ -3,11 +3,11 @@ package ca.jrvs.apps.trading.model.domain;
 import javax.json.JsonObject;
 import java.util.Map;
 
-public class QuoteUtil {
+public class IexQuoteUtil {
 
-    public static Quote createQuote(JsonObject jsonObject) {
+    public static IexQuote createIexQuote(JsonObject jsonObject) {
 
-        Quote nuQuote = new Quote();
+        IexQuote nuQuote = new IexQuote();
 
         nuQuote.setId(jsonObject.getString("symbol"));
         nuQuote.setLatestPrice(jsonObject.getJsonNumber("latestPrice").doubleValue());
@@ -19,9 +19,9 @@ public class QuoteUtil {
         return nuQuote;
     }
 
-    public static Quote createQuote(Map<String, Object> quoteMap) {
+    public static IexQuote createIexQuote(Map<String, Object> quoteMap) {
 
-        Quote nuQuote = new Quote();
+        IexQuote nuQuote = new IexQuote();
 
         nuQuote.setId((String) quoteMap.get("ticker"));
         nuQuote.setLatestPrice((double) quoteMap.get("latest_price"));
@@ -29,21 +29,6 @@ public class QuoteUtil {
         nuQuote.setBidSize((int) quoteMap.get("bid_size"));
         nuQuote.setAskPrice((double) quoteMap.get("ask_price"));
         nuQuote.setAskSize((int) quoteMap.get("ask_size"));
-
-        return nuQuote;
-    }
-
-    public static Quote createQuote(IexQuote iexQuote) {
-
-        Quote nuQuote = new Quote();
-        Double latestPrice = iexQuote.getLatestPrice();
-
-        nuQuote.setId(iexQuote.getId());
-        nuQuote.setLatestPrice(latestPrice == null ? 0 : latestPrice);
-        nuQuote.setBidPrice(iexQuote.getBidPrice());
-        nuQuote.setBidSize(iexQuote.getBidSize());
-        nuQuote.setAskPrice(iexQuote.getAskPrice());
-        nuQuote.setAskSize(iexQuote.getAskSize());
 
         return nuQuote;
     }

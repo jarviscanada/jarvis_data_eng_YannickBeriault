@@ -19,7 +19,10 @@ public class TestConfig {
 
         MarketDataConfig marketDataConfig = new MarketDataConfig();
         marketDataConfig.setHost("https://cloud.iexapis.com/v1");
-        marketDataConfig.setToken(System.getProperty("IEX_PUB_TOKEN"));
+        if (System.getProperty("IEX_PUB_TOKEN") != null)
+            marketDataConfig.setToken(System.getProperty("IEX_PUB_TOKEN"));
+        else
+            marketDataConfig.setToken(System.getenv("IEX_PUB_TOKEN"));
 
         return marketDataConfig;
     }
@@ -27,10 +30,22 @@ public class TestConfig {
     @Bean
     public DataSource dataSource() {
 
+        String url;
+        String user;
+        String password;
+
         System.out.println("Creating apacheDataSource");
-        String url = System.getProperty("PSQL_URL");
-        String user = System.getProperty("PSQL_USER");
-        String password = System.getProperty("PSQL_PASSWORD");
+        if (System.getProperty("PSQL_URL") != null) {
+
+            url = System.getProperty("PSQL_URL");
+            user = System.getProperty("PSQL_USER");
+            password = System.getProperty("PSQL_PASSWORD");
+        } else {
+
+            url = System.getenv("PSQL_URL");
+            user = System.getenv("PSQL_USER");
+            password = System.getenv("PSQL_PASSWORD");
+        }
 
         //Never log your credentials/secrets. Use IDE debugger instead
         BasicDataSource basicDataSource = new BasicDataSource();

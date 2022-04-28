@@ -1,10 +1,12 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
+import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.dao.DataRetrievalFailureException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,10 @@ public class MarketDataDaoIntTest {
 
         MarketDataConfig marketDataConfig = new MarketDataConfig();
         marketDataConfig.setHost("https://cloud.iexapis.com/v1");
-        marketDataConfig.setToken(System.getProperty("IEX_PUB_TOKEN"));
+        if (System.getProperty("IEX_PUB_TOKEN") != null)
+            marketDataConfig.setToken(System.getProperty("IEX_PUB_TOKEN"));
+        else
+            marketDataConfig.setToken(System.getenv("IEX_PUB_TOKEN"));
 
         dao = new MarketDataDao(cm, marketDataConfig);
     }
@@ -33,7 +38,7 @@ public class MarketDataDaoIntTest {
     @Test
     public void testFindIexQuotesByTickers() {
 
-        List<Quote> quoteList = (List<Quote>) dao.findAllById(Arrays.asList("AAPL", "FB"));
+        List<IexQuote> quoteList = (List<IexQuote>) dao.findAllById(Arrays.asList("AAPL", "FB"));
         assertEquals(2, quoteList.size());
         assertEquals("AAPL", quoteList.get(0).getId());
     }
@@ -48,7 +53,19 @@ public class MarketDataDaoIntTest {
     public void testFindByTicker() {
 
         String ticker = "AAPL";
-        Quote quote = dao.findById(ticker).get();
+        IexQuote quote = dao.findById(ticker).get();
         assertEquals(ticker, quote.getId());
+    }
+
+    @Test
+    public void testExceptionMessageForSingleWrongTicker() {
+
+        String badTicker = "blop";
+
+        try {
+            dao.findById(badTicker);
+        } catch (DataRetrievalFailureException e) {
+            assertEquals(MarketDataDao.NOT_FOUND_ERROR_MESSAGE, e.getMessage());
+        }
     }
 }
