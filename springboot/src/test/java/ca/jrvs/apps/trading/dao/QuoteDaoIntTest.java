@@ -160,7 +160,7 @@ public class QuoteDaoIntTest {
     }
 
     @After
-    public void deleteOne() {
+    public void deleteAll() {
         quoteDao.deleteAll();
     }
 }

@@ -49,9 +49,8 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
             if (updateOne(entity) != 1)
                 throw new DataRetrievalFailureException(UNABLE_TO_UPDATE_ERROR_MESSAGE);
-            else
-                addOne(entity);
-        }
+        } else
+            addOne(entity);
 
         return entity;
     }

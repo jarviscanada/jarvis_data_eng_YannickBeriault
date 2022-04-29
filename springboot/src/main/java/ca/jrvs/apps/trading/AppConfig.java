@@ -1,6 +1,8 @@
 package ca.jrvs.apps.trading;
 
+import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
+import ca.jrvs.apps.trading.model.domain.AccountUtil;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
