@@ -13,6 +13,8 @@ public class IexQuote implements Entity<String> {
     private double ask_price;
     private int ask_size;
 
+    public IexQuote() {}
+
     @Override
     public String getId() {
         return ticker;

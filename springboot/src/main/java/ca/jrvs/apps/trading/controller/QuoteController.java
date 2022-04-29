@@ -24,7 +24,7 @@ public class QuoteController {
     }
 
     //@ApiOperation(value = "ShowIexQuote", notes = "Show IexQuote for a given ticker/symbol")
-    @ApiResponse(value = {@ApiResponse(code = 404, message "ticker is not found")})
+    //@ApiResponse(value = {@ApiResponse(code = 404, message = "ticker is not found")})
     @GetMapping(path = "/iex/ticker/{ticker}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

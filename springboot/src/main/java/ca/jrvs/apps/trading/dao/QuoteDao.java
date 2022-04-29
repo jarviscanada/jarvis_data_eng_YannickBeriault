@@ -23,11 +23,16 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
     private static final String TABLE_NAME = "quote";
     private static final String ID_COLUMN_NAME = "ticker";
+
+    private static final String FAILED_COUNT_QUERY_ERROR_MESSAGE = "Unable to retrieve " +
+            "count of quotes (no number was returned).";
     private static final String FAILED_INSERT_ERROR_MESSAGE = "Failed to insert";
     private static final String FAILED_UPDATE_ERROR_MESSAGE = "Unable to update quote.";
     private static final String NOT_IMPLEMENTED_ERROR_MESSAGE = "Not implemented";
 
     private static final Logger logger = LoggerFactory.getLogger(QuoteDao.class);
+
+    private QuoteUtil quoteUtil = new QuoteUtil();
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
@@ -115,7 +120,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
         LinkedList<Quote> foundQuotes = new LinkedList<>();
         for (Map<String, Object> map : quoteMaps)
-            foundQuotes.add(QuoteUtil.createQuote(map));
+            foundQuotes.add((Quote) quoteUtil.createEntity(map));
 
         return foundQuotes;
     }
@@ -129,12 +134,12 @@ public class QuoteDao implements CrudRepository<Quote, String> {
         if (quoteRow.size() != 1)
             return Optional.empty();
         else
-            return Optional.of(QuoteUtil.createQuote(quoteRow.get(0)));
+            return Optional.of((Quote) quoteUtil.createEntity(quoteRow.get(0)));
     }
 
     @Override
     public boolean existsById(String ticker) {
-        return (findById(ticker).isPresent());
+        return findById(ticker).isPresent();
     }
 
     @Override
@@ -149,8 +154,15 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     public long count() {
 
         String countQuery = "SELECT COUNT(*) FROM " + TABLE_NAME;
+        long count;
 
-        return jdbcTemplate.queryForObject(countQuery, Long.class);
+        try {
+            count = jdbcTemplate.queryForObject(countQuery, Long.class);
+        } catch (NullPointerException e) {
+            throw new DataRetrievalFailureException(FAILED_COUNT_QUERY_ERROR_MESSAGE);
+        }
+
+        return count;
     }
 
     @Override

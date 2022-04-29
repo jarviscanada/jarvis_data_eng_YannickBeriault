@@ -3,9 +3,9 @@ package ca.jrvs.apps.trading.model.domain;
 import javax.json.JsonObject;
 import java.util.Map;
 
-public class IexQuoteUtil {
+public class IexQuoteUtil extends EntityUtil {
 
-    public static IexQuote createIexQuote(JsonObject jsonObject) {
+    public Entity<String> createEntity(JsonObject jsonObject) {
 
         IexQuote nuQuote = new IexQuote();
 
@@ -19,7 +19,8 @@ public class IexQuoteUtil {
         return nuQuote;
     }
 
-    public static IexQuote createIexQuote(Map<String, Object> quoteMap) {
+    @Override
+    public Entity<String> createEntity(Map<String, Object> quoteMap) {
 
         IexQuote nuQuote = new IexQuote();
 

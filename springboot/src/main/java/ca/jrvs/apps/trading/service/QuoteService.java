@@ -4,7 +4,6 @@ import ca.jrvs.apps.trading.dao.MarketDataDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.dao.ResourceNotFoundException;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
-import ca.jrvs.apps.trading.model.domain.IexQuoteUtil;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.QuoteUtil;
 import org.slf4j.Logger;
@@ -69,7 +68,7 @@ public class QuoteService {
      * Make sure to set a default value for number field(s).
      */
     protected static Quote buildQuoteFromIexQuote(IexQuote iexQuote) {
-        return QuoteUtil.createQuote(iexQuote);
+        return QuoteUtil.createEntity(iexQuote);
     }
 
     /**

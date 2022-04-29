@@ -3,9 +3,9 @@ package ca.jrvs.apps.trading.model.domain;
 import javax.json.JsonObject;
 import java.util.Map;
 
-public class QuoteUtil {
+public class QuoteUtil extends EntityUtil {
 
-    public static Quote createQuote(JsonObject jsonObject) {
+    public Entity<String> createEntity(JsonObject jsonObject) {
 
         Quote nuQuote = new Quote();
 
@@ -19,7 +19,7 @@ public class QuoteUtil {
         return nuQuote;
     }
 
-    public static Quote createQuote(Map<String, Object> quoteMap) {
+    public Entity<String> createEntity(Map<String, Object> quoteMap) {
 
         Quote nuQuote = new Quote();
 
@@ -33,7 +33,7 @@ public class QuoteUtil {
         return nuQuote;
     }
 
-    public static Quote createQuote(IexQuote iexQuote) {
+    public static Quote createEntity(IexQuote iexQuote) {
 
         Quote nuQuote = new Quote();
         Double latestPrice = iexQuote.getLatestPrice();

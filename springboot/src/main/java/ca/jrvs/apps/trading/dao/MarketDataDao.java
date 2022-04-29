@@ -44,6 +44,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
     private HttpClientConnectionManager httpClientConnectionManager;
+    private IexQuoteUtil iexQuoteUtil = new IexQuoteUtil();
 
     @Autowired
     public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager,
@@ -185,7 +186,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
         for (Map.Entry<String, JsonValue> entry : responseJson.entrySet()) {
 
-            list.add(IexQuoteUtil.createIexQuote(entry
+            list.add((IexQuote) iexQuoteUtil.createEntity(entry
                     .getValue()
                     .asJsonObject()
                     .getJsonObject("quote")));
