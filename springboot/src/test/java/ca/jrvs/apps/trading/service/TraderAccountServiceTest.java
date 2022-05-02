@@ -3,11 +3,11 @@ package ca.jrvs.apps.trading.service;
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.TraderDao;
+import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.domain.TraderAccountView;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,8 @@ public class TraderAccountServiceTest {
     private TraderAccountService traderAccountService;
 
     private Trader savedTrader;
+    private Account savedAccount;
+    private double startingAmount = 3000.00;
 
     @Before
     public void createAndSetTraderObject() {
@@ -67,5 +69,59 @@ public class TraderAccountServiceTest {
         assertEquals(savedTrader.getId(),
                 traderAccountView.getAccount().getTrader_id());
         assertEquals(0, traderAccountView.getAccount().getAmount(), 0.001);
+    }
+
+    @Test
+    public void testDeposit() {
+
+        double amountToDeposit = 500.38;
+
+        traderAccountService.createTraderAndAccount(savedTrader);
+        Account traderAccount = accountDao.findByTraderId(savedTrader.getId())
+                .orElseThrow(IllegalArgumentException::new);
+
+        accountDao.addAmountById(traderAccount.getId(), startingAmount);
+        traderAccount = traderAccountService.deposit(savedTrader.getId(), amountToDeposit);
+
+        assertEquals(startingAmount + amountToDeposit, traderAccount.getAmount()
+                , 0.0001);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDepositInvalidAmount() {
+
+        double amountToDeposit = 0.0;
+
+        traderAccountService.createTraderAndAccount(savedTrader);
+        traderAccountService.deposit(savedTrader.getId(), amountToDeposit);
+    }
+
+    @Test
+    public void testWithdraw() {
+
+        double amountToDeposit = 777.28;
+
+        traderAccountService.createTraderAndAccount(savedTrader);
+        Account traderAccount = accountDao.findByTraderId(savedTrader.getId())
+                .orElseThrow(IllegalArgumentException::new);
+
+        accountDao.addAmountById(traderAccount.getId(), startingAmount);
+        traderAccount = traderAccountService.withdraw(savedTrader.getId(), amountToDeposit);
+
+        assertEquals(startingAmount - amountToDeposit, traderAccount.getAmount()
+                , 0.0001);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testWithdrawInsufficientFunds() {
+
+        double amountToDeposit = 5000.00;
+
+        traderAccountService.createTraderAndAccount(savedTrader);
+        Account traderAccount = accountDao.findByTraderId(savedTrader.getId())
+                .orElseThrow(IllegalArgumentException::new);
+
+        accountDao.addAmountById(traderAccount.getId(), startingAmount);
+        traderAccountService.withdraw(savedTrader.getId(), amountToDeposit);
     }
 }

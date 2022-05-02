@@ -16,6 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -104,5 +105,20 @@ public class SecurityOrderDaoIntTest {
         assertTrue(savedSecurityOrder.getNotes()
                 .equalsIgnoreCase(securityOrders.get(0).getNotes())
         );
+    }
+
+    @Test
+    public void testDeleteWithIterable() {
+
+        assertEquals(1, securityOrderDao.findAll().size());
+
+        securityOrderDao.deleteAll(List.of(savedSecurityOrder));
+
+        assertEquals(0, securityOrderDao.findAll().size());
+    }
+
+    @Test
+    public void testDeleteWithEmptyList() {
+        securityOrderDao.deleteAll(new LinkedList<SecurityOrder>());
     }
 }

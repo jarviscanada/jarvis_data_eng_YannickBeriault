@@ -3,6 +3,7 @@ package ca.jrvs.apps.trading.dao;
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
+import ca.jrvs.apps.trading.model.domain.SecurityOrderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName(TABLE_NAME)
                 .usingGeneratedKeyColumns(ID_COLUMN);
+
+        super.entityUtil = new SecurityOrderUtil();
     }
 
     @Override
@@ -93,8 +96,11 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
     @Override
     public void deleteAll(Iterable<? extends SecurityOrder> ordersToDelete) {
 
+        if (!ordersToDelete.iterator().hasNext())
+            return;
+
         StringBuilder stringBuilder = new StringBuilder("DELETE FROM " + TABLE_NAME
-                + "WHERE id IN (");
+                + " WHERE id IN (");
 
         Iterator<SecurityOrder> iterator =
                 (Iterator<SecurityOrder>) ordersToDelete.iterator();

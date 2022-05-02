@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.AccountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
     private final String TABLE_NAME = "account";
     private final String ID_COLUMN = "id";
+    private final String INSUFFICIENT_FUNDS_ERROR_MESSAGE = "Funds are insufficient for this " +
+            "withdrawal attempt.";
     private final String UNSUPPORTED_OPERATION_ERROR_MESSAGE = "Unsupported operation.";
 
     private JdbcTemplate jdbcTemplate;
@@ -33,6 +36,8 @@ public class AccountDao extends JdbcCrudDao<Account> {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName(TABLE_NAME)
                 .usingGeneratedKeyColumns(ID_COLUMN);
+
+        super.entityUtil = new AccountUtil(this);
     }
 
     @Override
@@ -72,10 +77,20 @@ public class AccountDao extends JdbcCrudDao<Account> {
             return Optional.of(accountList.get(0));
     }
 
-    public Optional<Account> updateAmountById(Integer accountId, Double funds) {
+    public Optional<Account> addAmountById(Integer accountId, Double funds) {
 
-        String updateString = "UPDATE " + TABLE_NAME + " SET amount = " + funds
+        String queryString = "SELECT amount FROM " + TABLE_NAME + " WHERE "
+                + ID_COLUMN + " = " + accountId;
+
+        Double previousFunds = jdbcTemplate.queryForObject(queryString, Double.class);
+        Double nuFunds = previousFunds + funds;
+        if (nuFunds <= 0)
+            throw new IllegalArgumentException(INSUFFICIENT_FUNDS_ERROR_MESSAGE);
+
+        String updateString = "UPDATE " + TABLE_NAME + " SET amount = " + nuFunds
                 + " WHERE id = " + accountId;
+
+        jdbcTemplate.update(updateString);
 
         return findById(accountId);
     }

@@ -2,7 +2,6 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Entity;
 import ca.jrvs.apps.trading.model.domain.EntityUtil;
-import ca.jrvs.apps.trading.model.domain.QuoteUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -25,7 +24,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
     private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
 
-    private EntityUtil entityUtil = new QuoteUtil();
+    public EntityUtil entityUtil;
 
     abstract public JdbcTemplate getJdbcTemplate();
 

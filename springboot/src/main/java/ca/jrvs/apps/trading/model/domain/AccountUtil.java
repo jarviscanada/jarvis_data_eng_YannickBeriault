@@ -1,8 +1,6 @@
 package ca.jrvs.apps.trading.model.domain;
 
 import ca.jrvs.apps.trading.dao.AccountDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.json.JsonObject;
 import java.util.Map;
@@ -24,8 +22,14 @@ public class AccountUtil extends EntityUtil {
 
     @Override
     public Entity<?> createEntity(Map<String, Object> quoteMap) {
-        throw new UnsupportedOperationException(UNSUPPORTED_OPERATION_ERROR_MESSAGE);
-    }
+
+        Account nuAccount = new Account();
+
+        nuAccount.setId((int) quoteMap.get("id"));
+        nuAccount.setTrader_id((Integer) quoteMap.get("trader_id"));
+        nuAccount.setAmount((double) quoteMap.get("amount"));
+
+        return nuAccount;    }
 
     public Account createEmptyAccountWithTrader(Trader trader) {
 

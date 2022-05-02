@@ -13,9 +13,10 @@ import java.util.List;
 @Service
 public class TraderAccountService {
 
-    private static final String CANNOT_DELETE_TRADER_ERROR_MESSAGE = "Cannot delete trader: ";
-    private static final String DEPOSIT_AMOUNT_ERROR_MESSAGE = "Funds deposited have to be more " +
+    private static final String AMOUNT_ERROR_MESSAGE = "Funds have to be more " +
             "than zero.";
+    private static final String CANNOT_DELETE_TRADER_ERROR_MESSAGE = "Cannot delete trader: ";
+
     private static final String NULL_TRADER_ID_ERROR_MESSAGE = "Trader id cannot be null.";
     private static final String OPEN_POSITIONS_ERROR_MESSAGE = "some positions remain open.";
     private static final String TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE = "Account was not found " +
@@ -73,7 +74,7 @@ public class TraderAccountService {
 
     private void validateTrader(Trader trader) {
 
-        if (trader.getId() == null || trader.getFirst_name() == null
+        if (trader.getFirst_name() == null
                 || trader.getLast_name() == null || trader.getDob() == null
                 || trader.getCountry() == null || trader.getEmail() == null)
             throw new IllegalArgumentException(TRADER_NULL_FIELD_ERROR_MESSAGE);
@@ -92,9 +93,8 @@ public class TraderAccountService {
     public void deleteTraderById(Integer traderId) {
 
         Trader traderToDelete = validateTraderIdAndReturnTrader(traderId);;
-        Account traderAccount;
 
-        traderAccount = accountDao.findByTraderId(traderId)
+        Account traderAccount = accountDao.findByTraderId(traderId)
                 .orElseThrow(()
                         -> new IllegalArgumentException(TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE));
 
@@ -107,7 +107,9 @@ public class TraderAccountService {
                     + OPEN_POSITIONS_ERROR_MESSAGE);
         }
 
-        securityOrderDao.deleteAll(securityOrdersOfAccount);
+        if (securityOrdersOfAccount.size() != 0)
+            securityOrderDao.deleteAll(securityOrdersOfAccount);
+
         accountDao.deleteById(traderAccount.getId());
         traderDao.deleteById(traderToDelete.getId());
     }
@@ -134,16 +136,49 @@ public class TraderAccountService {
      */
     public Account deposit(Integer traderId, Double funds) {
 
-        if (funds <= 0)
-            throw new IllegalArgumentException(DEPOSIT_AMOUNT_ERROR_MESSAGE);
+        validateTransactionFunds(funds);
+        validateTraderIdAndLinkedAccount(traderId);
 
-        Trader traderDepositing = validateTraderIdAndReturnTrader(traderId);
-        Account traderAccount = accountDao.findByTraderId(traderId).orElseThrow(()
-                -> new IllegalArgumentException(TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE)
-        );
-
-        return accountDao.updateAmountById(traderId, funds).orElseThrow(()
+        return accountDao.addAmountById(traderId, funds).orElseThrow(()
                -> new IllegalArgumentException(UNABLE_TO_UPDATE_ACCOUNT_ERROR_MESSAGE)
+        );
+    }
+
+    /**
+     * Withdraw funds from an account by traderId
+     *
+     * - validate user input
+     * - account = accountDao.findByTraderId
+     * - accountDao.updateAmountById
+     *
+     * @param traderId trader ID
+     * @param funds amount can't be 0
+     * @return updated account
+     * @throws IllegalArgumentException if traderId is null or not found,
+     *                                  fund is less than or equal to 0,
+     *                                  or account amount is insufficient
+     */
+    public Account withdraw(Integer traderId, Double funds) {
+
+        validateTransactionFunds(funds);
+        validateTraderIdAndLinkedAccount(traderId);
+
+        return accountDao.addAmountById(traderId, funds * -1).orElseThrow(()
+                -> new IllegalArgumentException(UNABLE_TO_UPDATE_ACCOUNT_ERROR_MESSAGE)
+        );
+    }
+
+    private void validateTransactionFunds(Double funds) {
+
+        if (funds <= 0)
+            throw new IllegalArgumentException(AMOUNT_ERROR_MESSAGE);
+    }
+
+    private void validateTraderIdAndLinkedAccount(Integer traderId) {
+
+        validateTraderIdAndReturnTrader(traderId);
+        accountDao.findByTraderId(traderId).orElseThrow(()
+                -> new IllegalArgumentException(TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE)
         );
     }
 }
