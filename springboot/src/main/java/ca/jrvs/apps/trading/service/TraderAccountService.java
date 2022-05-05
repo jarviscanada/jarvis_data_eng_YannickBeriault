@@ -16,7 +16,7 @@ public class TraderAccountService {
     private static final String AMOUNT_ERROR_MESSAGE = "Funds have to be more " +
             "than zero.";
     private static final String CANNOT_DELETE_TRADER_ERROR_MESSAGE = "Cannot delete trader: ";
-
+    private static final String NON_ZERO_AMOUNT_ON_DELETION_ERROR_MESSAGE = "amount in account is non-zero.";
     private static final String NULL_TRADER_ID_ERROR_MESSAGE = "Trader id cannot be null.";
     private static final String OPEN_POSITIONS_ERROR_MESSAGE = "some positions remain open.";
     private static final String TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE = "Account was not found " +
@@ -97,6 +97,10 @@ public class TraderAccountService {
         Account traderAccount = accountDao.findByTraderId(traderId)
                 .orElseThrow(()
                         -> new IllegalArgumentException(TRADER_ACCOUNT_NOT_FOUND_ERROR_MESSAGE));
+
+        if (traderAccount.getAmount() != 0)
+            throw new IllegalArgumentException(CANNOT_DELETE_TRADER_ERROR_MESSAGE
+                    + NON_ZERO_AMOUNT_ON_DELETION_ERROR_MESSAGE);
 
         List<SecurityOrder> securityOrdersOfAccount =
                 securityOrderDao.getSecurityOrdersOfAccount(traderAccount.getId());
