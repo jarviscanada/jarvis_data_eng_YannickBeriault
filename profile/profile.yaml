@@ -22,15 +22,17 @@ skills:
     - RDBMS/SQL
     - Agile/Scrum
     - Git
+    - JDBC
   # At least 5 skills
   competent:
-    - JDBC
     - Vim
     - IntelliJ IDEA
     - JavaScript
     - HTML/CSS
     - Assembly language
     - Algorithmics and Mathematics for Computer Science
+    - Docker
+    - Spring Boot
   # At least 5 skills
   familiar:
     - C
@@ -59,9 +61,13 @@ jarvis_projects:
       "- Twitter App: Developed an app made to interact with Twitter's REST API in order to create, show and delete tweets.
       - JDBC App: Wrote a java program to enter customer info into a database and retrieve it.
       - Grep App: Implemented a simple version of the grep command."
-  #- name: "Springboot App"
-  #  git_url: "/springboot"
-  #  description: ""
+  - name: "Springboot App"
+    git_url: "/springboot"
+    description: "Our trading team needed to replace their legacy trading platform with something more efficient, 
+    maintainable and scalable. The platform we built for them is a REST API meant to manage traders and their accounts, 
+    execute security orders and get information about quotes. The app was developed inside the Spring Boot framework 
+    with data persistence ensured by a postgresql database, connected through JDBC. It is meant to be run inside two 
+    docker containers, one for the app and one for the database."
   #- name: "Python Data Analytics"
   #  git_url: "/python_data_anlytics"
   #  description: ""

@@ -4,9 +4,9 @@ The first thing that attracted me into computer science were databases. Their po
 
 ## Skills
 
-**Proficient:** Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git
+**Proficient:** Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, JDBC
 
-**Competent:** JDBC, Vim, IntelliJ IDEA, JavaScript, HTML/CSS, Assembly language, Algorithmics and Mathematics for Computer Science
+**Competent:** Vim, IntelliJ IDEA, JavaScript, HTML/CSS, Assembly language, Algorithmics and Mathematics for Computer Science, Docker, Spring Boot
 
 **Familiar:** C, C++, React, PHP, Laravel, Haskell, Various binary encodings
 
@@ -18,6 +18,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_YannickBer
 **Cluster Monitor** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_YannickBeriault/tree/master/linux_sql)]: Implemented a monitoring agent that is used to automatically gather hardware as well as memory and CPU usage information on a system. It gathers usage info every minute, as long as the database instance is properly running. It was made using bash scripts and sql, on a virtual machine accessed through VNC viewer. It runs a PostgreSQL database inside a Docker container. It obtains its data using terminal commands, whose results it processes using a combination of simple bash commands like `grep`, `cut` and `sed`.
 
 **Core Java Apps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_YannickBeriault/tree/master/core_java)]: - Twitter App: Developed an app made to interact with Twitter's REST API in order to create, show and delete tweets. - JDBC App: Wrote a java program to enter customer info into a database and retrieve it. - Grep App: Implemented a simple version of the grep command.
+
+**Springboot App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_YannickBeriault/tree/master/springboot)]: Our trading team needed to replace their legacy trading platform with something more efficient, maintainable and scalable. The platform we built for them is a REST API meant to manage traders and their accounts, execute security orders and get information about quotes. The app was developed inside the Spring Boot framework with data persistence ensured by a postgresql database, connected through JDBC. It is meant to be run inside two docker containers, one for the app and one for the database.
 
 
 ## Highlighted Projects
