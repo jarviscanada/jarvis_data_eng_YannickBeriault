@@ -1,6 +1,4 @@
-Table of contents
 * [Introduction](#Introduction)
-* [Quick Start](#QuickStart)
 * [Implementation](#Implementation)
 * [Test](#Test)
 * [Deployment](#Deployment)
@@ -16,19 +14,19 @@ the app and one for the database.
 # Quick Start
 - Prerequisites: 
     - Docker 17.05 or higher needs to be installed on the host system;
-    - Any Linux distro.
-    - root privileges
-    - IEX Cloud account and public token
+    - any Linux distro;
+    - root privileges;
+    - IEX Cloud account and public token.
 - Docker scripts:
     - Build images:
-      - From the command line, with working directory being the root of the project (the springboot folder), the 
+      - From the command line, with working directory being the root of the project (the `springboot` folder), the 
       image-building script should be launched with the `./dockerScripts/buildImages.sh` command.
     - Creating a docker network:
       - `./dockerScripts/createBridge.sh` will then be enough to create the exclusive networking bridge for the app.
-      - Starting containers:
-        - The IEX public token should be saved as an environment variable of name IEX_PUB_TOKEN, through the command 
+    - Starting containers:
+      - The IEX public token should be saved as an environment variable of name IEX_PUB_TOKEN, through the command 
         line of otherwise. Simplest method being: `IEX_PUB_TOKEN=yourToken` in a terminal.
-        - `./dockerScripts/startContainers.sh`
+      - `./dockerScripts/startContainers.sh`
 - Test trading-app with SwaggerUI
 ![Swagger test 1](assets/swaggerTest1.png)
 ![Swagger test 2](assets/swaggetTest2.png)
