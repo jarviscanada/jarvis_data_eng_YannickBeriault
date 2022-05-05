@@ -1,0 +1,7 @@
+/shelf/
+/workspace.xml
+/target/*
+/log/*
+/out/*
+/.idea/*
+*.jar

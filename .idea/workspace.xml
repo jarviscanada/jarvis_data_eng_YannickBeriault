@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6bd3d88a-e439-4e87-a99d-3e8c35b4a43a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core_java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core_java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core_java/grep/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core_java/grep/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core_java/jdbc/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core_java/jdbc/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core_java/twitter/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/core_java/twitter/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/psql/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/psql/Dockerfile" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28f4RSOqgzdlGUQ5xI6c0PhBdkU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bd3d88a-e439-4e87-a99d-3e8c35b4a43a" name="Changes" comment="" />
+      <created>1651594297710</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651594297710</updated>
+    </task>
+    <servers />
+  </component>
+</project>

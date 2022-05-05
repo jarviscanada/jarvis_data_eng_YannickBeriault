@@ -1,0 +1,11 @@
+# Default ignored files
+.gitignore
+**/shelf/
+**/workspace.xml
+**/target/*
+**/log/*
+**/out/*
+**/.idea/*
+*.jar
+/target
+.env
