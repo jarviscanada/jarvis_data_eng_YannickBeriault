@@ -25,7 +25,7 @@ the app and one for the database.
       - `./dockerScripts/createBridge.sh` will then be enough to create the exclusive networking bridge for the app.
     - Starting containers:
       - The IEX public token should be saved as an environment variable of name IEX_PUB_TOKEN, through the command 
-        line of otherwise. Simplest method being: `IEX_PUB_TOKEN=yourToken` in a terminal.
+        line or otherwise. Simplest method being: `IEX_PUB_TOKEN=yourToken` in a terminal.
       - `./dockerScripts/startContainers.sh`
 - Test trading-app with SwaggerUI
 ![Swagger test 1](assets/swaggerTest1.png)
@@ -50,7 +50,7 @@ the app and one for the database.
       them without having to know what they are, since every DAO instantiate its own version of the Util. The DAOs only 
       need to implement the logic that is specific to them, which is often not than many methods;
       - The AccountDao extends JdbcCrudDao and is responsible for interacting with the account database table;
-      - The MarketDataDao is different, has it does not extends JdbcCrudDao and is responsible for the interactions 
+      - The MarketDataDao is different, as it does not extends JdbcCrudDao and is responsible for the interactions 
       with the IEX cloud and the creation of IexQuote objects through calls to IexQuoteUtil. The IexQuote object is a
       temporary object meant to hold the information for the creation of an actual Quote object (this differentiation
       might help a lot with further development of the app);
@@ -61,20 +61,20 @@ the app and one for the database.
       - The TraderDao extends JdbcCrudDao and is responsible for interacting with the trader database table.
     - SpringBoot: webservlet/TomCat and IoC
       - Our app is managed using the Springboot framework and served with TomCat. It uses inversion of control to 
-      manage the creation of our components and their multiple dependencies on each others.
+      manage the creation of our components and their multiple dependencies upon each others.
     - PSQL and IEX
       - Data is saved inside a PostgreSQL database and quotes are retrieved from the IEX Cloud REST API, all using the
       JDBC interface.
 
 ## REST API Usage
 ### Swagger
-The Swagger browser-based user interface was used through development, along with Postman, to understand and test the 
+The Swagger browser-based user interface was used throughout development, along with Postman, to understand and test the 
 behaviour of both our app and the IEX Cloud API. Swagger is suggested as a mean of exploring our PoC for its ease of use 
 and its high legibility.
 ### Quote Controller
 - The Quote Controller receives requests concerning both quotes from IEX Cloud and from our own database:
   - GET `/quotes/iexquote/{iexquote}`: displays one quote, directly retrieved from IEX, for the ticker provided;
-  - GET `/quotes/dailyList`: lists all securities that are available to trading in this trading system;
+  - GET `/quotes/dailyList`: lists all securities that are available for trading in this trading system;
   - PUT `/quotes/`: enters a quote into the database, with data provided by the user and without checking it the ticker exists;
   - POST `/quotes/tickerid/{tickerid}`: retrieves a quote from IEX, saves pertinent data into our database and returns the 
   Quote object (JSON format).
@@ -92,7 +92,7 @@ withdrawals from the latter:
     trader's id;
 
 # Test
-Application was tested mostly with integration tests, using JUnit. Most tests interacts with a database: a db that was
+Application was tested mostly with integration tests, using JUnit. Most tests interact with a database: a db that was
 created for test purposes and the IEX Cloud API when applicable. A more robust testing protocol would need to mock the 
 behaviour of this API, but doing as we did was perfect for the context of this PoC. More than half the lines of code 
 where tested in the DAO and service components.
