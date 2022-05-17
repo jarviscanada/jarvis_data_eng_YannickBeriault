@@ -5,5 +5,5 @@ secretGenerator:
   - user=postgres
   - IEX_PUB_TOKEN=pk_579b48a49b8a43a2abe8df4b87fe5dd7
 resources:
-  - mysql-deployment.yaml
-  - wordpress-deployment.yaml
+  - psql-deployment.yaml
+  - trading-deployment.yaml
