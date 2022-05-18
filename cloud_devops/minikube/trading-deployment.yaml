@@ -6,8 +6,8 @@ metadata:
     app: trading
 spec:
   ports:
-    - port: 80
-      targetPort: 5000
+    - port: 8080
+      targetPort: 8080
   selector:
     app: trading
     tier: app-server
@@ -41,7 +41,7 @@ spec:
         - name: PSQL_HOST
           value: trading-psql
         - name: PSQL_PORT
-          value: "8085"
+          value: "5432"
         - name: PSQL_DB
           value: jrvstrading
         - name: PSQL_USER
@@ -60,5 +60,5 @@ spec:
               name: trading-app
               key: IEX_PUB_TOKEN
         ports:
-        - containerPort: 5000
+        - containerPort: 8080
           name: trading

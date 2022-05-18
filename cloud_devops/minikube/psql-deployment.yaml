@@ -6,7 +6,7 @@ metadata:
     app: trading
 spec:
   ports:
-    - port: 8085
+    - port: 5432
   selector:
     app: trading
     tier: db
@@ -61,11 +61,12 @@ spec:
         - name: POSTGRES_DB
           value: jrvstrading
         ports:
-        - containerPort: 8085
+        - containerPort: 5432
           name: psql
         volumeMounts:
         - name: psql-persistent-storage
-          mountPath: /var/lib/psql
+          mountPath: /var/lib/psqlData
+        imagePullPolicy: Always
       volumes:
       - name: psql-persistent-storage
         persistentVolumeClaim:
