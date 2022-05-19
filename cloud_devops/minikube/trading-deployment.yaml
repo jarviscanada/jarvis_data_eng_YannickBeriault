@@ -13,7 +13,6 @@ spec:
     tier: app-server
   type: LoadBalancer
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,7 +34,7 @@ spec:
         tier: app-server
     spec:
       containers:
-      - image: yannber/springboot_trading-app:trading-psql
+      - image: yannber/springboot_trading-app:trading-app
         name: trading
         env:
         - name: PSQL_HOST
@@ -44,6 +43,8 @@ spec:
           value: "5432"
         - name: PSQL_DB
           value: jrvstrading
+        - name: GET_HOSTS_FROM
+          value: dns
         - name: PSQL_USER
           valueFrom:
             secretKeyRef:
