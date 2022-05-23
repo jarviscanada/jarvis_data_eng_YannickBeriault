@@ -3,11 +3,6 @@
 
 \c jrvstrading
 
-DROP TABLE IF EXISTS public.trader cascade;
-DROP TABLE IF EXISTS public.account cascade;
-DROP TABLE IF EXISTS public.security_order cascade;
-DROP TABLE IF EXISTS public.quote cascade;
-
 -- DO NOT use double quote, e.g. public.trader."trader"
 CREATE TABLE public.trader
 (
