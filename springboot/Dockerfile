@@ -4,7 +4,7 @@
 FROM maven:3.8.5-openjdk-18 AS build
 COPY src /build/src
 COPY pom.xml /build/
-RUN mvn -f /build/pom.xml clean package -DskipTests
+RUN mvn -f /build/pom.xml clean package
 
 #
 # Package stage
