@@ -13,13 +13,13 @@ pipeline {
         ACR_NAME='yannberacr'
         //${BUILD_NUMBER} is a Jenkins built-in env https://bit.ly/32mySlQ
         //Note: double quote is neccessary here
-        IMAGE_NAME="trading-app:${BUILD_NUMBER}"
+        IMAGE_NAME="trading:${BUILD_NUMBER}"
 
         //Deploy
         RESOURCE_GROUP='rg-trading-app-aks'
         CLUSTER_NAME='aks-trading-app'
         DOCKER_REPO='yannberacr.azurecr.io'
-        DEPLOYMENT_NAME='deployment.apps/trading-app'
+        DEPLOYMENT_NAME='deployment.apps/trading'
     }
 
     stages {
@@ -43,7 +43,7 @@ pipeline {
                 //show cluster info for debugging purposes
                 sh 'kubectl cluster-info'
                 //Deploy the new image
-                sh 'kubectl set image ${DEPLOYMENT_NAME} trading-app=${DOCKER_REPO}/${IMAGE_NAME}'
+                sh 'kubectl set image ${DEPLOYMENT_NAME} trading=${DOCKER_REPO}/${IMAGE_NAME}'
                 //Check result
                 sh 'kubectl get all'
             }
