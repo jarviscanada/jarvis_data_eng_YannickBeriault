@@ -1,6 +1,6 @@
 # Introduction
 - This is a small project meant to deploy the trading app developed in the context of the so-called Springboot project
-  inside a Kubernetes infrastructure where various instances of our application can be served by a load-balancer and to
+  inside a Kubernetes infrastructure where various instances of our application can be served through a load-balancer and to
   which can be added new instances when usage demands it, effectively auto-scaling our application while maintaining a
   sole Psql database instance with which the application instances can interact.
 - Two environments were created on Azure to answer our need of having a development version and a production version of
