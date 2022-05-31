@@ -32,7 +32,7 @@ skills:
     - Assembly language
     - Algorithmics and Mathematics for Computer Science
     - Docker
-    - Spring Boot
+    - Spring framework
   # At least 5 skills
   familiar:
     - C
@@ -40,6 +40,8 @@ skills:
     - React
     - PHP
     - Laravel
+    - Kubernetes
+    - Jenkins
     - Haskell
     - Various binary encodings
 
@@ -77,9 +79,12 @@ jarvis_projects:
   #- name: "Spark"
   #  git_url: "/spark"
   #  description: ""
-  #- name: "Cloud/DevOps"
-  #  git_url: "/cloud_devops"
-  #  description: ""
+  - name: "Cloud/DevOps"
+    git_url: "/cloud_devops"
+    description: "This is a small project meant to deploy the trading app developed in the context of the so-called Springboot project
+  inside a Kubernetes infrastructure where various instances of our application can be served through a load-balancer and to
+  which can be added new instances when usage demands it, effectively auto-scaling our application while maintaining a
+  sole Psql database instance with which the application instances can interact."
 
 # List of personal or academic projects
 # Feel free to add more projects
